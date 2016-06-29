@@ -1,9 +1,11 @@
-# TradeItCornwall
 Vue.js &amp; Firebase app for Trade It Cornwall
 =======
+
 [ ![Codeship Status for jamiedumont/TradeItCornwall](https://codeship.com/projects/2becedc0-1f85-0134-2b71-3ae309bf0e43/status?branch=master)](https://codeship.com/projects/160378)
 
-> An online, local marketplace for second-hand goods
+---
+
+An online, local marketplace for second-hand goods
 
 ## Build Setup
 
