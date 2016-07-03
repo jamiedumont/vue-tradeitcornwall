@@ -1,31 +1,31 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 
-import Home from './Home'
-import Buy from './Buy'
-import Sell from './Sell'
-import About from './About'
+import Home from './pages/Home'
+import Buy from './pages/Buy'
+import Sell from './pages/Sell'
+import About from './pages/About'
 
 Vue.use(VueRouter)
 var router = new VueRouter({
-  history: false
+  history: true
 })
 
 router.map({
   '/': {
-    name: 'Home',
+    name: 'home',
     component: Home
   },
   '/buy': {
-    name: 'Buy',
+    name: 'buy',
     component: Buy
   },
   '/sell': {
-    name: 'Sell',
+    name: 'sell',
     component: Sell
   },
   '/about': {
-    name: 'About',
+    name: 'about',
     component: About
   }
 })
