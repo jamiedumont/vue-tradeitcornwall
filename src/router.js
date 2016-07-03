@@ -13,15 +13,19 @@ var router = new VueRouter({
 
 router.map({
   '/': {
+    name: 'Home',
     component: Home
   },
   '/buy': {
+    name: 'Buy',
     component: Buy
   },
   '/sell': {
+    name: 'Sell',
     component: Sell
   },
   '/about': {
+    name: 'About',
     component: About
   }
 })
