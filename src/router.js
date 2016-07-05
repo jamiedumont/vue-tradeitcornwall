@@ -7,7 +7,8 @@ import Sell from './pages/Sell'
 import About from './pages/About'
 
 Vue.use(VueRouter)
-var router = new VueRouter({
+
+const router = new VueRouter({
   history: true
 })
 
