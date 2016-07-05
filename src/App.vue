@@ -1,7 +1,8 @@
 <template>
   <div class="app">
     <div class="header">
-      <header-bar></header-bar>
+      <header-bar>
+      </header-bar>
     </div>
     <div class="page">
       <router-view></router-view>
@@ -11,9 +12,14 @@
 
 <script>
   import HeaderBar from './components/HeaderBar'
+  import store from 'src/vuex/store'
+
   // import firebase from 'firebase'
   export default {
-    components: {HeaderBar}
+    components: {
+      HeaderBar
+    },
+    store
   }
 </script>
 
