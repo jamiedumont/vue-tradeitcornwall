@@ -16,6 +16,18 @@ const mutations = {
   // You can make any modifications you want inside this function
   INCREMENT (state, amount) {
     state.count = state.count + amount
+  },
+  NEW_USER_EMAIL (state) {
+    console.log('New user created with email & password')
+  },
+  USER_CREATION_EMAIL_FAILED (state) {
+    console.error('New user creation with email & password failed!')
+  },
+  USER_LOGIN_EMAIL ({state}, email) {
+    console.error(`User: ${email} logged in`)
+  },
+  USER_LOGGED_OUT (state) {
+    console.error('User: logged out')
   }
 }
 

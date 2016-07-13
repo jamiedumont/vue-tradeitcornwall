@@ -1,27 +1,43 @@
 <template>
   <div id="home">
-    <h1>Home</h1>
-    <button label="Test"></button>
-    <p>The count is {{ counterValue }} </p>
-    <increment></increment>
+    <h1>Sign Up</h1>
+    <input v-model="email">
+    <input v-model="password">
+    <button @click="newUser(email,password)" label="New user"></button>
+
+    <h1>Log In</h1>
+    <input v-model="loginEmail">
+    <input v-model="loginPassword">
+    <button @click="login(loginEmail,loginPassword)" label="Login"></button>
+
+    <button @click="currentUser" label="Current User"></button>
+    <button @click="signOut" label="Sign Out"></button>
   </div>
 </template>
 
 <script>
 import Button from 'src/components/Button'
-import { getCount } from 'src/vuex/getters'
-import Increment from 'src/components/Increment'
+import { newUser, login, currentUser, signOut } from 'src/vuex/actions'
 
 export default {
   name: 'Home',
+  data: function () {
+    return {
+      email: '',
+      password: '',
+      loginEmail: '',
+      loginPassword: ''
+    }
+  },
   components: {
-    Button,
-    Increment
+    Button
   },
   vuex: {
-    getters: {
-      // note that you're passing the function itself, and not the value 'getCount()'
-      counterValue: getCount
+    actions: {
+      newUser,
+      login,
+      currentUser,
+      signOut
     }
   }
 }

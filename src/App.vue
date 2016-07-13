@@ -13,7 +13,6 @@
 <script>
   import HeaderBar from './components/HeaderBar'
   import store from 'src/vuex/store'
-
   // import firebase from 'firebase'
   export default {
     components: {
