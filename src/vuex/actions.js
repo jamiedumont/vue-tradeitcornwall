@@ -2,7 +2,7 @@
 // Since we are only interested in the dispatch (and optionally the state)
 // we can pull those two parameters using the ES6 destructuring feature
 
-import firebase from 'src/data/Auth'
+import firebase, { currentUser } from 'src/data/Auth'
 
 export const incrementCounter = function ({ dispatch, state }) {
   dispatch('INCREMENT', 1)
@@ -22,7 +22,7 @@ export const newUser = function ({dispatch, state}, email, password) {
     dispatch('USER_CREATION_EMAIL_FAILED')
     console.log(error)
   })
-  dispatch('NEW_USER_EMAIL')
+  dispatch('NEW_USER_EMAIL', email)
 }
 
 export const login = function ({dispatch, state}, email, password) {
@@ -38,14 +38,50 @@ export const login = function ({dispatch, state}, email, password) {
     }
     console.log(error)
   })
-  dispatch('USER_LOGIN_EMAIL', email)
+  dispatch('USER_LOGIN_EMAIL', currentUser)
 }
 
-export const currentUser = function ({dispatch, state}) {
+export const ourCurrentUser = function ({dispatch, state}) {
   console.log(firebase.auth().currentUser.email)
 }
 
 export const signOut = function ({dispatch, state}) {
-  firebase.auth().signOut()
-  dispatch('USER_LOGGED_OUT')
+  firebase.auth().signOut().then(function () {
+    dispatch('USER_LOGGED_OUT')
+  }, function (error) {
+    console.error(error)
+  })
+}
+
+export const oAuthLogin = function ({dispatch, state}, authProvider) {
+  const getProvider = function (authProvider) {
+    let authProviders = {
+      'google': function () {
+        return new firebase.auth.GoogleAuthProvider()
+      },
+      'facebook': function () {
+        return new firebase.auth.FacebookAuthProvider()
+      }
+    }
+    return authProviders[authProvider]()
+  }
+  const provider = getProvider(authProvider)
+  firebase.auth().signInWithPopup(provider).then(function (result) {
+    // This gives you a Google Access Token. You can use it to access the Google API.
+    // const token = result.credential.accessToken
+    // The signed-in user info.
+    dispatch('USER_LOGIN_AUTH', result.user)
+
+    // ...
+  }).catch(function (error) {
+    // Handle Errors here.
+    const errorCode = error.code
+    const errorMessage = error.message
+    // The email of the user's account used.
+    const email = error.email
+    // The firebase.auth.AuthCredential type that was used.
+    const credential = error.credential
+    // ...
+    console.log(errorCode, errorMessage, email, credential)
+  })
 }

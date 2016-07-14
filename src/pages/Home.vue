@@ -10,14 +10,16 @@
     <input v-model="loginPassword">
     <button @click="login(loginEmail,loginPassword)" label="Login"></button>
 
-    <button @click="currentUser" label="Current User"></button>
+    <button @click="ourCurrentUser" label="Current User"></button>
     <button @click="signOut" label="Sign Out"></button>
+    <button @click="oAuthLogin('google')" label="Google Login"></button>
+    <button @click="oAuthLogin('facebook')" label="Facebook Login"></button>
   </div>
 </template>
 
 <script>
 import Button from 'src/components/Button'
-import { newUser, login, currentUser, signOut } from 'src/vuex/actions'
+import { newUser, login, ourCurrentUser, signOut, oAuthLogin } from 'src/vuex/actions'
 
 export default {
   name: 'Home',
@@ -36,13 +38,13 @@ export default {
     actions: {
       newUser,
       login,
-      currentUser,
-      signOut
+      ourCurrentUser,
+      signOut,
+      oAuthLogin
     }
   }
 }
 </script>
 
 <style>
-
 </style>
