@@ -9,7 +9,16 @@
 
     <img v-link="{ path: '/' }" class="header__logo" src="../assets/tic-logo.svg" alt="Trade It Cornwall">
 
-    <div class="login-modal-trigger"@click="showModal = true">
+    <div class="o-media o-media--reverse o-media--centre header-avatar" v-if="loggedIn">
+      <div class="o-avatar o-avatar--small o-media__img">
+          <img :src="avatar" :alt="displayName" />
+      </div>
+      <div class="o-media__body">
+        {{ displayName || "Your account"}}
+      </div>
+    </div>
+
+    <div v-else class="login-modal-trigger"@click="showModal = true">
       <h4 class="lmt__header">Login</h4>
       <span class="lmt__tip">or Sign Up</span>
     </div>
@@ -49,12 +58,26 @@ export default {
   vuex: {
     actions: {
       oAuthLogin
+    },
+    getters: {
+      loggedIn: state => state.accounts.user.loggedIn,
+      displayName: state => state.accounts.user.displayName,
+      email: state => state.accounts.user.email,
+      photoURL: state => state.accounts.user.photoURL
+    }
+  },
+  computed: {
+    avatar () {
+      return this.photoURL ? this.photoURL : 'http://s3.amazonaws.com/37assets/svn/765-default-avatar.png'
     }
   }
 }
 </script>
 
 <style lang="scss" scoped>
+  .header-avatar {
+    margin-bottom: 0;
+  }
   .login-buttons {
     text-align: center;
     display: flex;
