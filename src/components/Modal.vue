@@ -2,7 +2,7 @@
   <div class="modal-mask" @click="close" v-show="show" transition="modal">
     <div class="modal-wrapper">
       <div class="modal-container" @click.stop>
-        
+
         <span class="modal-cross" @click="close">X</span>
 
         <div class="modal-header">
@@ -94,7 +94,7 @@
 }
 
 .modal-container {
-  width: 600px;
+  width: 300px;
   margin: 0px auto;
   padding: 20px 30px;
   background-color: #fff;
@@ -106,11 +106,12 @@
 
 .modal-cross {
   float: right;
+  cursor: pointer;
 }
 
 .modal-header h3 {
   margin-top: 0;
-  color: #42b983;
+  color: #1F9193;
 }
 
 .modal-body {

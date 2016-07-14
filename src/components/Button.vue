@@ -1,5 +1,5 @@
 <template>
-  <button>{{ label }}</button>
+  <button class="btn">{{ label }}</button>
 </template>
 
 <script>
@@ -41,3 +41,9 @@
     // name: ''
   }
 </script>
+
+<style>
+  .btn {
+    cursor: pointer
+  }
+</style>

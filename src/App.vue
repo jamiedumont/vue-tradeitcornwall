@@ -28,6 +28,7 @@
   body {
     font-family: "HelveticaNeue", "Helvetica Neue", Helvetica, Arial, sans-serif;
     color: #333;
+    margin: 0
   }
   .app {
     display: flex;
@@ -36,8 +37,9 @@
   }
   .header {
     border-bottom: 1px solid #b3b3b3;
-    width: 100%;
     padding: 30px 50px;
+    /*background-color: #E2B644;*/
+    background-color: #1F9193;
   }
   .page {
     width: 100%;
