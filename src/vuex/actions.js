@@ -42,7 +42,7 @@ export const login = function ({dispatch, state}, email, password) {
 }
 
 export const ourCurrentUser = function ({dispatch, state}) {
-  console.log(firebase.auth().currentUser.email)
+  console.log(firebase.auth().currentUser)
 }
 
 export const signOut = function ({dispatch, state}) {

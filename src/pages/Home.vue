@@ -12,14 +12,12 @@
 
     <button @click="ourCurrentUser" label="Current User"></button>
     <button @click="signOut" label="Sign Out"></button>
-    <button @click="oAuthLogin('google')" label="Google Login"></button>
-    <button @click="oAuthLogin('facebook')" label="Facebook Login"></button>
   </div>
 </template>
 
 <script>
 import Button from 'src/components/Button'
-import { newUser, login, ourCurrentUser, signOut, oAuthLogin } from 'src/vuex/actions'
+import { newUser, login, ourCurrentUser, signOut } from 'src/vuex/actions'
 
 export default {
   name: 'Home',
@@ -39,8 +37,7 @@ export default {
       newUser,
       login,
       ourCurrentUser,
-      signOut,
-      oAuthLogin
+      signOut
     }
   }
 }
