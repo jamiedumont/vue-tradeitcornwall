@@ -1,0 +1,41 @@
+/*********************************
+
+	<H*> TAG SIZE TRUMPS
+
+	Use these classes to force an element to take on the font-size of our
+	regular headings.
+
+	This double-stranded heading hierarchy allows for proper, semantic use of
+	<h*> tags whilst styling elements as we would wish.
+
+	This strand of the the hierarchy uses the greek alphabet to denote seniority.
+
+**********************************/
+
+.alpha {
+	@include font-size($heading-size-1);
+}
+
+.beta {
+	@include font-size($heading-size-2);
+}
+
+.gamma {
+	@include font-size($heading-size-3);
+}
+
+.delta {
+	@include font-size($heading-size-4);
+}
+
+.epsilon {
+	@include font-size($heading-size-5);
+}
+
+.zeta {
+	@include font-size($heading-size-6);
+}
+
+.header--no-margins {
+	margin: 0;
+}

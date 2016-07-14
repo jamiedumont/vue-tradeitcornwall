@@ -1,0 +1,58 @@
+.force--100 { flex: 0 0 100% !important; }
+
+.force--10 { flex: 0 0 10% !important; }
+.force--20 { flex: 0 0 20% !important; }
+.force--30 { flex: 0 0 30% !important; }
+.force--40 { flex: 0 0 40% !important; }
+.force--50 { flex: 0 0 50% !important; }
+.force--60 { flex: 0 0 60% !important; }
+.force--70 { flex: 0 0 70% !important; }
+.force--80 { flex: 0 0 80% !important; }
+.force--90 { flex: 0 0 90% !important; }
+
+.force--25 { flex: 0 0 25% !important; }
+.force--75 { flex: 0 0 75% !important; }
+
+.force--33 { flex: 0 0 33.3333% !important; }
+.force--66 { flex: 0 0 66.6666% !important; }
+
+
+@include media-query(med) {
+  .med-force--100 { flex: 0 0 100% !important; }
+
+  .med-force--10 { flex: 0 0 10% !important; }
+  .med-force--20 { flex: 0 0 20% !important; }
+  .med-force--30 { flex: 0 0 30% !important; }
+  .med-force--40 { flex: 0 0 40% !important; }
+  .med-force--50 { flex: 0 0 50% !important; }
+  .med-force--60 { flex: 0 0 60% !important; }
+  .med-force--70 { flex: 0 0 70% !important; }
+  .med-force--80 { flex: 0 0 80% !important; }
+  .med-force--90 { flex: 0 0 90% !important; }
+
+  .med-force--25 { flex: 0 0 25% !important; }
+  .med-force--75 { flex: 0 0 75% !important; }
+
+  .med-force--33 { flex: 0 0 33.3333% !important; }
+  .med-force--66 { flex: 0 0 66.6666% !important; }
+}
+
+@include media-query(lrg) {
+  .lrg-force--100 { flex: 0 0 100% !important; }
+
+  .lrg-force--10 { flex: 0 0 10% !important; }
+  .lrg-force--20 { flex: 0 0 20% !important; }
+  .lrg-force--30 { flex: 0 0 30% !important; }
+  .lrg-force--40 { flex: 0 0 40% !important; }
+  .lrg-force--50 { flex: 0 0 50% !important; }
+  .lrg-force--60 { flex: 0 0 60% !important; }
+  .lrg-force--70 { flex: 0 0 70% !important; }
+  .lrg-force--80 { flex: 0 0 80% !important; }
+  .lrg-force--90 { flex: 0 0 90% !important; }
+
+  .lrg-force--25 { flex: 0 0 25% !important; }
+  .lrg-force--75 { flex: 0 0 75% !important; }
+
+  .lrg-force--33 { flex: 0 0 33.3333% !important; }
+  .lrg-force--66 { flex: 0 0 66.6666% !important; }
+}

@@ -22,24 +22,17 @@
   }
 </script>
 
-<style>
-  html {
-  }
-  body {
-    font-family: "HelveticaNeue", "Helvetica Neue", Helvetica, Arial, sans-serif;
-    color: #333;
-    margin: 0
-  }
+<style lang="scss">
+  @import "./scss/app.scss";
   .app {
     display: flex;
     flex-direction: column;
     width: 100%;
   }
   .header {
-    border-bottom: 1px solid #b3b3b3;
+    border-bottom: none;
     padding: 30px 50px;
-    /*background-color: #E2B644;*/
-    background-color: #1F9193;
+    background-color: $primary-colour;
   }
   .page {
     width: 100%;

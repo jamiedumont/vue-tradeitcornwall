@@ -1,0 +1,17 @@
+/*********************************
+
+	BREAKPOINTS
+
+	Breakpoints are created in a list and given memorable alias.
+
+	These are invoked using the 'media-query' mixin found in _tools.media-queries.scss
+
+**********************************/
+
+$breakpoints: (
+    "sml"       "screen and (max-width: 40em)", 		  /* 	0px -> 640px 	  */
+    "med"    		"screen and (min-width: 40.063em)", 	/* 	641px -> 		    */
+    "lrg"       "screen and (min-width: 64em)",			  /* 	1024px -> 		  */
+    "xlrg"			"screen and (min-width: 90em)",			  /* 	1440px -> 		  */
+    "retina"    "(-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi), (min-resolution: 2dppx)"
+) !default;

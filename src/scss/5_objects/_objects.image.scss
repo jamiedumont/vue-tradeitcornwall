@@ -1,0 +1,31 @@
+/*********************************
+
+  IMAGE OBJECT
+
+  The image object is used to apply an image as a background to an element
+  (normally a <div>). Whilst not semantically perfect, it is the best solution
+  to allow control of how the image will display (through use of the '
+  background-size' attribute along with the 'background-position' attribute.)
+
+  USE:
+
+  A class of 'o-img' is applied to the div which will display the image. A
+  'style' attribute is then set with the 'background: url();' and
+  'background-size' if different.
+
+  For example:
+
+  <div class="o-img" style="background:url(http://img.photobucket.com/albums
+  /v493/streetvw/DSCN2013.jpg);">
+  </div>
+
+  NOTE: When support for "object-fit" is improved, this method of displaying
+  images with be replaced.
+
+**********************************/
+
+.o-img {
+  background: #333;
+  background-size: cover;
+  height: 100%;
+}

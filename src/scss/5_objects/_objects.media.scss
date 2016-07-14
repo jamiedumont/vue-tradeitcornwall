@@ -1,0 +1,101 @@
+/*********************************
+
+  MEDIA OBJECT
+
+  This object, based on Nicole Sullivan's Media Object (http://goo.gl/5GrKJ); 
+  but implemented using flex. 
+
+  By using flex, the object take's on the abilities of Harry Robert's Flag
+  Object (http://goo.gl/9AcBHp) without using "display:table;"
+
+  The use of flex prohibits use of these object on older browsers, however it 
+  is deemed acceptable considering current useage stats and the benefits that 
+  flex brings.
+
+  USE:
+
+  The media object is used as such:
+
+    <div class="o-media">
+      <div class="o-media__img">
+        <img>
+      </div>
+      <div class="o-media__body">
+        <h1 class="o-media__title"> MEDIA TITLE </div>
+        <p> ... </p>
+      </div>
+    </div>  
+
+  Which will produce an object similar to this:;
+
+  +---------+ MEDIA TITLE
+  |         | ~~~~~ ~~~~~ ~~~~
+  |         | ~~~~~~~~~ ~~~~~~
+  |         |
+  +---------+
+
+
+
+  It can be modified using the 'centre' or 'reverse' flags. These are applied to
+  the ".o-media" div, like so:
+
+  <div class="o-media o-media--centre">
+    ...
+  </div>
+
+  AND
+
+  <div class="o-media o-media--reverse">
+    ...
+  </div>
+
+
+  These will display like so (respectively):
+
+  +---------+
+  |         | MEDIA TITLE
+  |         | ~~~~~~~ ~~~~~ ~~
+  |         | ~~~~~~~~~~~~
+  +---------+
+
+  AND
+
+        MEDIA TITLE +---------+
+  ~~~~~~ ~~~~ ~~~~~ |         |
+  ~~~~ ~~~ ~~~ ~~~~ |         |
+                    |         |
+                    +---------+
+
+**********************************/
+
+
+.o-media {
+  display: flex;
+  align-items: flex-start;
+  margin-bottom: 1em;
+}
+
+.o-media__img {
+  margin-right: 1em;
+}
+
+.o-media__body {
+  flex: 1;
+}
+.o-media__body,
+.o-media__body :last-child {
+  margin-bottom: 0;
+}
+
+.o-media__title {
+  margin: 0 0 .5em;
+}
+
+.o-media--centre {
+  align-items: center;
+}
+
+.o-media--reverse > .o-media__img {
+  order: 1;
+  margin: 0 0 0 1em;
+}
