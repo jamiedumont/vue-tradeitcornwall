@@ -1,64 +1,41 @@
 <template>
-  <div id="app">
-    <img class="logo" src="./assets/logo.png">
-    <hello></hello>
-    <p>
-      Welcome to your Vue.js app!
-    </p>
-    <p>
-      To get a better understanding of how this boilerplate works, check out
-      <a href="http://vuejs-templates.github.io/webpack" target="_blank">its documentation</a>.
-      It is also recommended to go through the docs for
-      <a href="http://webpack.github.io/" target="_blank">Webpack</a> and
-      <a href="http://vuejs.github.io/vue-loader/" target="_blank">vue-loader</a>.
-      If you have any issues with the setup, please file an issue at this boilerplate's
-      <a href="https://github.com/vuejs-templates/webpack" target="_blank">repository</a>.
-    </p>
-    <p>
-      You may also want to checkout
-      <a href="https://github.com/vuejs/vue-router/" target="_blank">vue-router</a> for routing and
-      <a href="https://github.com/vuejs/vuex/" target="_blank">vuex</a> for state management.
-    </p>
+  <div class="app">
+    <div class="header">
+      <header-bar>
+      </header-bar>
+    </div>
+    <div class="page">
+      <router-view></router-view>
+    </div>
   </div>
 </template>
 
 <script>
-import Hello from './components/Hello'
-
-export default {
-  components: {
-    Hello
+  import HeaderBar from './components/HeaderBar'
+  import store from 'src/vuex/store'
+  // import firebase from 'firebase'
+  export default {
+    components: {
+      HeaderBar
+    },
+    store
   }
-}
 </script>
 
-<style>
-html {
-  height: 100%;
-}
-
-body {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  height: 100%;
-}
-
-#app {
-  color: #2c3e50;
-  margin-top: -100px;
-  max-width: 600px;
-  font-family: Source Sans Pro, Helvetica, sans-serif;
-  text-align: center;
-}
-
-#app a {
-  color: #42b983;
-  text-decoration: none;
-}
-
-.logo {
-  width: 100px;
-  height: 100px
-}
+<style lang="scss">
+  @import "./scss/app.scss";
+  .app {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+  }
+  .header {
+    border-bottom: none;
+    padding: 30px 50px;
+    background-color: $primary-colour;
+  }
+  .page {
+    width: 100%;
+    padding: 30px 50px;
+  }
 </style>

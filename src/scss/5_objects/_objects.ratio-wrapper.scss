@@ -1,0 +1,52 @@
+/*********************************
+
+  RATIO WRAPPER
+
+  This object adds an outer wrapper to an element, forcing the contents to a
+  set ratio. The height scales proportionately with the width, which is what
+  defines the dimensions of the element.
+
+  USE:
+
+  .o-ratio__wrapper & .o-ratio__object combine to form a wrapper around the element
+  to be contrained.
+
+  For example:
+
+  <div class="o-ratio__wrapper">
+    <div class="o-ratio__object">
+      <Element contained at ratio of 4:3>
+    </div>
+  </div>
+
+  By default, o-ratio__wrapper will be set at a 4:3 ratio.
+
+  Modifiers can be used to change the ratio when applied to the
+  .o-ratio__wrapper <div> like so:
+
+  <div class="o-ratio__wrapper o-ratio__wrapper--16by9">
+    <div class="o-ratio__object">
+      <Element contained at ratio of 16:9>
+    </div>
+  </div>
+
+
+**********************************/
+
+.o-ratio__wrapper {
+  position: relative;
+  padding-bottom: 75%;
+  height: 0;
+}
+
+.o-ratio__object {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.o-ratio__wrapper--16by9 {
+  padding-bottom: 56.25%;
+}

@@ -1,0 +1,16 @@
+/*********************************
+
+	LEDE STYLING
+
+	The `.lede` class is used to make the introductory text (usually a paragraph)
+	of a document slightly larger: en.wikipedia.org/wiki/Lede_(news)
+
+**********************************/
+
+// Predefine the variables below in order to alter and enable specific features.
+
+$lede-size:   1.125 !default;
+
+.o-lede {
+    @include font-size($base-font-size * $lede-size);
+}

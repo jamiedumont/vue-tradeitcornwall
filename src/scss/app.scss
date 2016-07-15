@@ -1,0 +1,155 @@
+/* MAIN SCSS
+
+  This project has been organised in accordance with Harry Robert's ITCSS
+  architecture. The aim of this is to harness the cascading nature of CSS
+  and use it as an advantage rather than a constant headache. For info please
+  read: https://speakerdeck.com/dafed/managing-css-projects-with-itcss
+
+  The Sass written also adhears to much of his CSS Guidelines found here.
+  Anyone wanting to add-to or amend the codebase should start by reading these.
+  Whilst not all guidelines are adheared to, many are; and editors should be
+  able to recognise these.
+
+  http://cssguidelin.es/
+
+*/
+
+
+/*** SETTINGS ***
+
+  Here we include files that control the basics of our project. This will
+  include globally available settings and variables such as our colours,
+  default font sizes, and spacing units.
+
+*/
+
+// Make basic $base-* variables available
+@import "1_settings/settings.globals";
+
+// Make some useful colours available throughout the framework
+@import "1_settings/settings.colours";
+
+// Define our breakpoints
+@import "1_settings/settings.breakpoints";
+
+
+
+
+/*** TOOLS ***
+
+  In 'Tools' we create our mixins, helper functions, and globally-available
+  tools.
+
+*/
+
+
+// Basic mixins (Font-size/Flex-Grid)
+@import "2_tools/tools.mixins";
+
+// Maths helpers for use with spacings
+@import "2_tools/tools.maths-helpers";
+
+// Uses breakpoints set in 'settings.breakpoints' to create media queries
+@import "2_tools/tools.media-queries";
+
+
+/*** GENERIC ***
+
+  Ground zero styles
+
+*/
+
+
+// Basic reset. Do NOT edit anything in here.
+@import "3_generic/generic.reset";
+
+// Set default box-sizing (border-box)
+@import "3_generic/generic.box-sizing";
+
+// Create vertical rhythm through use of margin bottom across elements
+@import "3_generic/generic.shared";
+
+
+/*** BASE ***
+
+  Unclassed HTML selectors
+
+*/
+
+// Sensible defaults
+@import "4_base/base.page";
+
+// Default heading sizes
+@import "4_base/base.headings";
+
+// Default image behaviours
+@import "4_base/base.images";
+
+// Default link styling
+@import "4_base/base.links";
+
+// Default input behaviour
+@import "4_base/base.inputs";
+
+// Default blockquote styling
+@import "4_base/base.blockquotes";
+
+
+/*** OBJECTS ***
+
+  Cosmetic free design patterns
+
+*/
+
+// Avatar object to style an image object as an avatar
+@import "5_objects/objects.avatar";
+
+// Basic object to box off content
+@import "5_objects/objects.box";
+
+// New button styles.
+@import "5_objects/objects.buttons";
+
+// Card object to arrange image and content
+@import "5_objects/objects.card";
+
+// Image object to apply images to backgrounds
+@import "5_objects/objects.image";
+
+// Layout object. Used to define available space and grid for components
+@import "5_objects/objects.layout";
+
+// Increase size of intro paragraphs slightly
+@import "5_objects/objects.lede";
+
+// Bare list
+@import "5_objects/objects.list-bare";
+
+// New media object using flex
+@import "5_objects/objects.media";
+
+// A wrapper that forces it's contents to a set ratio, scaling with width
+@import "5_objects/objects.ratio-wrapper";
+
+
+
+/*** COMPONENTS ***
+
+  All component specific styling should go in a scoped section of the .vue file
+
+*/
+
+
+
+
+/*** TRUMPS ***
+
+  Helpers and overrides.
+
+*/
+
+// Secondary naming convention to resize headers.
+@import "7_trumps/trumps.header-trumps";
+
+// Force 'layout__items' to take on specific width
+@import "7_trumps/trumps.flex-widths";

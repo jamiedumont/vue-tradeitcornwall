@@ -1,0 +1,38 @@
+/*********************************
+
+  AVATAR OBJECT
+
+  The avatar object acts as a wrapper for a ".img", styling it to appear as a
+  circle and sizing it appropriately.
+
+  USE:
+
+  <div class="o-avatar">
+    <img...>
+  </div>
+
+**********************************/
+
+.o-avatar {
+  width: 56px;
+  height: 56px;
+
+  img {
+    border-radius: 50%;
+  }
+}
+
+.o-avatar--small {
+  width: 40px;
+  height: 40px;
+}
+
+.o-avatar--large {
+  width: 75px;
+  height: 75px;
+}
+
+.o-avatar--xlarge {
+  width: 150px;
+  height: 150px;
+}

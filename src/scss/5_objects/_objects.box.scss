@@ -1,0 +1,21 @@
+/*********************************
+
+	BOX OBJECT
+
+	The box object simply 'boxes off' content. Use to add padding all the way 
+	around a component.
+
+	Can be extended with additional classes that change the amount of padding.
+
+**********************************/
+
+/* 1 - value to be replaced by spacing variable */
+
+.o-box {
+	padding: 10px; /*[1]*/
+
+	>:last-child {
+		margin-bottom: 0;
+	}
+}
+

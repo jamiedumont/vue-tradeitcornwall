@@ -1,0 +1,177 @@
+/*********************************
+
+	LAYOUT OBJECT
+
+	This object forms the underpinning of our grid system. It uses flex to
+	dynamically adjust the layouts. The use of the flex property removes
+	support for IE 9 and below. All other browsers are supported through the use
+	of Autoprefixer to cover flex's three syntaxs.
+
+	The layout comprises of only two, base elements; which are then extended.
+
+	'.layout' is our parent element
+
+	'.layout__item' is our child element
+
+	When implemented as above, all child elements will sit on one row, and
+	adjust their widths to fit within the screen size.
+
+	For example:
+
+	<div class="layout">
+		<div class="layout__item"></div>
+		<div class="layout__item"></div>
+		<div class="layout__item"></div>
+		<div class="layout__item"></div>
+	</div>
+
+	Will create a row of four columns, where each child takes up 25% of the
+	viewport width.
+
+	This layout contains no gutters, margins or paddings. These should instead
+	be determined by the margin property of each '.layout__item's content.
+
+**********************************/
+
+.layout {
+  display: flex;
+}
+
+.layout__item {
+  flex: 1;
+}
+
+
+/*********************************
+
+	CONTROLLING WIDTHS
+
+	If instead of dynamically sizing each child to fit in one row, we can define
+	the desired number of columns per row, and wrap the overflow.
+
+	This allows us to create a layout that can take an unspecified number of
+	children, but in a prescribed layout.
+
+	The class that modifies the behaviour is applied to the parent class ('.layout'),
+	and effects the wrap, and subsequently the width of the children.
+
+	A mixin has been written to create consistent rules. More details can be found
+	in _tools.mixins.scss
+
+	At present, only a small number of widths have been created; as there should
+	be little need for more given the inherent flexibility of the grid, and the use
+	of utility classes to give fine-grain control of individual child elements.
+
+
+**********************************/
+
+.layout--10 {
+	@include layout(10%);
+}
+
+.layout--20 {
+	@include layout(20%);
+}
+
+.layout--25 {
+	@include layout(25%);
+}
+
+.layout--33 {
+	@include layout(33.3333%);
+}
+
+.layout--50 {
+	@include layout(50%);
+}
+
+.layout--100 {
+	@include layout(100%);
+}
+
+
+/*********************************
+
+	DEALING WITH MEDIA QUERIES
+
+	The grid also accomodates responsive design with ease through the use of
+	additional classes for each breakpoint. The grid follows the 'mobile-first'
+	principle, meaning that these additional classes override the default widths
+	as screen size increases.
+
+	It is of course most common that the number of of columns increases as screen
+	size increases, but the inverse can also be achieved if desired.
+
+	The classes use the @ character as a prefix. This is valid in HTML, but must
+	be escaped (\) in CSS. The use of the @ character has been chosen as it gives
+	a layout great readability by following human speach.
+
+	For example:
+
+	<div class="layout layout--100 @med-layout--50 @lrg-layout--25">
+
+	This, whilst being quite verbose, allows layouts to be quickly and easily
+	written and understood, removing much of the mental overhead usually required
+	when using a grid system.
+
+	I wanted the syntax to be clear, memorable and new developer friendly; making
+	it easy to pick up and start using with very little upfront learning.
+
+
+**********************************/
+
+@include media-query(med){
+.\@med-layout--10 {
+	@include layout(10%);
+}
+
+.\@med-layout--20 {
+	@include layout(20%);
+}
+
+.\@med-layout--25 {
+	@include layout(25%);
+}
+
+.\@med-layout--33 {
+	@include layout(33.3333%);
+}
+
+.\@med-layout--50 {
+	@include layout(50%);
+}
+
+.\@med-layout--100 {
+	@include layout(100%);
+}
+
+}
+
+
+@include media-query(lrg){
+
+.\@lrg-layout--10 {
+	@include layout(10%);
+}
+
+.\@lrg-layout--20 {
+	@include layout(20%);
+}
+
+.\@lrg-layout--25 {
+	@include layout(25%);
+}
+
+.\@lrg-layout--33 {
+	@include layout(33.3333%);
+}
+
+.\@lrg-layout--50 {
+	@include layout(50%);
+}
+
+.\@lrg-layout--100 {
+	@include layout(100%);
+}
+
+}

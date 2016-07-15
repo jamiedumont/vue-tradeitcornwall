@@ -1,0 +1,29 @@
+/*********************************
+
+  MATHS HELPERS
+
+  Halve and double numbers, returning rounded integers.
+
+  .foo {
+     padding: halve(3.2px);
+  }
+
+
+**********************************/
+
+
+@function quarter($input-number) {
+    @return round($input-number / 4);
+}
+
+@function halve($input-number) {
+    @return round($input-number / 2);
+}
+
+@function double($input-number) {
+    @return round($input-number * 2);
+}
+
+@function quadruple($input-number) {
+    @return round($input-number * 4);
+}

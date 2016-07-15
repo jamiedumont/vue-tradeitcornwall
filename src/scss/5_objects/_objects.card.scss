@@ -1,0 +1,52 @@
+/*********************************
+
+  CARD OBJECT
+
+  The card object does very little, only stacking two divs directly above one
+  another. Whilst it seems wasteful to use a new object for this purpose, and
+  could well clutter the templates with too many class names, it is such a
+  repeatedly used pattern that the benefits outweigh the drawbacks.
+
+  Can be extended with additional classes that change the margin under the
+  image.
+
+  USE:
+
+  Create a card like so:
+
+  <div class="o-card">
+    <div class="o-card__img">
+      <IMG OR WHATEVER>
+    </div>
+    <div class="o-card__body">
+      <CONTENT>
+    </div>
+  </div>
+
+  Which will render:
+
+  +---------+
+  |         |
+  |  Image  |
+  |         |
+  +---------+
+  |         | 
+  |  Body   |
+  |         |
+  |         |
+  +---------+
+
+**********************************/
+
+
+.o-card {
+  display: block;
+}
+
+.o-card__img {
+  margin-bottom: 0;
+}
+
+.o-card__body {
+  display: block;
+}

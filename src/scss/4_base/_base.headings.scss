@@ -1,0 +1,46 @@
+/*********************************
+
+	HEADING STYLES
+
+**********************************/
+
+
+$heading-size-1:  64px !default;
+$heading-size-2:  24px !default;
+$heading-size-3:  16px !default;
+$heading-size-4:  20px !default;
+$heading-size-5:  16px !default;
+$heading-size-6:  14px !default;
+
+$header-margin: ($base-line-height / $base-font-size) * 1rem;
+
+
+h1,h2,h3,h4,h5,h6 {
+	font-weight: 400;
+	margin: $header-margin 0;
+	font-family: $header-font;
+}
+
+h1 {
+	@include font-size($heading-size-1);
+}
+
+h2 {
+	@include font-size($heading-size-2);
+}
+
+h3 {
+	@include font-size($heading-size-3);
+}
+
+h4 {
+	@include font-size($heading-size-4);
+}
+
+h5 {
+	@include font-size($heading-size-5);
+}
+
+h6 {
+	@include font-size($heading-size-6);
+}

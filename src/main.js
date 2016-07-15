@@ -1,8 +1,14 @@
 import Vue from 'vue'
-import App from './App'
+import VueFire from 'vuefire'
 
-/* eslint-disable no-new */
-new Vue({
-  el: 'body',
-  components: { App }
-})
+// import Auth from 'src/data/Auth'
+
+import App from './App'
+import router from './router'
+
+Vue.use(VueFire)
+
+// Now we can start the app!
+// The router will create an instance of App and mount to
+// the element matching the selector #app.
+router.start(App, '#app')

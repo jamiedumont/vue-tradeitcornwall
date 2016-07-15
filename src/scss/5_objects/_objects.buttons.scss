@@ -1,0 +1,158 @@
+/*********************************
+
+    BUTTONS
+
+    (We all love buttons!)
+
+    File layout:
+
+    1 - Button Settings & Switches
+    2 - Basic Button
+    3 - Extend Button Sizes
+    4 - Extend Button Colours
+
+
+
+    Button Settings & Switches
+
+**********************************/
+
+$btn-padding:         halve($base-spacing-unit) !default;
+$btn-padding--small:  halve($btn-padding) !default;
+$btn-padding--large:  double($btn-padding) !default;
+$btn-background:      #4a8ec2 !default;
+$btn-color:           #fff !default;
+$btn-border-width:    1px !default;
+$btn-border-style:    solid !default;
+$btn-border-color:    $btn-background !default;
+$btn-radius:          0 !default;
+
+$enable-btn--small:   false !default;
+$enable-btn--large:   false !default;
+$enable-btn--full:    false !default;
+$enable-btn--pill:    false !default;
+
+// EDITS
+
+$btn-radius:          3px;
+$btn-background:      $secondary-colour;
+$btn-color:           $black;
+$btn-border-style:    none;
+
+
+
+
+
+/*********************************
+
+    Basic Button
+
+    1. Allow us to style box model properties.
+    2. Line different sized buttons up a little nicer.
+    3. Make buttons inherit font styles (often necessary when styling `input`s as buttons).
+    4. Reset/normalize some styles.
+    5. Force all button-styled elements to appear clickable.
+    6. Subtract the border size from the padding value so that buttons do not grow larger as we add borders.
+
+**********************************/
+
+.o-btn {
+    display: inline-block;      /* [1] */
+    vertical-align: middle;     /* [2] */
+    font: inherit;              /* [3] */
+    text-align: center;         /* [4] */
+    margin:  0;                 /* [4] */
+    cursor: pointer;            /* [5] */
+    padding: $btn-padding - $btn-border-width  double($btn-padding) - $btn-border-width; /* [6] */
+    background-color: $btn-background;
+
+    @if($btn-border-width != 0) {
+        border: $btn-border-width $btn-border-style $btn-border-color;
+    } @else {
+        border: none;           /* [4] */
+    }
+
+    @if($btn-radius != 0) {
+        border-radius: $btn-radius;
+    }
+
+
+    &:hover,
+    &:active,
+    &:focus {
+        text-decoration: none; /* [4] */
+        color: $off-white;
+        background-color: $primary-colour;
+    }
+
+}
+
+/*
+ * Fix a Firefox bug whereby `input type="submit"` gains 2px extra padding.
+ */
+
+.o-btn::-moz-focus-inner {
+    border:  0;
+    padding: 0;
+}
+
+
+/*********************************
+
+    Extend Button Sizes
+
+**********************************/
+
+@if ($enable-btn--small == true) {
+
+/*********************************
+    Small Buttons
+**********************************/
+
+    .o-btn--small {
+        padding: $btn-padding--small - $btn-border-width  double($btn-padding--small) - $btn-border-width; /* [7] */
+    }
+
+}
+
+@if ($enable-btn--large == true) {
+
+/*********************************
+    Large Buttons
+**********************************/
+
+    .o-btn--large {
+        padding: $btn-padding--large - $btn-border-width  double($btn-padding--large) - $btn-border-width; /* [7] */
+    }
+
+}
+
+
+
+@if ($enable-btn--full == true) {
+
+/*********************************
+    Full Width Buttons
+**********************************/
+
+    .o-btn--full {
+        width: 100%;
+
+    }
+
+}
+
+
+
+@if ($enable-btn--pill == true) {
+
+/*********************************
+    Rounded Buttons
+    1 - really large value to ensure end is completely round
+**********************************/
+
+    .o-btn--pill {
+        border-radius: 100px; /* [1] */
+    }
+
+}
