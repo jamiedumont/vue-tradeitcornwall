@@ -5,6 +5,11 @@ import Home from './pages/Home'
 import Buy from './pages/Buy'
 import Sell from './pages/Sell'
 import About from './pages/About'
+import Inbox from './pages/Inbox'
+import UserDashboard from './pages/UserDashboard'
+import UserProfile from './pages/UserProfile'
+import UserBilling from './pages/UserBilling'
+import UserListings from './pages/UserListings'
 
 Vue.use(VueRouter)
 
@@ -28,6 +33,26 @@ router.map({
   '/about': {
     name: 'about',
     component: About
+  },
+  '/inbox': {
+    name: 'inbox',
+    component: Inbox
+  },
+  '/account': {
+    name: 'user-dashboard',
+    component: UserDashboard
+  },
+  '/account/my-listings': {
+    name: 'user-listings',
+    component: UserListings
+  },
+  '/account/billing': {
+    name: 'user-billing',
+    component: UserBilling
+  },
+  '/account/profile': {
+    name: 'user-profile',
+    component: UserProfile
   }
 })
 
