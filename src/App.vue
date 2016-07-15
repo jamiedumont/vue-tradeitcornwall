@@ -1,9 +1,6 @@
 <template>
   <div class="app">
-    <div class="header">
-      <header-bar>
-      </header-bar>
-    </div>
+    <header-bar></header-bar>
     <div class="page">
       <router-view></router-view>
     </div>
@@ -28,14 +25,14 @@
     display: flex;
     flex-direction: column;
     width: 100%;
-  }
-  .header {
-    border-bottom: none;
-    padding: 30px 50px;
-    background-color: $primary-colour;
+    min-height: 100%;
+    background: url(./assets/cornwall.jpg);
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
   }
   .page {
     width: 100%;
-    padding: 30px 50px;
+    padding: 30px;
   }
 </style>

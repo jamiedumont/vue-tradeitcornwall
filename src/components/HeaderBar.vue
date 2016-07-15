@@ -1,11 +1,10 @@
 <template>
   <div id="header">
-    <div class="header__nav">
-      <!-- use v-link directive for navigation. -->
+    <!-- <div class="header__nav">
       <h4 v-link="{ path: '/buy' }">Buy</h4>
       <h4 v-link="{ path: '/sell' }">Sell</h4>
       <h4 v-link="{ path: '/about' }">About</h4>
-    </div>
+    </div> -->
 
     <img v-link="{ path: '/' }" class="header__logo" src="../assets/tic-logo.svg" alt="Trade It Cornwall">
 
@@ -14,13 +13,12 @@
           <img :src="avatar" :alt="displayName" />
       </div>
       <div class="o-media__body">
-        {{ displayName || "Your account"}}
+        <h5>MENU</h5>
       </div>
     </div>
 
     <div v-else class="login-modal-trigger"@click="showModal = true">
-      <h4 class="lmt__header">Login</h4>
-      <span class="lmt__tip">or Sign Up</span>
+      <h5 class="lmt__header">Login</h5>
     </div>
   </div>
 
@@ -75,6 +73,8 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@import "../scss/1_settings/settings.colours.scss";
+
   .header-avatar {
     margin-bottom: 0;
   }
@@ -104,9 +104,11 @@ export default {
     align-items: center;
     justify-content: space-between;
     height: 80px;
+    padding: 20px 30px;
+    background-color: $secondary-colour;
   }
   .header__logo {
-    width: 150px;
+    height: 100%;
     cursor: pointer;
   }
   .header__nav {
@@ -116,7 +118,7 @@ export default {
       cursor: pointer;
     }
     h4:hover {
-      color: #E2B644;;
+      color: white;
     }
     h4:last-of-type {
       margin: 0;
@@ -127,7 +129,7 @@ export default {
     cursor: pointer;
   }
   .login-modal-trigger:hover {
-    color: #E2B644;;
+    color: white;
   }
   .lmt__header {
     margin: 0;
