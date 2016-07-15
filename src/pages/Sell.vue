@@ -52,10 +52,12 @@ export default {
 @import "../scss/1_settings/settings.colours.scss";
 
 .price-input {
-  background: url(../assets/pound.svg);
+
+  background-image: url(../assets/pound.svg);
   background-repeat: no-repeat;
   background-position: 3px;
   background-size: 20px 15px;
+  background-color: white;
 }
 
 </style>
