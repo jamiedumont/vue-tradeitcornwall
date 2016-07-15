@@ -25,6 +25,8 @@ export const newUser = function ({dispatch, state}, email, password) {
   dispatch('NEW_USER_EMAIL', email)
 }
 
+// TODO: Reference Firebase docs to see if the signInWithEmailAndPassword function also returns a 'result', and whether I can use a .then to check for route and redirect accordingly
+
 export const login = function ({dispatch, state}, email, password) {
   firebase.auth().signInWithEmailAndPassword(email, password).catch(function (error) {
     // Handle Errors here.
