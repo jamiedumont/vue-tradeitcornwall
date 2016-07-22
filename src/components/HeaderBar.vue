@@ -105,7 +105,7 @@ export default {
     justify-content: space-between;
     height: 80px;
     padding: 20px 30px;
-    background-color: $secondary-colour;
+    background-color: $primary-colour;
   }
   .header__logo {
     height: 100%;
