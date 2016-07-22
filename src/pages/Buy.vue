@@ -3,6 +3,11 @@
   <div id="buy">
 
     <div class="algolia-filters">
+      <div class="content">
+        <h2>Query: {{query here}}</h2>
+      </div>
+
+
 
     </div>
 
@@ -34,6 +39,21 @@
 
 <style lang="scss" scoped>
   @import "../scss/1_settings/settings.colours.scss";
+
+  .algolia-filters {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.8);
+    top: 0;
+    bottom: 0;
+    z-index: 10;
+    .content {
+      z-index: 11;
+      display: block;
+      position: relative;
+    }
+  }
   #buy {
     padding-bottom: 60px;
   }
