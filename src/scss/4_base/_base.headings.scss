@@ -8,7 +8,7 @@
 $heading-size-1:  18px !default;
 $heading-size-2:  24px !default;
 $heading-size-3:  16px !default;
-$heading-size-4:  20px !default;
+$heading-size-4:  14px !default;
 $heading-size-5:  12px !default;
 $heading-size-6:  12px !default;
 
@@ -16,16 +16,15 @@ $header-margin: ($base-line-height / $base-font-size) * 1rem;
 
 
 h1,h2,h3,h4,h5,h6 {
-  font-weight: 900;
+  font-weight: 700;
   margin: 0 0 $header-margin;
   font-family: $header-font;
-  font-style: italic;
   text-align: center;
-  text-transform: uppercase;
 }
 
 h1 {
   @include font-size($heading-size-1);
+  text-transform: uppercase;
 }
 
 h2 {
