@@ -8,7 +8,7 @@
 
     <img v-link="{ path: '/' }" class="header__logo" src="../assets/tic-logo.svg" alt="Trade It Cornwall">
 
-    <div class="o-media o-media--reverse o-media--centre header-avatar" v-if="loggedIn">
+    <div @click="showMenu = true" class="o-media o-media--reverse o-media--centre header-avatar" v-if="loggedIn">
       <div class="o-avatar o-avatar--small o-media__img">
           <img :src="avatar" :alt="displayName" />
       </div>
@@ -17,23 +17,15 @@
       </div>
     </div>
 
-    <div v-else class="login-modal-trigger"@click="showModal = true">
+    <div v-else class="login-modal-trigger" v-link="{ name: 'login'}">
       <h5 class="lmt__header">Login</h5>
     </div>
   </div>
 
 
 
-  <modal :show.sync="showModal">
-    <h3 slot="header">Login</h3>
-    <div slot="body">
-      <span class="modal-task">Use an account you already have...</span>
-      <div class="login-buttons">
-        <img class="login-icon" @click="showModal = false, oAuthLogin('facebook')" src="../assets/facebook.svg" alt="Login with Facebook" />
-        <h3>OR</h3>
-        <img class="login-icon" @click="showModal = false, oAuthLogin('google')" src="../assets/google-plus.svg" alt="Login with Google" />
-      </div>
-    </div>
+  <modal :show.sync="showMenu">
+    Testing
   </modal>
 
 </template>
@@ -50,7 +42,7 @@ export default {
   },
   data: function () {
     return {
-      showModal: false
+      showMenu: false
     }
   },
   vuex: {
@@ -77,6 +69,7 @@ export default {
 
   .header-avatar {
     margin-bottom: 0;
+    cursor: pointer;
     img {
       border: 1px solid $black;
     }

@@ -8,6 +8,7 @@ import About from './pages/About'
 import Inbox from './pages/Inbox'
 import Menu from './pages/Menu'
 import Login from './pages/Login'
+import LoginEmail from './pages/LoginEmail'
 import UserDashboard from './pages/UserDashboard'
 import UserProfile from './pages/UserProfile'
 import UserBilling from './pages/UserBilling'
@@ -47,6 +48,10 @@ router.map({
   '/login': {
     name: 'login',
     component: Login
+  },
+  '/login/email': {
+    name: 'login-email',
+    component: LoginEmail
   },
   '/account': {
     name: 'user-dashboard',
