@@ -24,21 +24,20 @@
 
 
 
-  <modal :show.sync="showMenu">
-    Testing
-  </modal>
+  <menu :show.sync="showMenu">
+  </menu>
 
 </template>
 
 <script>
 import Button from 'src/components/Button'
-import Modal from 'src/components/Modal'
+import Menu from 'src/components/Menu'
 import { oAuthLogin } from 'src/vuex/actions'
 
 export default {
   components: {
     Button,
-    Modal
+    Menu
   },
   data: function () {
     return {
