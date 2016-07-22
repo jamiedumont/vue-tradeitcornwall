@@ -1,58 +1,47 @@
 <template>
   <div id="header">
-    <div class="header__nav">
-      <!-- use v-link directive for navigation. -->
+    <!-- <div class="header__nav">
       <h4 v-link="{ path: '/buy' }">Buy</h4>
       <h4 v-link="{ path: '/sell' }">Sell</h4>
       <h4 v-link="{ path: '/about' }">About</h4>
-    </div>
+    </div> -->
 
     <img v-link="{ path: '/' }" class="header__logo" src="../assets/tic-logo.svg" alt="Trade It Cornwall">
 
-    <div class="o-media o-media--reverse o-media--centre header-avatar" v-if="loggedIn">
+    <div @click="showMenu = true" class="o-media o-media--reverse o-media--centre header-avatar" v-if="loggedIn">
       <div class="o-avatar o-avatar--small o-media__img">
           <img :src="avatar" :alt="displayName" />
       </div>
       <div class="o-media__body">
-        {{ displayName || "Your account"}}
+        <h5>MENU</h5>
       </div>
     </div>
 
-    <div v-else class="login-modal-trigger"@click="showModal = true">
-      <h4 class="lmt__header">Login</h4>
-      <span class="lmt__tip">or Sign Up</span>
+    <div v-else class="login-modal-trigger" v-link="{ name: 'login'}">
+      <h5 class="lmt__header">Login</h5>
     </div>
   </div>
 
 
 
-  <modal :show.sync="showModal">
-    <h3 slot="header">Login</h3>
-    <div slot="body">
-      <span class="modal-task">Use an account you already have...</span>
-      <div class="login-buttons">
-        <img class="login-icon" @click="showModal = false, oAuthLogin('facebook')" src="../assets/facebook.svg" alt="Login with Facebook" />
-        <h3>OR</h3>
-        <img class="login-icon" @click="showModal = false, oAuthLogin('google')" src="../assets/google-plus.svg" alt="Login with Google" />
-      </div>
-    </div>
-  </modal>
+  <menu :show.sync="showMenu">
+  </menu>
 
 </template>
 
 <script>
 import Button from 'src/components/Button'
-import Modal from 'src/components/Modal'
+import Menu from 'src/components/Menu'
 import { oAuthLogin } from 'src/vuex/actions'
 
 export default {
   components: {
     Button,
-    Modal
+    Menu
   },
   data: function () {
     return {
-      showModal: false
+      showMenu: false
     }
   },
   vuex: {
@@ -75,8 +64,17 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@import "../scss/1_settings/settings.colours.scss";
+
   .header-avatar {
     margin-bottom: 0;
+    cursor: pointer;
+    img {
+      border: 1px solid $black;
+    }
+  }
+  .header-avatar > .o-media__img {
+    margin: 0 0 0 0.5em;
   }
   .login-buttons {
     text-align: center;
@@ -104,9 +102,11 @@ export default {
     align-items: center;
     justify-content: space-between;
     height: 80px;
+    padding: 15px;
+    background-color: $primary-colour;
   }
   .header__logo {
-    width: 150px;
+    height: 100%;
     cursor: pointer;
   }
   .header__nav {
@@ -116,7 +116,7 @@ export default {
       cursor: pointer;
     }
     h4:hover {
-      color: #E2B644;;
+      color: white;
     }
     h4:last-of-type {
       margin: 0;
@@ -127,10 +127,11 @@ export default {
     cursor: pointer;
   }
   .login-modal-trigger:hover {
-    color: #E2B644;;
+    color: white;
   }
   .lmt__header {
     margin: 0;
+    text-transform: uppercase;
   }
   .lmt__tip {
     margin: 5px 0;

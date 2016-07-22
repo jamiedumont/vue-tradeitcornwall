@@ -1,46 +1,54 @@
 /*********************************
 
-	HEADING STYLES
+  HEADING STYLES
 
 **********************************/
 
 
-$heading-size-1:  64px !default;
+$heading-size-1:  18px !default;
 $heading-size-2:  24px !default;
 $heading-size-3:  16px !default;
-$heading-size-4:  20px !default;
-$heading-size-5:  16px !default;
-$heading-size-6:  14px !default;
+$heading-size-4:  14px !default;
+$heading-size-5:  12px !default;
+$heading-size-6:  12px !default;
 
 $header-margin: ($base-line-height / $base-font-size) * 1rem;
 
 
 h1,h2,h3,h4,h5,h6 {
-	font-weight: 400;
-	margin: $header-margin 0;
-	font-family: $header-font;
+  font-weight: 700;
+  margin: 0 0 $header-margin;
+  font-family: $header-font;
+  text-align: center;
 }
 
 h1 {
-	@include font-size($heading-size-1);
+  @include font-size($heading-size-1);
+  text-transform: uppercase;
 }
 
 h2 {
-	@include font-size($heading-size-2);
+  @include font-size($heading-size-2);
 }
 
 h3 {
-	@include font-size($heading-size-3);
+  @include font-size($heading-size-3);
 }
 
 h4 {
-	@include font-size($heading-size-4);
+  @include font-size($heading-size-4);
 }
 
 h5 {
-	@include font-size($heading-size-5);
+  @include font-size($heading-size-5);
+  margin: 0;
 }
 
 h6 {
-	@include font-size($heading-size-6);
+  @include font-size($heading-size-6);
+  text-transform: none;
+  font-weight: 400;
+  border-bottom: 1px solid $light-grey;
+  padding: 0 3px 3px;
+  display: inline-block;
 }

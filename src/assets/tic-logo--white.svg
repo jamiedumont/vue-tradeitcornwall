@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg width="198px" height="93px" viewBox="0 0 198 93" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 39 (31667) - http://www.bohemiancoding.com/sketch -->
+    <title>Logo Copy</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="iPhone-SE-Layouts" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Login" transform="translate(-70.000000, -34.000000)">
+            <g id="Logo-Copy" transform="translate(63.000000, 21.000000)">
+                <text id="Trade" font-family="KaushanScript-Regular, Kaushan Script" font-size="53.4570766" font-weight="normal" fill="#FFFFFF">
+                    <tspan x="34.1666667" y="58">Trade</tspan>
+                </text>
+                <text id="Cornwall" font-family="KaushanScript-Regular, Kaushan Script" font-size="53.4570766" font-weight="normal" fill="#FFFFFF">
+                    <tspan x="0" y="100.598608">Cornwall</tspan>
+                </text>
+                <g id="Middle" transform="translate(80.000000, 59.303944)">
+                    <text id="IT" font-family="OpenSans-ExtraboldItalic, Open Sans" font-size="11.6937355" font-style="italic" font-weight="600" letter-spacing="0.454756379" fill="#FAFAFA">
+                        <tspan x="22.5" y="12">IT</tspan>
+                    </text>
+                    <g id="Group" transform="translate(0.000000, 7.517401)" stroke="#FAFAFA" stroke-width="1.04408353" stroke-linecap="square">
+                        <path d="M40.4166667,0.522041763 L56.25,0.522041763" id="Right"></path>
+                        <path d="M0.416666667,0.522041763 L16.25,0.522041763" id="Left"></path>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

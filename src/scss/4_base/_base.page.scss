@@ -34,7 +34,7 @@ input, textarea {
   width: 100%;
 
   &:focus {
-    border-bottom: 3px solid $secondary-colour;
+    border-bottom: 3px solid $primary-colour;
     margin-bottom: 8px; // To allow for the inputs to not move up and down
   }
 }

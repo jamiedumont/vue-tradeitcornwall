@@ -12,3 +12,5 @@ firebase.initializeApp(config)
 export default firebase
 
 export const currentUser = firebase.auth().currentUser
+
+// Firebase watches for changes at the correct message endpoint, when a change it detected, do something with it and dispatch

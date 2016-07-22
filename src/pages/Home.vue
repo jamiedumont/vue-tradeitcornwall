@@ -1,6 +1,9 @@
 <template>
+  <header-bar></header-bar>
   <div id="home">
-    <h1>Sign Up</h1>
+    
+
+    <!-- <h1>Sign Up</h1>
     <input v-model="email">
     <input v-model="password">
     <button @click="newUser(email,password)" label="New user"></button>
@@ -11,13 +14,14 @@
     <button @click="login(loginEmail,loginPassword)" label="Login"></button>
 
     <button @click="ourCurrentUser" label="Current User"></button>
-    <button @click="signOut" label="Sign Out"></button>
+    <button @click="signOut" label="Sign Out"></button> -->
   </div>
 </template>
 
 <script>
 import Button from 'src/components/Button'
 import { newUser, login, ourCurrentUser, signOut } from 'src/vuex/actions'
+import HeaderBar from 'src/components/HeaderBar'
 
 export default {
   name: 'Home',
@@ -30,7 +34,8 @@ export default {
     }
   },
   components: {
-    Button
+    Button,
+    HeaderBar
   },
   vuex: {
     actions: {
@@ -43,5 +48,15 @@ export default {
 }
 </script>
 
-<style>
+<style lang="scss" scoped>
+  @import "../scss/1_settings/settings.colours.scss";
+
+  #home {
+    background-color: $off-white;
+    padding: 30px;
+    max-width: 400px;
+    min-height: 900px;
+    margin: 0 auto;
+    text-align: center;
+  }
 </style>
