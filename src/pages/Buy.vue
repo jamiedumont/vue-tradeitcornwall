@@ -2,45 +2,28 @@
   <header-bar></header-bar>
   <div id="buy">
 
-    <div class="search-box">
+    <div class="algolia-filters">
+
+    </div>
+
+    <div class="algolia-container">
+      <div id="search-input"></div>
+
+      <div id="hits-container"></div>
+
+      <div id="pagination-container"></div>
+    </div>
+
+
+
+    <!-- <div class="search-box">
       <input placeholder="Search Cornwall...">
       <span class="input-icon">
         <img class="input-icon-actual" src="../assets/search.svg" alt="Search">
       </span>
     </div>
-    <p class="search-box__meta"><strong>280</strong> results found within <strong> 8km</strong></p>
+    <p class="search-box__meta"><strong>280</strong> results found within <strong> 8km</strong></p> -->
 
-    <div class="result o-card">
-      <div class="o-card__img">
-        <img src="../assets/bmw.jpg" alt="BMW">
-      </div>
-      <div class="o-card__body">
-        <div class="result__meta">
-          <div class="meta__price">
-            <span>£4600</span>
-          </div>
-            <span class="meta__distance">2km away</span>
-
-        </div>
-        <span class="result__header">2009 BMW 330 Touring</span>
-      </div>
-    </div>
-
-      <div class="result o-card">
-        <div class="o-card__img">
-          <img src="../assets/bmw.jpg" alt="BMW">
-        </div>
-        <div class="o-card__body">
-          <div class="result__meta">
-            <div class="meta__price">
-              <span>£4600</span>
-            </div>
-              <span class="meta__distance">2km away</span>
-
-          </div>
-          <span class="result__header">2009 BMW 330 Touring</span>
-        </div>
-      </div>
 
     <div class="filter-btn">
       <span>Filters</span>
@@ -52,47 +35,9 @@
 <style lang="scss" scoped>
   @import "../scss/1_settings/settings.colours.scss";
   #buy {
-    padding-bottom: 80px;
+    padding-bottom: 60px;
   }
-  .result {
-    background-color: white;
-    width: 90vw;
-    margin: 1em auto;
-    text-align: center;
-  }
-  .result__header {
-    font-size: 16px;
-    font-weight: 700;
-    display: block;
-    margin: 0px auto;
-    padding-bottom: 20px;
-    width: 80%;
-  }
-  .result__meta {
-    background-color: $primary-colour;
-    color: white;
-    position: relative;
-    top: -20px;
-    display: inline;
-    text-align: center;
-    padding: 8px 10px 8px 0px;
-    margin: 0 auto;
-    letter-spacing: 0.4px;
-  }
-  // .meta__price, .meta__distance {
-  //   display: inline-block;
-  // }
-  .meta__price {
-    background-color: $black;
-    color: $primary-colour;
-    min-height: 100%;
-    display: inline-block;
-    padding: 10px;
-    margin-right: 10px;
-    span {
-      font-weight: 700;
-    }
-  }
+
   .search-box__meta {
     font-size: 12px;
     text-align: center;
@@ -140,14 +85,74 @@
     }
   }
 
+  .algolia-container {
+    width: 90vw;
+    margin: 1em auto;
+  }
+
 </style>
 
 <script>
 import HeaderBar from 'src/components/HeaderBar'
+import instantsearch from 'instantsearch.js'
+
 export default {
   name: 'Buy',
   components: {
     HeaderBar
+  },
+  ready: function () {
+    // `this` points to the vm instance
+    const search = instantsearch({
+      appId: '6VAJ69ISJV',
+      apiKey: 'c6540d28ecc025d481367f17ae5cdb89',
+      indexName: 'getstarted_actors',
+      urlSync: true
+    })
+
+    search.addWidget(
+      instantsearch.widgets.searchBox({
+        container: '#search-input',
+        placeholder: 'Search Cornwall...',
+        poweredBy: true
+      })
+    )
+
+    search.addWidget(
+      instantsearch.widgets.hits({
+        container: '#hits-container',
+        templates: {
+          item: `<div class="result o-card">
+            <div class="o-card__img">
+              <img src="http://localhost:8080/static/img/bmw.b8ece9c.jpg" alt="BMW">
+            </div>
+            <div class="o-card__body">
+              <div class="result__meta">
+                <div class="meta__price">
+                  <span>£4600</span>
+                </div>
+                <span>Falmouth</span>
+              </div>
+              <span class="result__header">{{name}}</span>
+            </div>
+          </div>`
+        }
+      })
+    )
+
+    search.addWidget(
+      instantsearch.widgets.pagination({
+        container: '#pagination-container',
+        maxPages: 3,
+        cssClasses: {
+          root: 'is-pagination__root',
+          item: 'is-pagination__item',
+          link: 'is-pagination__link'
+        }
+      })
+    )
+
+    search.start()
   }
 }
 </script>

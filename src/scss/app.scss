@@ -139,6 +139,64 @@
 
 */
 
+.result {
+  background-color: white;
+  width: 90vw;
+  margin: 1em auto;
+  text-align: center;
+}
+.result__header {
+  font-size: 16px;
+  font-weight: 700;
+  display: block;
+  margin: 0px auto;
+  padding-bottom: 20px;
+  width: 80%;
+}
+.result__meta {
+  background-color: $primary-colour;
+  color: white;
+  position: relative;
+  top: -20px;
+  display: inline;
+  text-align: center;
+  padding: 8px 10px 8px 0px;
+  margin: 0 auto;
+  letter-spacing: 0.4px;
+}
+// .meta__price, .meta__distance {
+//   display: inline-block;
+// }
+.meta__price {
+  background-color: $black;
+  color: $primary-colour;
+  min-height: 100%;
+  display: inline-block;
+  padding: 10px;
+  margin-right: 10px;
+  span {
+    font-weight: 700;
+  }
+}
+
+.is-pagination__root {
+  margin: 0;
+  text-align: center;
+}
+
+.is-pagination__item {
+  background-color: $light-grey;
+  margin: 3px;
+  padding: 5px;
+  width: 30px;
+  height: 30px;
+  text-align: center;
+}
+
+.is-pagination__link {
+  color: white;
+}
+
 
 
 
