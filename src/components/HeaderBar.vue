@@ -77,6 +77,12 @@ export default {
 
   .header-avatar {
     margin-bottom: 0;
+    img {
+      border: 1px solid $black;
+    }
+  }
+  .header-avatar > .o-media__img {
+    margin: 0 0 0 0.5em;
   }
   .login-buttons {
     text-align: center;
@@ -104,7 +110,7 @@ export default {
     align-items: center;
     justify-content: space-between;
     height: 80px;
-    padding: 20px 30px;
+    padding: 15px;
     background-color: $primary-colour;
   }
   .header__logo {
@@ -133,6 +139,7 @@ export default {
   }
   .lmt__header {
     margin: 0;
+    text-transform: uppercase;
   }
   .lmt__tip {
     margin: 5px 0;

@@ -1,7 +1,7 @@
 <template>
-
-  <input placeholder="What are you looking for?">
+  <header-bar></header-bar>
   <div id="home">
+    <input placeholder="What are you looking for?">
 
     <h1>Featured Listings</h1>
 
@@ -63,6 +63,7 @@
 <script>
 import Button from 'src/components/Button'
 import { newUser, login, ourCurrentUser, signOut } from 'src/vuex/actions'
+import HeaderBar from 'src/components/HeaderBar'
 
 export default {
   name: 'Home',
@@ -75,7 +76,8 @@ export default {
     }
   },
   components: {
-    Button
+    Button,
+    HeaderBar
   },
   vuex: {
     actions: {
