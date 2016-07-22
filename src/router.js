@@ -6,6 +6,8 @@ import Buy from './pages/Buy'
 import Sell from './pages/Sell'
 import About from './pages/About'
 import Inbox from './pages/Inbox'
+import Menu from './pages/Menu'
+import Login from './pages/Login'
 import UserDashboard from './pages/UserDashboard'
 import UserProfile from './pages/UserProfile'
 import UserBilling from './pages/UserBilling'
@@ -26,6 +28,10 @@ router.map({
     name: 'buy',
     component: Buy
   },
+  '/menu': {
+    name: 'menu',
+    component: Menu
+  },
   '/sell': {
     name: 'sell',
     component: Sell
@@ -37,6 +43,10 @@ router.map({
   '/inbox': {
     name: 'inbox',
     component: Inbox
+  },
+  '/login': {
+    name: 'login',
+    component: Login
   },
   '/account': {
     name: 'user-dashboard',
