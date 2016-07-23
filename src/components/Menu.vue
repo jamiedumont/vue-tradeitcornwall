@@ -27,7 +27,7 @@
           <div class="menu__icon-container o-media__img">
             <img class="menu__icon" src="../assets/sell-icon.svg" alt="Sell">
           </div>
-          <div class="o-media__body">
+          <div v-link="{ name: 'sell'}" class="o-media__body">
             <span class="menu__text">Sell</span>
           </div>
         </div>
