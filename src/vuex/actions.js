@@ -5,43 +5,30 @@
 import firebase from 'src/data/Auth'
 import router from 'src/router'
 
-export const incrementCounter = function ({ dispatch, state }) {
-  dispatch('INCREMENT', 1)
-}
-
 export const newUser = function ({dispatch, state}, email, password) {
-  firebase.auth().createUserWithEmailAndPassword(email, password).catch(function (error) {
-    // Handle Errors here.
-    const errorCode = error.code
-    const errorMessage = error.message
-    // [START_EXCLUDE]
-    if (errorCode === 'auth/weak-password') {
-      console.log('The password is too weak.')
-    } else {
-      console.log(errorMessage)
-    }
-    dispatch('USER_CREATION_EMAIL_FAILED')
-    console.log(error)
-  })
-  dispatch('NEW_USER_EMAIL', email)
-  router.go({ path: '/' })
+  firebase.auth().createUserWithEmailAndPassword(email, password)
+    .then(function (result) {
+      dispatch('NEW_USER_EMAIL', result.email)
+      router.go({ path: '/' })
+    })
+    .catch(function (error) {
+      // Handle Errors here.
+      dispatch('USER_CREATION_EMAIL_FAILED', error.code)
+    })
 }
 
 // TODO: Reference Firebase docs to see if the signInWithEmailAndPassword function also returns a 'result', and whether I can use a .then to check for route and redirect accordingly
 
 export const login = function ({dispatch, state}, email, password) {
-  firebase.auth().signInWithEmailAndPassword(email, password).catch(function (error) {
-    // Handle Errors here.
-    const errorCode = error.code
-    const errorMessage = error.message
-    // [START_EXCLUDE]
-    if (errorCode === 'auth/wrong-password') {
-      console.error('Wrong password.')
-    } else {
-      console.error(errorMessage)
-    }
-    console.log(error)
-  })
+  firebase.auth().signInWithEmailAndPassword(email, password)
+    .then(function (result) {
+      // State mutation handled by authCheck in 'src/data/Auth'
+      router.go({ path: '/' })
+    })
+    .catch(function (error) {
+      // Handle Errors here.
+      dispatch('USER_LOGIN_ERROR', error.code)
+    })
 }
 
 export const ourCurrentUser = function ({dispatch, state}) {
@@ -49,11 +36,12 @@ export const ourCurrentUser = function ({dispatch, state}) {
 }
 
 export const signOut = function ({dispatch, state}) {
-  firebase.auth().signOut().then(function () {
-    dispatch('USER_LOGGED_OUT')
-  }, function (error) {
-    console.error(error)
-  })
+  firebase.auth().signOut()
+    .then(function () {
+      dispatch('USER_LOGGED_OUT')
+    }, function (error) {
+      console.error(error)
+    })
 }
 
 export const oAuthLogin = function ({dispatch, state}, authProvider) {
@@ -72,11 +60,8 @@ export const oAuthLogin = function ({dispatch, state}, authProvider) {
   firebase.auth().signInWithPopup(provider).then(function (result) {
     // This gives you a Google Access Token. You can use it to access the Google API.
     // const token = result.credential.accessToken
-    // The signed-in user info.
-    // dispatch('USER_LOGIN_AUTH', result.user)
-    // console.log(result)
 
-    // ...
+    // State mutation handled by authCheck in 'src/data/Auth'
   }).catch(function (error) {
     // Handle Errors here.
     const errorCode = error.code

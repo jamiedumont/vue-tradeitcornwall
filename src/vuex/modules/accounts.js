@@ -2,8 +2,11 @@ import {
   NEW_USER_EMAIL,
   USER_CREATION_EMAIL_FAILED,
   USER_LOGGED_OUT,
-  USER_LOGIN
+  USER_LOGIN,
+  USER_LOGIN_ERROR
 } from '../mutation-types'
+
+import { userCreationError, emailLoginError } from 'src/data/FirebaseErrors'
 
 // initial state
 
@@ -16,15 +19,11 @@ const state = {
 // mutations
 const mutations = {
   [NEW_USER_EMAIL] (state, email) {
-    console.log(`New user created with email (${email}) & password`)
+    console.log(`New user created with email (${email})`)
   },
-  [USER_CREATION_EMAIL_FAILED] (state) {
-    console.error('New user creation with email & password failed!')
+  [USER_CREATION_EMAIL_FAILED] (state, errorCode) {
+    console.log(userCreationError(errorCode))
   },
-  // [USER_LOGIN_EMAIL] (state, currentUser) {
-  //   state.user.loggedIn = true
-  //   state.user.email = currentUser.email
-  // },
   [USER_LOGGED_OUT] (state) {
     state.user.loggedIn = false
     state.user.email = null
@@ -43,6 +42,9 @@ const mutations = {
       uid: res.uid || ''
     }
     state.user = user
+  },
+  [USER_LOGIN_ERROR] (state, errorCode) {
+    console.log(emailLoginError(errorCode))
   }
 }
 

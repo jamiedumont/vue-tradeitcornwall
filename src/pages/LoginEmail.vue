@@ -13,7 +13,7 @@
     </div>
 
     <div class="buttons">
-      <div v-link="{ name: 'home'}" @click="login(email,password)" class="button login">
+      <div @click="login(email,password)" class="button login">
         <h1>Login</h1>
       </div>
       <div v-link="{ name: 'login'}" class="button back">

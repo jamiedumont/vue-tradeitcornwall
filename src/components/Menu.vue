@@ -10,8 +10,12 @@
       </div>
 
       <div class="avatar">
-        <img src="../assets/avatar.png" alt="Jamie">
-        <h4>Jamie</h4>
+        <div class="o-avatar o-avatar--large">
+          <img v-if="photoURL" src="{{ photoURL }}" alt="{{ displayName }}">
+          <span v-else>No image</span>
+        </div>
+        <h4 v-if="displayName">{{ displayName }}</h4>
+        <span v-else>Please head to your profile and add your name</span>
       </div>
 
       <div class="search-box">
@@ -71,7 +75,8 @@
     // Options / Data
     data: function () {
       return {
-        searchValue: ''
+        searchValue: '',
+        fallbackAvatar: 'src/assets/avatar.png'
       }
     },
     props: {
@@ -101,6 +106,10 @@
     vuex: {
       actions: {
         signOut
+      },
+      getters: {
+        displayName: state => state.accounts.user.displayName,
+        photoURL: state => state.accounts.user.photoURL
       }
     },
     // watch: {},
@@ -141,7 +150,9 @@
 
 <style lang='scss' scoped>
 @import "../scss/1_settings/settings.colours.scss";
-
+  .full-width {
+    width: 56px
+  }
   .login-screen {
     position: fixed;
     top: 0;
@@ -194,11 +205,11 @@
     }
   }
   .avatar {
-    max-width: 30vw;
+    max-width: 40vw;
     margin: 0 auto;
     padding-top: 2vh;
-    img {
-      width: 100%;
+    .o-avatar {
+      margin: 0 auto;
     }
     h4 {
       color: $off-white;
