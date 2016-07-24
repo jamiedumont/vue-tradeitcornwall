@@ -28,6 +28,7 @@ export const login = function ({dispatch, state}, email, password) {
     .catch(function (error) {
       // Handle Errors here.
       dispatch('USER_LOGIN_ERROR', error.code)
+      dispatch('ALERT', error.code)
     })
 }
 

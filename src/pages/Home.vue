@@ -1,7 +1,7 @@
 <template>
   <header-bar></header-bar>
   <div id="home">
-    
+
 
     <!-- <h1>Sign Up</h1>
     <input v-model="email">

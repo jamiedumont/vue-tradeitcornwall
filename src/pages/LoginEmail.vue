@@ -1,4 +1,5 @@
 <template>
+
   <div class="login-screen">
     <div v-link="{ name: 'home'}" class="cross">
       <img src="../assets/cross.svg" alt="Close">
@@ -9,7 +10,7 @@
 
     <div class="form">
       <input placeholder="Email..." v-model="email">
-      <input type="password" placeholder="Password..." v-model="password">
+      <input @keyup.enter="login(email,password)" type="password" placeholder="Password..." v-model="password">
     </div>
 
     <div class="buttons">

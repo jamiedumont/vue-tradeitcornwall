@@ -3,7 +3,8 @@ import {
   USER_CREATION_EMAIL_FAILED,
   USER_LOGGED_OUT,
   USER_LOGIN,
-  USER_LOGIN_ERROR
+  USER_LOGIN_ERROR,
+  ALERT
 } from '../mutation-types'
 
 import { userCreationError, emailLoginError } from 'src/data/FirebaseErrors'
@@ -13,6 +14,9 @@ import { userCreationError, emailLoginError } from 'src/data/FirebaseErrors'
 const state = {
   user: {
     loggedIn: false
+  },
+  alert: {
+    present: false
   }
 }
 
@@ -45,6 +49,11 @@ const mutations = {
   },
   [USER_LOGIN_ERROR] (state, errorCode) {
     console.log(emailLoginError(errorCode))
+  },
+  [ALERT] (state, msg) {
+    state.alert.type = 'danger'
+    state.alert.msg = msg
+    state.alert.present = true
   }
 }
 

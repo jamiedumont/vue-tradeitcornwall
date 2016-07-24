@@ -11,7 +11,7 @@
 
       <div class="avatar">
         <div class="o-avatar o-avatar--large">
-          <img v-if="photoURL" src="{{ photoURL }}" alt="{{ displayName }}">
+          <img v-if="photoURL" v-bind:src="photoURL" alt="{{ displayName }}">
           <span v-else>No image</span>
         </div>
         <h4 v-if="displayName">{{ displayName }}</h4>
