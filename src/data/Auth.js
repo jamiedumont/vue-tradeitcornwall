@@ -16,7 +16,6 @@ export default firebase
 // authCheck()
 firebase.auth().onAuthStateChanged(function (user) {
   if (user) {
-    console.log(user)
     store.dispatch('USER_LOGIN', user)
   } else {
     // No user is signed in.

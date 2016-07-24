@@ -7,27 +7,40 @@
       <img src="../assets/tic-logo--white.svg" alt="Trade It Cornwall">
     </div>
 
+    <div>
+      <h2>New Account</h2>
+    </div>
+
+    <div class="form">
+      <input placeholder="Email..." v-model="email">
+      <input type="password" placeholder="Password..." v-model="password">
+    </div>
+
     <div class="buttons">
-      <div v-link="{ name: 'login-email'}"class="button login">
-        <h1>Login</h1>
+      <div @click="newUser(email, password)" class="button login">
+        <h1>Sign Up</h1>
       </div>
-      <div v-link="{ name: 'home'}" @click="oAuthLogin('facebook')" class="button facebook">
-        <h1>Login with Facebook</h1>
-      </div>
-      <div v-link="{ name: 'signup'}" class="button signup">
-        <h1>Create an account</h1>
+      <div v-link="{ name: 'login'}" class="button back">
+        <h1>Back</h1>
       </div>
     </div>
   </div>
 </template>
 
 <script>
-import { oAuthLogin } from 'src/vuex/actions'
+import { newUser } from 'src/vuex/actions'
+
 export default {
-  name: 'Login',
+  name: 'SignUp',
+  data: function () {
+    return {
+      email: '',
+      password: ''
+    }
+  },
   vuex: {
     actions: {
-      oAuthLogin
+      newUser
     }
   }
 }
@@ -35,18 +48,15 @@ export default {
 
 <style lang='scss' scoped>
 @import "../scss/1_settings/settings.colours.scss";
+
+  .form {
+    width: 90vw;
+    margin: 3em auto;
+  }
   .login {
     background-color: $primary-colour;
   }
-  .facebook {
-    background-color: $facebook-blue;
-    color: $off-white;
-    h1 {
-      font-weight: 400;
-      font-size: 16px;
-    }
-  }
-  .signup {
+  .back {
     background-color: $black;
     color: $off-white;
     h1 {
@@ -69,7 +79,7 @@ export default {
     }
   }
   .login-screen {
-    background: url(../assets/cornwall.jpg);
+    background: url(../assets/cornwall_1.jpg);
     background-position: center;
     height: 100vh;
     background-repeat: none;

@@ -3,6 +3,7 @@
 // we can pull those two parameters using the ES6 destructuring feature
 
 import firebase from 'src/data/Auth'
+import router from 'src/router'
 
 export const incrementCounter = function ({ dispatch, state }) {
   dispatch('INCREMENT', 1)
@@ -23,6 +24,7 @@ export const newUser = function ({dispatch, state}, email, password) {
     console.log(error)
   })
   dispatch('NEW_USER_EMAIL', email)
+  router.go({ path: '/' })
 }
 
 // TODO: Reference Firebase docs to see if the signInWithEmailAndPassword function also returns a 'result', and whether I can use a .then to check for route and redirect accordingly

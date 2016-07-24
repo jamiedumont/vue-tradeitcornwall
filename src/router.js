@@ -8,6 +8,7 @@ import About from './pages/About'
 import Inbox from './pages/Inbox'
 import Menu from './pages/Menu'
 import Login from './pages/Login'
+import SignUp from './pages/SignUp'
 import LoginEmail from './pages/LoginEmail'
 import UserDashboard from './pages/UserDashboard'
 import UserProfile from './pages/UserProfile'
@@ -44,6 +45,10 @@ router.map({
   '/inbox': {
     name: 'inbox',
     component: Inbox
+  },
+  '/signup': {
+    name: 'signup',
+    component: SignUp
   },
   '/login': {
     name: 'login',

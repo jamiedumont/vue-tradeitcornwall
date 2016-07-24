@@ -1,6 +1,5 @@
 import Vue from 'vue'
 import VueFire from 'vuefire'
-
 // import Auth from 'src/data/Auth'
 
 import App from './App'

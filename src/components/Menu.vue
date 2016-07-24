@@ -91,10 +91,6 @@
         this.signOut()
       },
       search: function () {
-        console.log(this.searchValue)
-        const query = this.searchValue
-        console.log(query)
-        console.log(this.$route.router)
         const router = this.$route.router
         router.go({
           name: 'buy',
