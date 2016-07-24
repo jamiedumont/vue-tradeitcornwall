@@ -15,7 +15,7 @@
       </div>
 
       <div class="search-box">
-        <input placeholder="Search Cornwall...">
+        <input v-model="searchValue" @keyup.enter="search" placeholder="Search Cornwall...">
         <span class="input-icon">
           <img class="input-icon-actual" src="../assets/search.svg" alt="Search">
         </span>
@@ -69,6 +69,11 @@
 
   export default {
     // Options / Data
+    data: function () {
+      return {
+        searchValue: ''
+      }
+    },
     props: {
       show: {
         type: Boolean,
@@ -84,6 +89,17 @@
       menuSignOut: function () {
         this.close()
         this.signOut()
+      },
+      search: function () {
+        console.log(this.searchValue)
+        const query = this.searchValue
+        console.log(query)
+        console.log(this.$route.router)
+        const router = this.$route.router
+        router.go({
+          name: 'buy',
+          query: { q: this.searchValue }
+        })
       }
     },
     vuex: {

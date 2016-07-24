@@ -2,14 +2,14 @@
   <header-bar></header-bar>
   <div id="buy">
 
-    <div class="algolia-filters">
+    <!-- <div class="algolia-filters">
       <div class="content">
         <h2>Query: {{query here}}</h2>
       </div>
 
 
 
-    </div>
+    </div> -->
 
     <div class="algolia-container">
       <div id="search-input"></div>
@@ -144,7 +144,7 @@ export default {
         templates: {
           item: `<div class="result o-card">
             <div class="o-card__img">
-              <img src="http://localhost:8080/static/img/bmw.b8ece9c.jpg" alt="BMW">
+              <img src="https://s-media-cache-ak0.pinimg.com/564x/f9/ce/ef/f9ceefe6d38eabf934a40d1548f3ede1.jpg" alt="BMW">
             </div>
             <div class="o-card__body">
               <div class="result__meta">
