@@ -2,7 +2,7 @@
 // Since we are only interested in the dispatch (and optionally the state)
 // we can pull those two parameters using the ES6 destructuring feature
 
-import firebase, { currentUser } from 'src/data/Auth'
+import firebase from 'src/data/Auth'
 
 export const incrementCounter = function ({ dispatch, state }) {
   dispatch('INCREMENT', 1)
@@ -40,7 +40,6 @@ export const login = function ({dispatch, state}, email, password) {
     }
     console.log(error)
   })
-  dispatch('USER_LOGIN_EMAIL', currentUser)
 }
 
 export const ourCurrentUser = function ({dispatch, state}) {
@@ -72,7 +71,8 @@ export const oAuthLogin = function ({dispatch, state}, authProvider) {
     // This gives you a Google Access Token. You can use it to access the Google API.
     // const token = result.credential.accessToken
     // The signed-in user info.
-    dispatch('USER_LOGIN_AUTH', result.user)
+    // dispatch('USER_LOGIN_AUTH', result.user)
+    // console.log(result)
 
     // ...
   }).catch(function (error) {

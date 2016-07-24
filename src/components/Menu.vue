@@ -23,11 +23,11 @@
 
       <div class="menu">
 
-        <div class="o-media o-media--centre menu__item">
+        <div v-link="{ name: 'sell'}" class="o-media o-media--centre menu__item">
           <div class="menu__icon-container o-media__img">
             <img class="menu__icon" src="../assets/sell-icon.svg" alt="Sell">
           </div>
-          <div v-link="{ name: 'sell'}" class="o-media__body">
+          <div class="o-media__body">
             <span class="menu__text">Sell</span>
           </div>
         </div>
@@ -50,7 +50,7 @@
           </div>
         </div>
 
-        <div class="o-media o-media--centre menu__item menu__item--detached">
+        <div @click="menuSignOut" class="o-media o-media--centre menu__item menu__item--detached">
           <div class="menu__icon-container o-media__img">
             <img class="menu__icon" src="../assets/account-icon.svg" alt="Account">
           </div>
@@ -65,6 +65,8 @@
 </template>
 
 <script>
+  import { signOut } from 'src/vuex/actions'
+
   export default {
     // Options / Data
     props: {
@@ -78,6 +80,15 @@
     methods: {
       close: function () {
         this.show = false
+      },
+      menuSignOut: function () {
+        this.close()
+        this.signOut()
+      }
+    },
+    vuex: {
+      actions: {
+        signOut
       }
     },
     // watch: {},

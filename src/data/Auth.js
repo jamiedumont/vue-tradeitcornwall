@@ -1,4 +1,6 @@
 import firebase from 'firebase'
+// import { authCheck } from '../vuex/actions'
+import store from '../vuex/store'
 
 const config = {
   apiKey: 'AIzaSyAloSIXHBzC39AfzvabL5EbfHiGeVtPYA8',
@@ -11,6 +13,14 @@ firebase.initializeApp(config)
 
 export default firebase
 
-export const currentUser = firebase.auth().currentUser
+// authCheck()
+firebase.auth().onAuthStateChanged(function (user) {
+  if (user) {
+    console.log(user)
+    store.dispatch('USER_LOGIN', user)
+  } else {
+    // No user is signed in.
+  }
+})
 
 // Firebase watches for changes at the correct message endpoint, when a change it detected, do something with it and dispatch
