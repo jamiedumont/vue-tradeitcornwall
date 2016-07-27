@@ -5,9 +5,26 @@
 import firebase from 'src/data/Auth'
 import router from 'src/router'
 
+export const saveListingInState = function ({dispatch, state}) {
+
+}
+
+export const addListing = function ({dispatch, state}) {
+
+}
+
+export const updateListing = function ({dispatch, state}) {
+
+}
+
+export const removeListing = function ({dispatch, state}) {
+
+}
+
 export const newUser = function ({dispatch, state}, email, password) {
   firebase.auth().createUserWithEmailAndPassword(email, password)
     .then(function (result) {
+      // TODO: firebase create user in database
       dispatch('NEW_USER_EMAIL', result.email)
       router.go({ path: '/' })
     })
