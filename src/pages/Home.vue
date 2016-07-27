@@ -1,7 +1,7 @@
 <template>
   <header-bar></header-bar>
   <div id="home">
-
+    <category-select :categories.sync="categories"></category-select>
 
     <!-- <h1>Sign Up</h1>
     <input v-model="email">
@@ -20,6 +20,7 @@
 
 <script>
 import Button from 'src/components/Button'
+import CategorySelect from 'src/components/CategorySelect'
 import { newUser, login, ourCurrentUser, signOut } from 'src/vuex/actions'
 import HeaderBar from 'src/components/HeaderBar'
 
@@ -30,12 +31,18 @@ export default {
       email: '',
       password: '',
       loginEmail: '',
-      loginPassword: ''
+      loginPassword: '',
+      categories: {
+        lvl0: '',
+        lvl1: ''
+      },
+      test: 'test'
     }
   },
   components: {
     Button,
-    HeaderBar
+    HeaderBar,
+    CategorySelect
   },
   vuex: {
     actions: {
