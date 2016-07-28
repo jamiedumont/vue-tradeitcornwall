@@ -1,8 +1,11 @@
 <template>
   <header-bar></header-bar>
   <div id="home">
-    <category-select :categories.sync="categories"></category-select>
+    <file-upload
+      :multiple="true"
+      :file-list.sync="fileList"
 
+    ></file-upload>
     <!-- <h1>Sign Up</h1>
     <input v-model="email">
     <input v-model="password">
@@ -20,7 +23,7 @@
 
 <script>
 import Button from 'src/components/Button'
-import CategorySelect from 'src/components/CategorySelect'
+import FileUpload from 'src/components/FileUpload'
 import { newUser, login, ourCurrentUser, signOut } from 'src/vuex/actions'
 import HeaderBar from 'src/components/HeaderBar'
 
@@ -32,17 +35,13 @@ export default {
       password: '',
       loginEmail: '',
       loginPassword: '',
-      categories: {
-        lvl0: '',
-        lvl1: ''
-      },
-      test: 'test'
+      fileList: []
     }
   },
   components: {
     Button,
     HeaderBar,
-    CategorySelect
+    FileUpload
   },
   vuex: {
     actions: {
@@ -61,8 +60,6 @@ export default {
   #home {
     background-color: $off-white;
     padding: 30px;
-    max-width: 400px;
-    min-height: 900px;
     margin: 0 auto;
     text-align: center;
   }

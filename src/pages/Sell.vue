@@ -16,6 +16,20 @@
 
         <label>Description</label><br/>
         <textarea style="height: 150px" v-model="listing.description"></textarea>
+
+        <label>Type</label><br/>
+        <input type="radio" id="item "value="item" v-model="listing.type">
+        <label for="item">Item</label>
+        <br>
+        <input type="radio" id="vehicle" value="vehicle" v-model="listing.type">
+        <label for="vehicle">Vehicle</label>
+        <br>
+        <span v-if="listing.type === 'item'">This listing will cost £2</span>
+        <span v-if="listing.type === 'vehicle'">This listing will cost £5</span>
+
+        <category-select :categories.sync="listing.categories"></category-select>
+
+        <input type="file" name="img" multiple>
       </div>
 
       <!-- <div class="layout__item">
@@ -31,6 +45,7 @@
 
 <script>
   import HeaderBar from 'src/components/HeaderBar'
+  import CategorySelect from 'src/components/CategorySelect'
 
   export default {
     name: 'Sell',
@@ -39,13 +54,18 @@
         listing: {
           title: '',
           description: '',
-          price: ''
+          price: '',
+          categories: {
+            lvl0: '',
+            lvl1: ''
+          }
         },
         stage: 1
       }
     },
     components: {
-      HeaderBar
+      HeaderBar,
+      CategorySelect
     }
   }
 </script>

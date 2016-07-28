@@ -1,18 +1,20 @@
 <template>
   <div>
-  <select v-model="categories.lvl0">
-    <option v-for="option in lvl0options" v-bind:value="option">
-      {{ option }}
-    </option>
-  </select>
+    <label>Category</label><br/>
+    <select v-model="categories.lvl0">
+      <option v-for="option in lvl0options" v-bind:value="option">
+        {{ option }}
+      </option>
+    </select>
 
-  <select v-if="categories.lvl0 !== ''" v-model="categories.lvl1">
-    <option v-for="option in lvl1options" v-bind:value="option">
-      {{ option }}
-    </option>
-  </select>
-
-  <h2>Selected: {{ categories.lvl0 }}: {{ categories.lvl1 }}</h2>
+    <div v-if="categories.lvl0 !== ''">
+    <label>Sub-category</label><br/>
+    <select v-model="categories.lvl1">
+      <option v-for="option in lvl1options" v-bind:value="option">
+        {{ option }}
+      </option>
+    </select>
+    </div>
   </div>
 </template>
 
@@ -22,17 +24,19 @@
     name: 'CategorySelect',
     data () {
       return {
-        lvl0options: [ 'Sports', 'Home', 'Electronics', 'Pets', 'Vehicles', 'Clothing' ]
+        lvl0options: [ 'Sports', 'Home', 'Electronics', 'Vehicles', 'Clothing' ]
       }
     },
     props: [ 'categories' ],
     computed: {
       lvl1options: function () {
         const options = {
-          'Sports': [
+          'Sports Equipment': [
+            'Surfboards',
+            'Wetsuits',
             'Outdoor',
-            'Running',
-            'Watersports'
+            'Gym & Fitness',
+            'Other'
           ],
           'Home': [
             'Furniture',
@@ -45,13 +49,13 @@
           ],
           'Electronics': [
             'Computers & Tablets',
-            'Consoles & Video games',
+            'Gaming',
             'Music',
             'TV & Film',
             'Photography',
-            'Mobile phones'
+            'Mobiles',
+            'Other'
           ],
-          'Pets': [],
           'Vehicles': [
             'Cars',
             'Motorbikes',
@@ -62,7 +66,8 @@
             'Womens',
             'Mens',
             'Childrens',
-            'Jewellery & Watches'
+            'Jewellery & Watches',
+            'Other'
           ]
         }
         return options[this.categories.lvl0] || []
