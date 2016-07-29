@@ -1,11 +1,6 @@
 <template>
   <header-bar></header-bar>
   <div id="home">
-    <file-upload
-      :multiple="true"
-      :file-list.sync="fileList"
-
-    ></file-upload>
     <!-- <h1>Sign Up</h1>
     <input v-model="email">
     <input v-model="password">
@@ -23,7 +18,7 @@
 
 <script>
 import Button from 'src/components/Button'
-import FileUpload from 'src/components/FileUpload'
+
 import { newUser, login, ourCurrentUser, signOut } from 'src/vuex/actions'
 import HeaderBar from 'src/components/HeaderBar'
 
@@ -34,14 +29,12 @@ export default {
       email: '',
       password: '',
       loginEmail: '',
-      loginPassword: '',
-      fileList: []
+      loginPassword: ''
     }
   },
   components: {
     Button,
-    HeaderBar,
-    FileUpload
+    HeaderBar
   },
   vuex: {
     actions: {

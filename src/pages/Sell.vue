@@ -30,6 +30,11 @@
         <category-select :categories.sync="listing.categories"></category-select>
 
         <input type="file" name="img" multiple>
+
+        <file-upload
+          :multiple="true"
+          :file-list.sync="fileList"
+        ></file-upload>
       </div>
 
       <!-- <div class="layout__item">
@@ -45,6 +50,7 @@
 
 <script>
   import HeaderBar from 'src/components/HeaderBar'
+  import FileUpload from 'src/components/FileUpload'
   import CategorySelect from 'src/components/CategorySelect'
 
   export default {
@@ -65,7 +71,8 @@
     },
     components: {
       HeaderBar,
-      CategorySelect
+      CategorySelect,
+      FileUpload
     }
   }
 </script>

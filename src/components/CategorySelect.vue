@@ -50,8 +50,7 @@
           'Electronics': [
             'Computers & Tablets',
             'Gaming',
-            'Music',
-            'TV & Film',
+            'Home Entertainment',
             'Photography',
             'Mobiles',
             'Other'

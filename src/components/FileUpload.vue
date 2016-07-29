@@ -33,6 +33,7 @@
 
 <script>
   import trigger from 'src/utils/trigger'
+  // import firebase from 'src/data/Auth'
 
   export default {
     // Options / Data
@@ -121,6 +122,7 @@
     methods: {
       submitForm () {
         if (!this.fileList.length) return
+        console.log(this.fileList)
       },
       retry () {
         this.state = 'retry'
@@ -253,8 +255,8 @@ $gritcode-file-upload-label-color: #39bfd3;
 .gritcode-file-upload {
     text-align: center;
     font-size: 1.25rem; /* 20 */
+    line-height: 2em;
     background-color: $gritcode-file-upload-background;
-    position: relative;
     padding: 100px 20px;
     &.advanced-upload {
         outline: 2px dashed #92b0b3;
