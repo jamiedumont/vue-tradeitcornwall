@@ -9,39 +9,53 @@
       <div class="layout__item med-force--40">
         <h3>Enter your listing below</h3>
         <label>Title</label><br/>
-        <input v-model="listing.title"><br/>
+        <input v-model="title"><br/>
 
         <label>Price</label><br/>
-        <input class="price-input" v-model="listing.price"><br/>
+        <input class="price-input" v-model="price"><br/>
 
         <label>Description</label><br/>
-        <textarea style="height: 150px" v-model="listing.description"></textarea>
+        <textarea style="height: 150px" v-model="description"></textarea>
 
-        <label>Type</label><br/>
-        <input type="radio" id="item "value="item" v-model="listing.type">
-        <label for="item">Item</label>
-        <br>
-        <input type="radio" id="vehicle" value="vehicle" v-model="listing.type">
-        <label for="vehicle">Vehicle</label>
-        <br>
-        <span v-if="listing.type === 'item'">This listing will cost £2</span>
-        <span v-if="listing.type === 'vehicle'">This listing will cost £5</span>
+        <category-select :categories.sync="categories"></category-select>
 
-        <category-select :categories.sync="listing.categories"></category-select>
+        <span v-if="type === 'item'">This listing will cost £2</span>
+        <span v-if="type === 'vehicle'">This listing will cost £5</span>
 
-        <input type="file" name="img" multiple>
 
-        <file-upload
+
+        <span v-if="!addImages" @click="addImages = !addImages">Add More</span>
+
+        <file-upload v-if="addImages"
           :multiple="true"
           :file-list.sync="fileList"
         ></file-upload>
+
+        <!--  Image preview and sort control -->
+        <!-- <div class="layout layout--33" v-sortable="{ draggable: '.box'}">
+          <div class="layout__item box">
+            <div class="content" style="background-image: url('http://www.topgear.com/sites/default/files/styles/16x9_640w/public/cars-road-test/image/2015/02/Large%20Image%20(optional)_96.jpg?itok=cMVM31YC');"></div>
+          </div>
+          <div class="layout__item box">
+            <div class="content" style="background-image: url('http://cdn.pocket-lint.com/r/s/970x/assets/images/phpeufecs.jpg');"></div>
+          </div>
+          <div class="layout__item box">
+            <div class="content" style="background-image: url('https://www.bmw.co.uk/dam/brandBM/marketGB/countryGB/newvehicles/3-series/touring/2015/Introduction/3-series-touring-design-top-stage.jpg.resource.1431610966917.jpg');"></div>
+          </div>
+          <div class="layout__item box">
+            <div class="content" style="background-image: url('http://images.cdn.autocar.co.uk/sites/autocar.co.uk/files/styles/gallery_slide/public/bmw320d.jpg?itok=OyJ3aTVM');"></div>
+          </div>
+          <div class="layout__item box">
+            <div class="content" style="background-image: url('http://images.cdn.autocar.co.uk/sites/autocar.co.uk/files/styles/gallery_slide/public/images/car-reviews/first-drives/legacy/3series-spies-0759.jpg?itok=2oyaGevO');"></div>
+          </div>
+        </div> -->
       </div>
 
       <!-- <div class="layout__item">
         <h2>Advert Preview</h2>
-        <h2>{{ listing.title }}</h2>
-        <p>{{ listing.description }}</p>
-        <p>£ {{ listing.price }}</p>
+        <h2>{{ title }}</h2>
+        <p>{{ description }}</p>
+        <p>£ {{ price }}</p>
       </div> -->
     </div>
 
@@ -52,21 +66,43 @@
   import HeaderBar from 'src/components/HeaderBar'
   import FileUpload from 'src/components/FileUpload'
   import CategorySelect from 'src/components/CategorySelect'
+  import Sortable from 'vue-sortable'
+  import Vue from 'vue'
+
+  Vue.use(Sortable)
 
   export default {
     name: 'Sell',
     data: function () {
       return {
-        listing: {
-          title: '',
-          description: '',
-          price: '',
-          categories: {
-            lvl0: '',
-            lvl1: ''
-          }
+        fileList: [],
+        images: [],
+        title: '',
+        description: '',
+        price: '',
+        type: 'item',
+        location: {
+          locality: '',
+          postcode: ''
         },
+        _geoloc: {
+          lat: '',
+          lng: ''
+        },
+        categories: {
+          lvl0: '',
+          lvl1: ''
+        },
+        addImages: true,
         stage: 1
+      }
+    },
+    computed: {
+      type () {
+        if (this.categories.lvl0 === 'Vehicles') {
+          return 'vehicle'
+        }
+        return 'item'
       }
     },
     components: {
@@ -80,6 +116,30 @@
 <style lang="scss">
 @import "../scss/1_settings/settings.colours.scss";
 
+.sortable-chosen {
+  width: 110%;
+  height: 110%;
+  transform: rotate(5deg);
+}
+.box {
+  position: relative;
+  transition: all 0.2s;
+  .content {
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+  }
+}
+.box:before {
+  content: "";
+  display: block;
+  padding-top: 100%;
+}
 #sell {
   background-color: $off-white;
   padding: 30px;
