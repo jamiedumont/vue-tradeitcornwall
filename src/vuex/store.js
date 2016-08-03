@@ -17,7 +17,6 @@ export default new Vuex.Store({
     listings,
     conversations,
     newListing
-
   },
   strict: debug
 })

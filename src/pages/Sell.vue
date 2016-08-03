@@ -9,46 +9,35 @@
       <div class="layout__item med-force--40">
         <h3>Enter your listing below</h3>
         <label>Title</label><br/>
-        <input v-model="title"><br/>
+        <input :value="message" @input="updateTitle | debounce"><br/>
 
         <label>Price</label><br/>
-        <input class="price-input" v-model="price"><br/>
+        <input class="price-input" :value="price" @input="updatePrice | debounce"><br/>
 
         <label>Description</label><br/>
-        <textarea style="height: 150px" v-model="description"></textarea>
+        <textarea style="height: 150px" :value="description" @input="updateDescription | debounce 500"></textarea>
 
         <category-select :categories.sync="categories"></category-select>
+
+        <span v-if="!uploadVisible" @click="toggleUploader">Change Images</span>
+
+        <file-upload v-if="uploadVisible"
+          :multiple="true"
+        ></file-upload>
 
         <span v-if="type === 'item'">This listing will cost £2</span>
         <span v-if="type === 'vehicle'">This listing will cost £5</span>
 
 
+         <!-- Image preview and sort control -->
+        <div v-if="images.length > 0" class="layout layout--50">
+          <div v-for="image in previewImages" class="layout__item box">
+            <div class="content" :style="{ 'background-image': 'url(' + image + ')' }">
+              <!-- <img :src="image" alt=""> -->
+            </div>
 
-        <span v-if="!addImages" @click="addImages = !addImages">Add More</span>
-
-        <file-upload v-if="addImages"
-          :multiple="true"
-          :file-list.sync="fileList"
-        ></file-upload>
-
-        <!--  Image preview and sort control -->
-        <!-- <div class="layout layout--33" v-sortable="{ draggable: '.box'}">
-          <div class="layout__item box">
-            <div class="content" style="background-image: url('http://www.topgear.com/sites/default/files/styles/16x9_640w/public/cars-road-test/image/2015/02/Large%20Image%20(optional)_96.jpg?itok=cMVM31YC');"></div>
           </div>
-          <div class="layout__item box">
-            <div class="content" style="background-image: url('http://cdn.pocket-lint.com/r/s/970x/assets/images/phpeufecs.jpg');"></div>
-          </div>
-          <div class="layout__item box">
-            <div class="content" style="background-image: url('https://www.bmw.co.uk/dam/brandBM/marketGB/countryGB/newvehicles/3-series/touring/2015/Introduction/3-series-touring-design-top-stage.jpg.resource.1431610966917.jpg');"></div>
-          </div>
-          <div class="layout__item box">
-            <div class="content" style="background-image: url('http://images.cdn.autocar.co.uk/sites/autocar.co.uk/files/styles/gallery_slide/public/bmw320d.jpg?itok=OyJ3aTVM');"></div>
-          </div>
-          <div class="layout__item box">
-            <div class="content" style="background-image: url('http://images.cdn.autocar.co.uk/sites/autocar.co.uk/files/styles/gallery_slide/public/images/car-reviews/first-drives/legacy/3series-spies-0759.jpg?itok=2oyaGevO');"></div>
-          </div>
-        </div> -->
+        </div>
       </div>
 
       <!-- <div class="layout__item">
@@ -68,6 +57,7 @@
   import CategorySelect from 'src/components/CategorySelect'
   import Sortable from 'vue-sortable'
   import Vue from 'vue'
+  import { _ } from 'underscore'
 
   Vue.use(Sortable)
 
@@ -75,11 +65,6 @@
     name: 'Sell',
     data: function () {
       return {
-        fileList: [],
-        images: [],
-        title: '',
-        description: '',
-        price: '',
         type: 'item',
         location: {
           locality: '',
@@ -93,8 +78,31 @@
           lvl0: '',
           lvl1: ''
         },
-        addImages: true,
-        stage: 1
+        addImages: true
+      }
+    },
+    vuex: {
+      getters: {
+        title: state => state.newListing.title,
+        description: state => state.newListing.description,
+        price: state => state.newListing.price,
+        type: state => state.newListing.type,
+        images: state => state.newListing.images,
+        uploadVisible: state => state.newListing.uploadVisible
+      },
+      actions: {
+        updateTitle: ({dispatch}, e) => {
+          dispatch('UPDATE_NL_TITLE', e.target.value)
+        },
+        updatePrice: ({dispatch}, e) => {
+          dispatch('UPDATE_NL_PRICE', e.target.value)
+        },
+        updateDescription: ({dispatch}, e) => {
+          dispatch('UPDATE_NL_DESCRIPTION', e.target.value)
+        },
+        toggleUploader: ({dispatch}) => {
+          dispatch('TOGGLE_UPLOADER')
+        }
       }
     },
     computed: {
@@ -103,6 +111,24 @@
           return 'vehicle'
         }
         return 'item'
+      },
+      previewImages () {
+        const images = []
+        // const imagesToProcess = _.pluck(this.images, 'length')
+        // console.log(imagesToProcess)
+        _.each(this.images, function (image) {
+          // const reader = new window.FileReader()
+          // reader.onload = function (e) {
+          //   // get loaded data and render thumbnail.
+          //   const test = e.target.result
+          //
+          //   console.log(test)
+          // }
+          // const output = reader.readAsDataURL(image)
+          // images.push(output)
+          images.push(window.URL.createObjectURL(image))
+        })
+        return images
       }
     },
     components: {
@@ -130,7 +156,7 @@
     left: 0;
     bottom: 0;
     right: 0;
-    background-position: center;
+    background-position: center center;
     background-repeat: no-repeat;
     background-size: cover;
   }

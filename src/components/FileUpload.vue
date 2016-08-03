@@ -43,7 +43,8 @@
         state: null,
         dragover: false,
         progress: '0%',
-        errorMessage: ''
+        errorMessage: '',
+        fileList: []
       }
     },
     props: {
@@ -82,9 +83,9 @@
         type: Boolean,
         default: false
       },
-      fileList: {
-        default: null
-      },
+      // fileList: {
+      //   default: null
+      // },
       hideButton: {
         type: Boolean,
         default: false
@@ -119,10 +120,22 @@
         return result
       }
     },
+    vuex: {
+      actions: {
+        addImages: ({dispatch}, images) => {
+          dispatch('UPDATE_NL_IMAGES', images)
+        },
+        toggleUploader: ({dispatch}) => {
+          dispatch('TOGGLE_UPLOADER')
+        }
+      }
+    },
     methods: {
       submitForm () {
         if (!this.fileList.length) return
         console.log(this.fileList)
+        this.addImages(this.fileList)
+        this.toggleUploader()
       },
       retry () {
         this.state = 'retry'
@@ -144,6 +157,7 @@
         } else {
           this.fileList.push({name: this._input.value.replace(/^.*\\/, '')})
         }
+        // TODO: file.preview = window.URL.createObjectURL(file);
       },
       _eventHandler (e) {
         // stop propagation to avoid accidental behaviour
@@ -233,15 +247,16 @@
 </script>
 
 <style lang="scss" scoped>
+@import "../scss/1_settings/settings.colours.scss";
   // variables
 $gritcode-file-upload-background: #c8dadf;
 $gritcode-file-upload-background-dragover: #fff;
 $gritcode-file-upload-background-dragover-outline:#c8dadf;
-$gritcode-file-upload-button-color: #e5edf1;
-$gritcode-file-upload-button-background: #39bfd3;
+$gritcode-file-upload-button-color: #333;
+$gritcode-file-upload-button-background: $primary-colour;
 $gritcode-file-upload-button-border: none;
 $gritcode-file-upload-icon-color: #92b0b3;
-$gritcode-file-upload-label-color: #39bfd3;
+$gritcode-file-upload-label-color: #333;
 
 // animation
 @keyframes appear-from-inside
@@ -254,10 +269,10 @@ $gritcode-file-upload-label-color: #39bfd3;
 // core
 .gritcode-file-upload {
     text-align: center;
-    font-size: 1.25rem; /* 20 */
+    font-size: 0.8em; /* 20 */
     line-height: 2em;
-    background-color: $gritcode-file-upload-background;
-    padding: 100px 20px;
+    // background-color: $gritcode-file-upload-background;
+    padding: 20px;
     &.advanced-upload {
         outline: 2px dashed #92b0b3;
         outline-offset: -10px;
@@ -270,16 +285,17 @@ $gritcode-file-upload-label-color: #39bfd3;
             height: 80px;
             fill: $gritcode-file-upload-icon-color;
             display: block;
-            margin-bottom: 40px;
+            margin-bottom: 20px;
         }
         .btn-primary {
             font-weight: 700;
             color: $gritcode-file-upload-button-color;
             background-color: $gritcode-file-upload-button-background;
             border: $gritcode-file-upload-button-border;
+            border-radius: 2px;
             display: block;
             padding: 8px 16px;
-            margin: 40px auto 0;
+            margin: 10px auto 0;
         }
     }
 
