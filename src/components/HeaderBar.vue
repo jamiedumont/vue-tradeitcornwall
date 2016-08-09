@@ -1,10 +1,5 @@
 <template>
   <div id="header">
-    <!-- <div class="header__nav">
-      <h4 v-link="{ path: '/buy' }">Buy</h4>
-      <h4 v-link="{ path: '/sell' }">Sell</h4>
-      <h4 v-link="{ path: '/about' }">About</h4>
-    </div> -->
 
     <img v-link="{ path: '/' }" class="header__logo" src="../assets/tic-logo.svg" alt="Trade It Cornwall">
 
@@ -21,8 +16,6 @@
       <h5 class="lmt__header">Login</h5>
     </div>
   </div>
-
-
 
   <menu :show.sync="showMenu">
   </menu>
