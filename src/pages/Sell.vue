@@ -17,17 +17,15 @@
         <label>Description</label><br/>
         <textarea style="height: 150px" :value="description" @input="updateDescription | debounce 500"></textarea>
 
-        <category-select :categories.sync="categories"></category-select>
+        <category-select on-change="consoleCall" :categories.sync="categories"></category-select>
 
-        <span v-if="!uploadVisible" @click="toggleUploader">Change Images</span>
+
 
         <file-upload v-if="uploadVisible"
           :multiple="true"
+          :auto-submit="true"
+
         ></file-upload>
-
-        <span v-if="type === 'item'">This listing will cost £2</span>
-        <span v-if="type === 'vehicle'">This listing will cost £5</span>
-
 
          <!-- Image preview and sort control -->
         <div v-if="images.length > 0" class="layout layout--50">
@@ -38,14 +36,16 @@
 
           </div>
         </div>
+
+        <button label="Change Images" v-if="!uploadVisible" @click="toggleUploader"></button>
+
+        <p v-if="type === 'item'">This listing will cost £2</p>
+        <p v-if="type === 'vehicle'">This listing will cost £5</p>
+
+        <button @click="addListing" label="Add to checkout"></button>
+
       </div>
 
-      <!-- <div class="layout__item">
-        <h2>Advert Preview</h2>
-        <h2>{{ title }}</h2>
-        <p>{{ description }}</p>
-        <p>£ {{ price }}</p>
-      </div> -->
     </div>
 
   </div>
@@ -55,11 +55,9 @@
   import HeaderBar from 'src/components/HeaderBar'
   import FileUpload from 'src/components/FileUpload'
   import CategorySelect from 'src/components/CategorySelect'
-  import Sortable from 'vue-sortable'
-  import Vue from 'vue'
+  import Button from 'src/components/Button'
   import { _ } from 'underscore'
-
-  Vue.use(Sortable)
+  import { addListing } from 'src/vuex/actions'
 
   export default {
     name: 'Sell',
@@ -81,13 +79,21 @@
         addImages: true
       }
     },
+    watch: {
+      'categories.lvl0': function (val, old) {
+        this.updateCategory('lvl0', val)
+      },
+      'categories.lvl1': function (val, old) {
+        this.updateCategory('lvl1', val)
+      }
+    },
     vuex: {
       getters: {
         title: state => state.newListing.title,
         description: state => state.newListing.description,
         price: state => state.newListing.price,
         type: state => state.newListing.type,
-        images: state => state.newListing.images,
+        images: state => state.newListing.imageRefs,
         uploadVisible: state => state.newListing.uploadVisible
       },
       actions: {
@@ -102,7 +108,11 @@
         },
         toggleUploader: ({dispatch}) => {
           dispatch('TOGGLE_UPLOADER')
-        }
+        },
+        updateCategory: ({dispatch}, level, value) => {
+          dispatch('UPDATE_CATEGORY', level, value)
+        },
+        addListing
       }
     },
     computed: {
@@ -134,7 +144,8 @@
     components: {
       HeaderBar,
       CategorySelect,
-      FileUpload
+      FileUpload,
+      Button
     }
   }
 </script>
