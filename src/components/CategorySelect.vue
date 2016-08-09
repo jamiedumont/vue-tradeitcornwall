@@ -33,7 +33,6 @@
 
 <template>
   <div>
-    <!-- <label>Category</label><br/> -->
 
     <mdl-select label="Category" id="category" :value.sync="categories.lvl0" :options="lvl0options"></mdl-select>
 
@@ -41,36 +40,18 @@
       <mdl-select label="Sub-category" id="sub-category" :value.sync="categories.lvl1" :options="lvl1options"></mdl-select>
     </div>
 
-      <!-- <select v-model="categories.lvl0">
-        <option v-for="option in lvl0options" v-bind:value="option">
-          {{ option }}
-        </option>
-      </select>
-
-
-
-    <div v-if="categories.lvl0 !== ''">
-    <label>Sub-category</label><br/>
-    <select v-model="categories.lvl1">
-      <option v-for="option in lvl1options" v-bind:value="option">
-        {{ option }}
-      </option>
-    </select>
-    </div> -->
   </div>
 </template>
 
 <script>
-  // import { MdlSelect } from 'vue-mdl'
   export default {
-    // Options / Data
     name: 'CategorySelect',
     data () {
       return {
         lvl0options: [ 'Sports Equipment', 'Home', 'Electronics', 'Vehicles', 'Clothing' ]
       }
     },
-    props: [ 'categories' ],
+    props: [ 'categories', 'onChange' ],
     computed: {
       lvl1options: function () {
         const options = {
@@ -120,34 +101,6 @@
       'categories.lvl0': function () {
         this.categories.lvl1 = ''
       }
-    },
-    // Options / DOM
-    // el () {},
-    // replace: true,
-    // template: '',
-    // Options / Lifecycle Hooks
-    // init () {},
-    // crated () {},
-    // beforeCompile () {},
-    // compiled () {},
-    // ready () {},
-    // attached () {},
-    // detached () {},
-    // beforeDestroy () {},
-    // destroyed () {},
-    // Options / Assets
-    // directives: {},
-    // elementDirectives: {},
-    // filters: {},
-    components: {
-      // MdlSelect
     }
-    // transitions: {},
-    // partials: {},
-    // Options / Misc
-    // parent: null,
-    // events: {},
-    // mixins: [],
-    // name: ''
   }
 </script>
