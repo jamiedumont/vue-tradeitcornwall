@@ -10,50 +10,55 @@ export const saveListingInState = function ({dispatch, state}) {
 
 }
 
-export const addListing = function ({dispatch, state}) {
+export const setCurrentDate = function (store) {
+  return new Promise(function (resolve, reject) {
+    resolve(new Date())
+  })
+}
+
+export const uploadImages = function (store, uri, images) {
+  return new Promise(function (resolve, reject) {
+    store.dispatch('TOTAL_IMAGES', images.length)
+    const uploadedImages = []
+    _.each(images, function (file) {
+      const uploadTask = uri.child(file.name).put(file)
+
+      uploadTask.on('state_changed', function (snapshot) {
+        const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100
+        console.log(progress)
+        store.dispatch('UPDATE_UPLOAD_PROGRESS', progress)
+      }, function (error) {
+        console.log('Not going so well', error)
+        // write and dispatch error
+      }, function () {
+        console.log('Complete')
+        // write and dispatch success
+
+        uploadedImages.push(uploadTask.snapshot.downloadURL)
+
+        store.dispatch('NUMBER_IMAGES_COMPLETE', uploadedImages.length)
+
+        if (uploadedImages.length === images.length) {
+          resolve(uploadedImages)
+        }
+      })
+    })
+  })
+}
+
+export const addListing = function (store) {
   // 0. Go to /sell/uploading view
   router.go({ path: '/sell/uploading' })
   // 1. Get a reference for the item from firebase
   const itemUID = firebase.database().ref().child('items').push().key
   // 2. Get the item to list from Vuex Store
-  const item = state.newListing
+  const item = store.state.newListing
   // 3. Append details to that item (userUID, dateListed, dateLastEdited, status)
-  const userUID = state.accounts.user.uid
-  const dateListed = new Date()
-  const dateLastEdited = new Date()
-  // 4. Initialise image uploads
-  const imagesToProcess = item.imageRefs
-
-  const uploadedImages = []
-
+  const userUID = store.state.accounts.user.uid
   const imageEndpoint = firebase.storage().ref().child(`images/${userUID}/${itemUID}/`)
-
-  _.each(imagesToProcess, function (file) {
-    const uploadTask = imageEndpoint.child(file.name).put(file)
-    uploadTask.on('state_changed', function (snapshot) {
-      console.log('All going well')
-    }, function (error) {
-      console.log('Not going so well', error)
-    }, function () {
-      console.log('Complete')
-      const URL = uploadTask.snapshot.downloadURL
-      console.log(URL)
-      uploadedImages.push(URL)
-    })
-  })
-  // 4a. Output upload status
-  // 5. Append image URLS to item
-  console.log(item)
-
-  // console.log(completeItem)
-  // 6. Upload to firebase
-  console.log(dateListed)
-  console.log(uploadedImages)
+  // 4. Upload to firebase
   firebase.database().ref('items/' + itemUID).set({
     sellerUID: userUID,
-    dateListed: dateListed,
-    dateLastEdited: dateLastEdited,
-    images: uploadedImages,
     categories: item.categories,
     title: item.title,
     price: item.price,
@@ -69,9 +74,32 @@ export const addListing = function ({dispatch, state}) {
     favourited: 0,
     convs: []
   })
+
+  // Upload images
+  const toUpload = item.imageRefs
+
+  uploadImages(store, imageEndpoint, toUpload).then(function (images) {
+    firebase.database().ref(`items/${itemUID}`).update({
+      images: images
+    })
+  })
+
+  // Set relevant dates
+  setCurrentDate(store).then(function (date) {
+    firebase.database().ref(`items/${itemUID}`).update({
+      dateListed: date,
+      dateLastEdited: date
+    })
+  })
+
+  // 5. Add item ID to user account in Firebase
+  firebase.database().ref(`users/${userUID}/items/${itemUID}`).set(true)
+
   // 6. Add item ID to checkout, along with cost
-  // 7 Add item ID to user account
+  const cost = item.type === 'vehicle' ? 500 : 200
+  store.dispatch('ADD_TO_CHECKOUT', itemUID, cost)
   // 6. router.go('/checkout')
+  router.go({ path: '/checkout' })
 }
 
 export const updateListing = function ({dispatch, state}) {

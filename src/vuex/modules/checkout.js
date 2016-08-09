@@ -5,8 +5,11 @@ const state = {
 }
 
 const mutations = {
-  [ADD_TO_CHECKOUT] (state, newListing) {
-    state.listings.push(newListing)
+  [ADD_TO_CHECKOUT] (state, listingUID, cost) {
+    state.listings.push({
+      uid: listingUID,
+      cost
+    })
   }
 }
 
