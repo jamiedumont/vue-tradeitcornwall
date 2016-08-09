@@ -3,7 +3,8 @@ import {
   UPDATE_NL_PRICE,
   UPDATE_NL_DESCRIPTION,
   UPDATE_NL_IMAGES,
-  TOGGLE_UPLOADER
+  TOGGLE_UPLOADER,
+  UPDATE_CATEGORY
 } from '../mutation-types'
 
 const state = {
@@ -17,6 +18,7 @@ const state = {
     lvl1: ''
   },
   images: [],
+  imageRefs: [],
   location: {
     locality: '',
     postcode: ''
@@ -40,10 +42,13 @@ const mutations = {
     state.description = description
   },
   [UPDATE_NL_IMAGES] (state, images) {
-    state.images = images
+    state.imageRefs = images
   },
   [TOGGLE_UPLOADER] (state) {
     state.uploadVisible = !state.uploadVisible
+  },
+  [UPDATE_CATEGORY] (state, level, value) {
+    state.categories[level] = value
   }
 }
 

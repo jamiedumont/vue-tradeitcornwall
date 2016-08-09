@@ -4,6 +4,7 @@ import accounts from 'src/vuex/modules/accounts'
 import listings from 'src/vuex/modules/listings'
 import newListing from 'src/vuex/modules/new-listings'
 import conversations from 'src/vuex/modules/conversations'
+import checkout from 'src/vuex/modules/checkout'
 
 // Make Vue aware of Vuex
 Vue.use(Vuex)
@@ -16,7 +17,8 @@ export default new Vuex.Store({
     accounts,
     listings,
     conversations,
-    newListing
+    newListing,
+    checkout
   },
   strict: debug
 })

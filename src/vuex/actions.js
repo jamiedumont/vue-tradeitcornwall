@@ -4,13 +4,74 @@
 
 import firebase from 'src/data/Auth'
 import router from 'src/router'
+import { _ } from 'underscore'
 
 export const saveListingInState = function ({dispatch, state}) {
 
 }
 
 export const addListing = function ({dispatch, state}) {
+  // 0. Go to /sell/uploading view
+  router.go({ path: '/sell/uploading' })
+  // 1. Get a reference for the item from firebase
+  const itemUID = firebase.database().ref().child('items').push().key
+  // 2. Get the item to list from Vuex Store
+  const item = state.newListing
+  // 3. Append details to that item (userUID, dateListed, dateLastEdited, status)
+  const userUID = state.accounts.user.uid
+  const dateListed = new Date()
+  const dateLastEdited = new Date()
+  // 4. Initialise image uploads
+  const imagesToProcess = item.imageRefs
 
+  const uploadedImages = []
+
+  const imageEndpoint = firebase.storage().ref().child(`images/${userUID}/${itemUID}/`)
+
+  _.each(imagesToProcess, function (file) {
+    const uploadTask = imageEndpoint.child(file.name).put(file)
+    uploadTask.on('state_changed', function (snapshot) {
+      console.log('All going well')
+    }, function (error) {
+      console.log('Not going so well', error)
+    }, function () {
+      console.log('Complete')
+      const URL = uploadTask.snapshot.downloadURL
+      console.log(URL)
+      uploadedImages.push(URL)
+    })
+  })
+  // 4a. Output upload status
+  // 5. Append image URLS to item
+  console.log(item)
+
+  // console.log(completeItem)
+  // 6. Upload to firebase
+  console.log(dateListed)
+  console.log(uploadedImages)
+  firebase.database().ref('items/' + itemUID).set({
+    sellerUID: userUID,
+    dateListed: dateListed,
+    dateLastEdited: dateLastEdited,
+    images: uploadedImages,
+    categories: item.categories,
+    title: item.title,
+    price: item.price,
+    description: item.description,
+    location: {},
+    _geoloc: {
+      lat: '',
+      lng: ''
+    },
+    type: item.type,
+    status: 'pending-payment',
+    viewed: 0,
+    favourited: 0,
+    convs: []
+  })
+  // 6. Add item ID to checkout, along with cost
+  // 7 Add item ID to user account
+  // 6. router.go('/checkout')
 }
 
 export const updateListing = function ({dispatch, state}) {
