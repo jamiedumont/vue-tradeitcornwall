@@ -29,7 +29,7 @@ export const uploadImages = function (store, uri, images) {
         store.dispatch('UPDATE_UPLOAD_PROGRESS', progress)
       }, function (error) {
         console.log('Not going so well', error)
-        // write and dispatch error
+        // dispatch error along with reject
       }, function () {
         console.log('Complete')
         // write and dispatch success
@@ -86,6 +86,7 @@ export const addListing = function (store) {
 
   // Set relevant dates
   setCurrentDate(store).then(function (date) {
+    console.log('dating')
     firebase.database().ref(`items/${itemUID}`).update({
       dateListed: date,
       dateLastEdited: date

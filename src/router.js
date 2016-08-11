@@ -5,6 +5,7 @@ import Home from './pages/Home'
 import Buy from './pages/Buy'
 import Sell from './pages/Sell'
 import About from './pages/About'
+import Checkout from './pages/Checkout'
 import Inbox from './pages/Inbox'
 import Menu from './pages/Menu'
 import Login from './pages/Login'
@@ -37,6 +38,10 @@ router.map({
   '/sell': {
     name: 'sell',
     component: Sell
+  },
+  '/checkout': {
+    name: 'checkout',
+    component: Checkout
   },
   '/about': {
     name: 'about',
