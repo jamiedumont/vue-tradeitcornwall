@@ -28,6 +28,10 @@
     }
   }
 
+  .mdl-textfield {
+    width: 100%;
+  }
+
 
 </style>
 

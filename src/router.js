@@ -8,6 +8,7 @@ import About from './pages/About'
 import Checkout from './pages/Checkout'
 import Inbox from './pages/Inbox'
 import Menu from './pages/Menu'
+import Item from './pages/Item'
 import Login from './pages/Login'
 import SignUp from './pages/SignUp'
 import LoginEmail from './pages/LoginEmail'
@@ -30,6 +31,10 @@ router.map({
   '/buy': {
     name: 'buy',
     component: Buy
+  },
+  '/buy/:itemUID': {
+    name: 'item',
+    component: Item
   },
   '/menu': {
     name: 'menu',

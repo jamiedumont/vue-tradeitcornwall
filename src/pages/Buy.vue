@@ -126,7 +126,7 @@ export default {
     const search = instantsearch({
       appId: '6VAJ69ISJV',
       apiKey: 'c6540d28ecc025d481367f17ae5cdb89',
-      indexName: 'getstarted_actors',
+      indexName: 'cornwall',
       urlSync: true
     })
 
@@ -144,16 +144,17 @@ export default {
         templates: {
           item: `<div class="result o-card">
             <div class="o-card__img">
-              <img src="https://s-media-cache-ak0.pinimg.com/564x/f9/ce/ef/f9ceefe6d38eabf934a40d1548f3ede1.jpg" alt="BMW">
+              <img src="{{images.0}}" alt="{{title}}">
             </div>
             <div class="o-card__body">
               <div class="result__meta">
                 <div class="meta__price">
-                  <span>£4600</span>
+                  <span>£{{price}}</span>
                 </div>
                 <span>Falmouth</span>
               </div>
-              <span class="result__header">{{name}}</span>
+              <span class="result__header"><a href="/buy/{{objectID}}">{{title}}</a></span>
+              <div>{{description}}</div>
             </div>
           </div>`
         }
