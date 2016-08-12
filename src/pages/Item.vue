@@ -14,7 +14,17 @@ export default {
   name: 'Item',
   data: function () {
     return {
-      id: this.$route.params.itemUID
+      id: this.$route.params.itemUID,
+      loading: true,
+      item: {
+        title: '',
+        description: '',
+        images: '',
+        categories: '',
+        location: '',
+        price: '',
+        dateListed: ''
+      }
     }
   },
   components: {
@@ -22,10 +32,20 @@ export default {
   },
   ready () {
     // Pass the UID from route params to Vuex action which adds it to store
-    console.log(this.id)
+    const self = this
     firebase.database().ref(`/items/${this.id}`).once('value')
     .then(function (snapshot) {
-      console.log(snapshot.val())
+      const d = snapshot.val()
+      self.item = {
+        title: d.title,
+        description: d.description,
+        images: d.images,
+        categories: d.categories,
+        location: d.location,
+        price: d.price,
+        dateListed: d.dateListed
+      }
+      self.loading = false
     })
   }
 }

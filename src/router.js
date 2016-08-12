@@ -7,7 +7,6 @@ import Sell from './pages/Sell'
 import About from './pages/About'
 import Checkout from './pages/Checkout'
 import Inbox from './pages/Inbox'
-import Menu from './pages/Menu'
 import Item from './pages/Item'
 import Login from './pages/Login'
 import SignUp from './pages/SignUp'
@@ -35,10 +34,6 @@ router.map({
   '/buy/:itemUID': {
     name: 'item',
     component: Item
-  },
-  '/menu': {
-    name: 'menu',
-    component: Menu
   },
   '/sell': {
     name: 'sell',
