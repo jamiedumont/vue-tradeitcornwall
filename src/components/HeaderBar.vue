@@ -23,37 +23,33 @@
 </template>
 
 <script>
-import Button from 'src/components/Button'
-import Menu from 'src/components/Menu'
-import { oAuthLogin } from 'src/vuex/actions'
+  import Menu from 'src/components/Menu'
 
-export default {
-  components: {
-    Button,
-    Menu
-  },
-  data: function () {
-    return {
-      showMenu: false
-    }
-  },
-  vuex: {
-    actions: {
-      oAuthLogin
+  export default {
+    name: 'HeaderBar',
+    components: {
+      Menu
     },
-    getters: {
-      loggedIn: state => state.accounts.user.loggedIn,
-      displayName: state => state.accounts.user.displayName,
-      email: state => state.accounts.user.email,
-      photoURL: state => state.accounts.user.photoURL
-    }
-  },
-  computed: {
-    avatar () {
-      return this.photoURL ? this.photoURL : 'http://s3.amazonaws.com/37assets/svn/765-default-avatar.png'
+    data: function () {
+      return {
+        showMenu: false
+      }
+    },
+    vuex: {
+      getters: {
+        loggedIn: state => state.accounts.user.loggedIn,
+        displayName: state => state.accounts.user.displayName,
+        email: state => state.accounts.user.email,
+        photoURL: state => state.accounts.user.photoURL
+      }
+    },
+    computed: {
+      avatar () {
+        // TODO: Replace this avatar with a locally served one.
+        return this.photoURL ? this.photoURL : 'http://s3.amazonaws.com/37assets/svn/765-default-avatar.png'
+      }
     }
   }
-}
 </script>
 
 <style lang="scss" scoped>

@@ -151,7 +151,7 @@ export default {
                 <div class="meta__price">
                   <span>£{{price}}</span>
                 </div>
-                <span>Falmouth</span>
+                <span>{{location}}</span>
               </div>
               <span class="result__header"><a href="/buy/{{objectID}}">{{title}}</a></span>
               <div>{{description}}</div>

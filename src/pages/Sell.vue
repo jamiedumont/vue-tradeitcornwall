@@ -1,10 +1,7 @@
 <template>
   <header-bar></header-bar>
   <div id="sell">
-    <!-- This progress indicator will become a component  -->
-    <!-- <h4 style="text-align: center;">Progress indicator here: {{ stage }}</h4> -->
 
-    <!-- Each of the two layout items will be a component, both rendered (conditionally by this view) -->
     <div class="layout">
       <div class="layout__item med-force--40">
         <h3>Enter your listing below</h3>
@@ -17,7 +14,7 @@
         <label>Description</label><br/>
         <textarea style="height: 150px" :value="description" @input="updateDescription | debounce 500"></textarea>
 
-        <category-select on-change="consoleCall" :categories.sync="categories"></category-select>
+        <category-select :categories.sync="categories"></category-select>
 
 
 
@@ -39,6 +36,10 @@
 
         <button label="Change Images" v-if="!uploadVisible" @click="toggleUploader"></button>
 
+        <label>Location</label><br/>
+        <input type="text" v-model="tempLocation">
+        <button @click="findLocation" label="Find location">
+
         <p v-if="type === 'item'">This listing will cost £2</p>
         <p v-if="type === 'vehicle'">This listing will cost £5</p>
 
@@ -57,17 +58,15 @@
   import CategorySelect from 'src/components/CategorySelect'
   import Button from 'src/components/Button'
   import { _ } from 'underscore'
-  import { addListing } from 'src/vuex/actions'
+  import { addListing } from 'src/vuex/modules/new-listings/actions'
 
   export default {
     name: 'Sell',
     data: function () {
       return {
         type: 'item',
-        location: {
-          locality: '',
-          postcode: ''
-        },
+        tempLocation: '',
+        location: '',
         _geoloc: {
           lat: '',
           lng: ''
@@ -79,12 +78,36 @@
         addImages: true
       }
     },
+    methods: {
+      findLocation () {
+        if (this.tempLocation === '') {
+          return
+        }
+        this.$http.get(`https://maps.googleapis.com/maps/api/geocode/json?address=${this.tempLocation}`).then(function (location) {
+          const locationjson = JSON.parse(location.body)
+          console.log(locationjson.results[0])
+          const pos = locationjson.results[0].geometry.location
+          const locale = locationjson.results[0].formatted_address
+          this.updateGeo(pos)
+          this.updateLocation(locale)
+        }, function (err) {
+          console.log(err)
+        })
+      }
+    },
     watch: {
       'categories.lvl0': function (val, old) {
         this.updateCategory('lvl0', val)
       },
       'categories.lvl1': function (val, old) {
         this.updateCategory('lvl1', val)
+      },
+      '_geoloc': function (val, old) {
+        this.updateGeo(val)
+        console.log('Test')
+      },
+      'location': function (val, old) {
+        this.updateLocation(val)
       }
     },
     vuex: {
@@ -112,6 +135,12 @@
         updateCategory: ({dispatch}, level, value) => {
           dispatch('UPDATE_CATEGORY', level, value)
         },
+        updateGeo: ({dispatch}, value) => {
+          dispatch('UPDATE_GEO', value)
+        },
+        updateLocation: ({dispatch}, value) => {
+          dispatch('UPDATE_LOCATION', value)
+        },
         addListing
       }
     },
@@ -124,18 +153,7 @@
       },
       previewImages () {
         const images = []
-        // const imagesToProcess = _.pluck(this.images, 'length')
-        // console.log(imagesToProcess)
         _.each(this.images, function (image) {
-          // const reader = new window.FileReader()
-          // reader.onload = function (e) {
-          //   // get loaded data and render thumbnail.
-          //   const test = e.target.result
-          //
-          //   console.log(test)
-          // }
-          // const output = reader.readAsDataURL(image)
-          // images.push(output)
           images.push(window.URL.createObjectURL(image))
         })
         return images

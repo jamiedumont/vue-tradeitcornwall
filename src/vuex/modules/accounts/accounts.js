@@ -5,11 +5,11 @@ import {
   USER_LOGIN,
   USER_LOGIN_ERROR,
   ALERT
-} from '../mutation-types'
+} from '../../mutation-types'
 
 import { userCreationError, emailLoginError } from 'src/data/FirebaseErrors'
 
-// initial state
+// Initial state
 
 const state = {
   user: {
@@ -20,7 +20,8 @@ const state = {
   }
 }
 
-// mutations
+// Mutations
+
 const mutations = {
   [NEW_USER_EMAIL] (state, email) {
     console.log(`New user created with email (${email})`)

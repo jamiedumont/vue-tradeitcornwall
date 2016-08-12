@@ -4,8 +4,10 @@ import {
   UPDATE_NL_DESCRIPTION,
   UPDATE_NL_IMAGES,
   TOGGLE_UPLOADER,
-  UPDATE_CATEGORY
-} from '../mutation-types'
+  UPDATE_CATEGORY,
+  UPDATE_GEO,
+  UPDATE_LOCATION
+} from '../../mutation-types'
 
 const state = {
   sellerUID: '',
@@ -19,10 +21,7 @@ const state = {
   },
   images: [],
   imageRefs: [],
-  location: {
-    locality: '',
-    postcode: ''
-  },
+  location: '',
   _geoloc: {
   },
   convs: [],
@@ -49,6 +48,12 @@ const mutations = {
   },
   [UPDATE_CATEGORY] (state, level, value) {
     state.categories[level] = value
+  },
+  [UPDATE_GEO] (state, pos) {
+    state._geoloc = pos
+  },
+  [UPDATE_LOCATION] (state, loc) {
+    state.location = loc
   }
 }
 

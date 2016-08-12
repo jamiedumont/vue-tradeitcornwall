@@ -1,5 +1,5 @@
 <template>
-    <div v-show="show" transition="modal" class="login-screen">
+    <div v-show="show" class="login-screen">
 
       <div @click="close" class="cross">
         <img src="../assets/cross.svg" alt="Close">
@@ -12,7 +12,7 @@
       <div class="avatar">
         <div class="o-avatar o-avatar--large">
           <img v-if="photoURL" v-bind:src="photoURL" alt="{{ displayName }}">
-          <span v-else>No image</span>
+          <img v-else src="../assets/avatar.png">
         </div>
         <h4 v-if="displayName">{{ displayName }}</h4>
         <span v-else>Please head to your profile and add your name</span>
@@ -69,14 +69,13 @@
 </template>
 
 <script>
-  import { signOut } from 'src/vuex/actions'
+  import { signOut } from 'src/vuex/modules/accounts/actions'
 
   export default {
-    // Options / Data
+    name: 'Menu',
     data: function () {
       return {
-        searchValue: '',
-        fallbackAvatar: 'src/assets/avatar.png'
+        searchValue: ''
       }
     },
     props: {
@@ -86,7 +85,6 @@
         twoWay: true
       }
     },
-    computed: {},
     methods: {
       close: function () {
         this.show = false
@@ -112,16 +110,6 @@
         photoURL: state => state.accounts.user.photoURL
       }
     },
-    // watch: {},
-    // Options / DOM
-    // el () {},
-    // replace: true,
-    // template: '',
-    // Options / Lifecycle Hooks
-    // init () {},
-    // crated () {},
-    // beforeCompile () {},
-    // compiled () {},
     ready: function () {
       document.addEventListener('keydown', (e) => {
         if (this.show && e.keyCode === 27) {
@@ -129,27 +117,12 @@
         }
       })
     }
-    // attached () {},
-    // detached () {},
-    // beforeDestroy () {},
-    // destroyed () {},
-    // Options / Assets
-    // directives: {},
-    // elementDirectives: {},
-    // filters: {},
-    // components: {},
-    // transitions: {},
-    // partials: {},
-    // Options / Misc
-    // parent: null,
-    // events: {},
-    // mixins: [],
-    // name: ''
   }
 </script>
 
 <style lang='scss' scoped>
-@import "../scss/1_settings/settings.colours.scss";
+  @import "../scss/1_settings/settings.colours.scss";
+
   .full-width {
     width: 56px
   }
@@ -185,7 +158,7 @@
     margin: 30px auto;
     display: flex;
     flex-direction: row;
-    background-color: $off-white;
+    background-color: white;
     border-radius: 100px;
     input {
       margin: 0;
@@ -245,30 +218,11 @@
     border: none;
   }
 
-    .menu__text {
-      text-transform: uppercase;
-      color: $off-white;
-      font-size: 18px;
-      font-weight: 700;
-    }
-
-/*
- * the following styles are auto-applied to elements with
- * v-transition="modal" when their visiblity is toggled
- * by Vue.js.
- *
- * You can easily play with the modal transition by editing
- * these styles.
- */
-
-.modal-enter, .modal-leave {
-  opacity: 0;
-}
-
-.modal-enter .modal-container,
-.modal-leave .modal-container {
-  -webkit-transform: scale(1.1);
-  transform: scale(1.1);
-}
+  .menu__text {
+    text-transform: uppercase;
+    color: $off-white;
+    font-size: 18px;
+    font-weight: 700;
+  }
 
 </style>

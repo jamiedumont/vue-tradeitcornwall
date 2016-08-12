@@ -9,6 +9,7 @@
 
 <script>
 import HeaderBar from 'src/components/HeaderBar'
+import firebase from 'src/data/Firebase'
 export default {
   name: 'Item',
   data: function () {
@@ -22,6 +23,10 @@ export default {
   ready () {
     // Pass the UID from route params to Vuex action which adds it to store
     console.log(this.id)
+    firebase.database().ref(`/items/${this.id}`).once('value')
+    .then(function (snapshot) {
+      console.log(snapshot.val())
+    })
   }
 }
 </script>

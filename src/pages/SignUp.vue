@@ -28,7 +28,7 @@
 </template>
 
 <script>
-import { newUser } from 'src/vuex/actions'
+import { newUser } from 'src/vuex/modules/accounts/actions'
 
 export default {
   name: 'SignUp',

@@ -1,4 +1,4 @@
-import {ADD_TO_CHECKOUT} from '../mutation-types'
+import {ADD_TO_CHECKOUT} from '../../mutation-types'
 
 const state = {
   listings: []

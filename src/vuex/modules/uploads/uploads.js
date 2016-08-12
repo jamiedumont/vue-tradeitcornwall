@@ -2,7 +2,7 @@ import {
   UPDATE_UPLOAD_PROGRESS,
   NUMBER_IMAGES_COMPLETE,
   TOTAL_IMAGES
-} from '../mutation-types'
+} from '../../mutation-types'
 
 const state = {
   uploadProgess: '',

@@ -22,7 +22,7 @@
 </template>
 
 <script>
-import { oAuthLogin } from 'src/vuex/actions'
+import { oAuthLogin } from 'src/vuex/modules/accounts/actions'
 export default {
   name: 'Login',
   vuex: {

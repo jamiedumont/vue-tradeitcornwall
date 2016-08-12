@@ -38,10 +38,9 @@
 
 <script>
   import trigger from 'src/utils/trigger'
-  // import firebase from 'src/data/Auth'
 
+  // TODO: This component's props and methods can be massively slimmed down.
   export default {
-    // Options / Data
     name: 'FileUpload',
     data () {
       return {
@@ -162,7 +161,6 @@
         } else {
           this.fileList.push({name: this._input.value.replace(/^.*\\/, '')})
         }
-        // TODO: file.preview = window.URL.createObjectURL(file);
       },
       _eventHandler (e) {
         // stop propagation to avoid accidental behaviour

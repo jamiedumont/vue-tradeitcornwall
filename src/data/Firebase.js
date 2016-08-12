@@ -1,5 +1,4 @@
 import firebase from 'firebase'
-// import { authCheck } from '../vuex/actions'
 import store from '../vuex/store'
 
 const config = {
@@ -21,5 +20,3 @@ firebase.auth().onAuthStateChanged(function (user) {
     // No user is signed in.
   }
 })
-
-// Firebase watches for changes at the correct message endpoint, when a change it detected, do something with it and dispatch

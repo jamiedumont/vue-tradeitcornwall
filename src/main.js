@@ -1,7 +1,6 @@
 import Vue from 'vue'
 import VueFire from 'vuefire'
 import VueMdl from 'vue-mdl'
-// import Auth from 'src/data/Auth'
 
 import App from './App'
 import router from './router'

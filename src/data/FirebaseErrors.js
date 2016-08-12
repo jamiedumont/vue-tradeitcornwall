@@ -19,3 +19,5 @@ export const emailLoginError = function (errorCode) {
   }
   return (errors[errorCode] || errors['default'])
 }
+
+// TODO: Are there similar errors I can use for the oAuth stuff?

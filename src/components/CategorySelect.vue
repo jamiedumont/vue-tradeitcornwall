@@ -55,7 +55,7 @@
         lvl0options: [ 'Sports Equipment', 'Home', 'Electronics', 'Vehicles', 'Clothing' ]
       }
     },
-    props: [ 'categories', 'onChange' ],
+    props: [ 'categories' ],
     computed: {
       lvl1options: function () {
         const options = {
@@ -100,7 +100,6 @@
         return options[this.categories.lvl0] || []
       }
     },
-    methods: {},
     watch: {
       'categories.lvl0': function () {
         this.categories.lvl1 = ''

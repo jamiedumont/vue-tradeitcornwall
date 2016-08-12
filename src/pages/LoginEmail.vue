@@ -25,7 +25,7 @@
 </template>
 
 <script>
-import { login } from 'src/vuex/actions'
+import { login } from 'src/vuex/modules/accounts/actions'
 export default {
   name: 'LoginEmail',
   data: function () {
