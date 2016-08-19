@@ -43,6 +43,7 @@ export const addListing = function (store) {
     firebase.database().ref(`items/${itemUID}`).update({
       images: images
     })
+    router.go({ path: '/checkout' })
   })
 
   // Set relevant dates
@@ -61,7 +62,6 @@ export const addListing = function (store) {
   const cost = item.type === 'vehicle' ? 500 : 200
   store.dispatch('ADD_TO_CHECKOUT', itemUID, cost)
   // 6. router.go('/checkout')
-  router.go({ path: '/checkout' })
 }
 
 export const updateListing = function ({dispatch, state}) {

@@ -5,9 +5,9 @@ import {
 } from '../../mutation-types'
 
 const state = {
-  uploadProgess: '',
-  totalUploads: '',
-  uploadsComplete: ''
+  uploadProgess: 0,
+  totalUploads: 0,
+  uploadsComplete: 0
 }
 
 const mutations = {

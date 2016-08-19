@@ -4,6 +4,7 @@ import VueRouter from 'vue-router'
 import Home from './pages/Home'
 import Buy from './pages/Buy'
 import Sell from './pages/Sell'
+import Uploading from './pages/Uploading'
 import About from './pages/About'
 import Checkout from './pages/Checkout'
 import Inbox from './pages/Inbox'
@@ -38,6 +39,10 @@ router.map({
   '/sell': {
     name: 'sell',
     component: Sell
+  },
+  '/sell/uploading': {
+    name: 'uploading',
+    component: Uploading
   },
   '/checkout': {
     name: 'checkout',

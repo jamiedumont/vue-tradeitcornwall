@@ -8,14 +8,12 @@ export const uploadImages = function (store, uri, images) {
       const uploadTask = uri.child(file.name).put(file)
 
       uploadTask.on('state_changed', function (snapshot) {
-        const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100
-        console.log(progress)
+        const progress = Math.floor((snapshot.bytesTransferred / snapshot.totalBytes) * 100)
         store.dispatch('UPDATE_UPLOAD_PROGRESS', progress)
       }, function (error) {
         console.log('Not going so well', error)
         // dispatch error along with reject
       }, function () {
-        console.log('Complete')
         // write and dispatch success
 
         uploadedImages.push(uploadTask.snapshot.downloadURL)
@@ -23,6 +21,7 @@ export const uploadImages = function (store, uri, images) {
         store.dispatch('NUMBER_IMAGES_COMPLETE', uploadedImages.length)
 
         if (uploadedImages.length === images.length) {
+          store.dispatch('NUMBER_IMAGES_COMPLETE', 0)
           resolve(uploadedImages)
         }
       })
