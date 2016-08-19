@@ -3,7 +3,7 @@
   <div id="sell">
 
     <div class="layout">
-      <div class="layout__item med-force--40">
+      <div class="layout__item med-force--30">
         <h3>Enter your listing below</h3>
         <label>Title</label><br/>
         <input :value="message" @input="updateTitle | debounce"><br/>
@@ -16,7 +16,7 @@
 
         <category-select :categories.sync="categories"></category-select>
 
-
+        <div class="images">
 
         <file-upload v-if="uploadVisible"
           :multiple="true"
@@ -34,11 +34,12 @@
           </div>
         </div>
 
-        <button label="Change Images" v-if="!uploadVisible" @click="toggleUploader"></button>
+        <button class="o-btn o-btn--ghost" label="Change Images" v-if="!uploadVisible" @click="toggleUploader"></button>
+        </div>
 
 
 
-        <label>Location</label><span v-if="location"> saved as: {{location}}</span><br/>
+        <label>Location<span v-if="location"> saved as: <strong>{{location}}</strong></span></label><br/>
         <input type="text" v-model="tempLocation">
         <button @click="findLocation" label="Find location">
 
@@ -46,13 +47,16 @@
         <p v-if="type === 'item'">This listing will cost £2</p>
         <p v-if="type === 'vehicle'">This listing will cost £5</p>
 
-        <button @click="addListing" label="Add to checkout"></button>
+      </div> <!-- END .layout__item -->
 
-      </div>
+    </div> <!-- END .layout -->
 
+    <div @click="addListing" class="add-listing">
+      <span>Add to checkout</span>
     </div>
 
-  </div>
+  </div> <!-- END #sell -->
+
 </template>
 
 <script>
@@ -67,7 +71,6 @@
     name: 'Sell',
     data: function () {
       return {
-        type: 'item',
         tempLocation: '',
         categories: {
           lvl0: '',
@@ -100,6 +103,7 @@
 
           this.updateGeo(pos)
           this.updateLocation(locality.long_name)
+          this.tempLocation = ''
         }, function (err) {
           console.log(err)
         })
@@ -125,7 +129,7 @@
         title: state => state.newListing.title,
         description: state => state.newListing.description,
         price: state => state.newListing.price,
-        type: state => state.newListing.type,
+        // type: state => state.newListing.type,
         images: state => state.newListing.imageRefs,
         uploadVisible: state => state.newListing.uploadVisible,
         location: state => state.newListing.location
@@ -181,6 +185,7 @@
 
 <style lang="scss">
 @import "../scss/1_settings/settings.colours.scss";
+@import "../scss/1_settings/settings.globals.scss";
 
 .sortable-chosen {
   width: 110%;
@@ -209,7 +214,6 @@
 #sell {
   background-color: $off-white;
   padding: 30px;
-  max-width: 400px;
   min-height: 900px;
   margin: 0 auto;
   text-align: center;
@@ -236,6 +240,19 @@
   margin-bottom: 30px;
   h3 {
     margin: 0 30px;
+  }
+}
+
+.add-listing {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: $base-spacing-unit;
+  background-color: $black;
+  span {
+    font-weight: $weight-bold;
+    color: white;
   }
 }
 

@@ -6,7 +6,7 @@
 
 
 $heading-size-1:  18px !default;
-$heading-size-2:  24px !default;
+$heading-size-2:  18px !default;
 $heading-size-3:  16px !default;
 $heading-size-4:  14px !default;
 $heading-size-5:  12px !default;
@@ -24,7 +24,6 @@ h1,h2,h3,h4,h5,h6 {
 
 h1 {
   @include font-size($heading-size-1);
-  text-transform: uppercase;
 }
 
 h2 {

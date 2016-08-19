@@ -1,7 +1,11 @@
 <template>
   <header-bar></header-bar>
   <div id="checkout">
-    <h1 @click="open">Checkout</h1>
+    <div class="header-unit">
+      <h1 class="hu__header">Checkout</h1>
+      <span class="hu__info">{{ }} items</span>
+      <button class="o-btn o-btn--ghost">Add another</button>
+    </div>
   </div>
 </template>
 
@@ -56,6 +60,11 @@ export default {
 }
 </script>
 
-<style>
-
+<style lang="scss">
+  @import "../scss/1_settings/settings.colours.scss";
+  #checkout {
+    text-align: left;
+    background-color: white;
+    height: 100vh;
+  }
 </style>
