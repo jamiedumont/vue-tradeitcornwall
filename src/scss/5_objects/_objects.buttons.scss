@@ -31,6 +31,7 @@ $enable-btn--small:   false !default;
 $enable-btn--large:   false !default;
 $enable-btn--full:    false !default;
 $enable-btn--pill:    false !default;
+$enable-btn--ghost:    false !default;
 
 // EDITS
 
@@ -38,6 +39,8 @@ $btn-radius:          3px;
 $btn-background:      $primary-colour;
 $btn-color:           $black;
 $btn-border-style:    none;
+
+$enable-btn--ghost:    true;
 
 
 
@@ -60,8 +63,10 @@ $btn-border-style:    none;
     display: inline-block;      /* [1] */
     vertical-align: middle;     /* [2] */
     font: inherit;              /* [3] */
+    font-size: 10px;
+    font-weight: $weight-semi;
     text-align: center;         /* [4] */
-    margin:  0;                 /* [4] */
+    margin:  $base-spacing-unit/2;                 /* [4] */
     cursor: pointer;            /* [5] */
     padding: $btn-padding - $btn-border-width  double($btn-padding) - $btn-border-width; /* [6] */
     background-color: $btn-background;
@@ -138,6 +143,26 @@ $btn-border-style:    none;
     .o-btn--full {
         width: 100%;
 
+    }
+
+}
+
+@if ($enable-btn--ghost == true) {
+
+/*********************************
+    Ghost Buttons
+**********************************/
+
+    .o-btn--ghost {
+      background: none;
+      color: $black;
+      border: 1px solid $black;
+    }
+
+    .o-btn--ghost:hover {
+      background: $black;
+      color: white;
+      border: 1px solid $black;
     }
 
 }

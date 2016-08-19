@@ -146,12 +146,14 @@
   text-align: center;
 }
 .result__header {
-  font-size: 16px;
-  font-weight: 700;
-  display: block;
-  margin: 0px auto;
-  padding-bottom: 20px;
-  width: 80%;
+    a {
+    font-size: 16px;
+    color: $black;
+    font-weight: 700;
+    display: block;
+    margin: 0px auto;
+    width: 80%;
+  }
 }
 .result__meta {
   background-color: $primary-colour;
@@ -165,6 +167,17 @@
 .result__meta--overlap {
   position: relative;
   top: -20px;
+}
+.result__description {
+  padding: $base-spacing-unit 0 0;
+  /* For sale is my 2009: */
+  font-family: OpenSans;
+  font-size: 10px;
+  color: $black;
+  letter-spacing: 0.6px;
+  line-height: 1.5em;
+  max-width: 90%;
+  margin: 0 auto;
 }
 // .meta__price, .meta__distance {
 //   display: inline-block;

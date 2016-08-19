@@ -154,7 +154,10 @@ export default {
                 <span>{{location}}</span>
               </div>
               <span class="result__header"><a href="/buy/{{objectID}}">{{title}}</a></span>
-              <div>{{description}}</div>
+              <div class="result__description">{{description}}</div>
+              <a href="/buy/{{objectID}}">
+                <button class="o-btn o-btn--ghost">More details</button>
+              </a>
             </div>
           </div>`
         }
