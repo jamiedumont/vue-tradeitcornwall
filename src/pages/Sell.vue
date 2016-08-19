@@ -36,9 +36,12 @@
 
         <button label="Change Images" v-if="!uploadVisible" @click="toggleUploader"></button>
 
-        <label>Location</label><br/>
+
+
+        <label>Location</label><span v-if="location"> saved as: {{location}}</span><br/>
         <input type="text" v-model="tempLocation">
         <button @click="findLocation" label="Find location">
+
 
         <p v-if="type === 'item'">This listing will cost £2</p>
         <p v-if="type === 'vehicle'">This listing will cost £5</p>
@@ -66,11 +69,6 @@
       return {
         type: 'item',
         tempLocation: '',
-        location: '',
-        _geoloc: {
-          lat: '',
-          lng: ''
-        },
         categories: {
           lvl0: '',
           lvl1: ''
@@ -85,11 +83,23 @@
         }
         this.$http.get(`https://maps.googleapis.com/maps/api/geocode/json?address=${this.tempLocation}`).then(function (location) {
           const locationjson = JSON.parse(location.body)
-          console.log(locationjson.results[0])
+
+          // Get the lat/lng
           const pos = locationjson.results[0].geometry.location
-          const locale = locationjson.results[0].formatted_address
+
+          // Get the address components
+          const address = locationjson.results[0].address_components
+
+          // Get a human readable, concise location from address
+          const locality = _.find(address, function (comp) {
+            const correctItem = _.find(comp.types, function (type) {
+              return type === 'locality'
+            })
+            return correctItem !== undefined
+          })
+
           this.updateGeo(pos)
-          this.updateLocation(locale)
+          this.updateLocation(locality.long_name)
         }, function (err) {
           console.log(err)
         })
@@ -101,14 +111,14 @@
       },
       'categories.lvl1': function (val, old) {
         this.updateCategory('lvl1', val)
-      },
-      '_geoloc': function (val, old) {
-        this.updateGeo(val)
-        console.log('Test')
-      },
-      'location': function (val, old) {
-        this.updateLocation(val)
       }
+      // '_geoloc': function (val, old) {
+      //   this.updateGeo(val)
+      //   console.log('Test')
+      // },
+      // 'location': function (val, old) {
+      //   this.updateLocation(val)
+      // }
     },
     vuex: {
       getters: {
@@ -117,7 +127,8 @@
         price: state => state.newListing.price,
         type: state => state.newListing.type,
         images: state => state.newListing.imageRefs,
-        uploadVisible: state => state.newListing.uploadVisible
+        uploadVisible: state => state.newListing.uploadVisible,
+        location: state => state.newListing.location
       },
       actions: {
         updateTitle: ({dispatch}, e) => {
