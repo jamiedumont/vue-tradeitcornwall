@@ -135,6 +135,7 @@
     height: 100vh;
     background-repeat: none;
     background-size: cover;
+    z-index: 10;
   }
   .cross {
     width: 18px;

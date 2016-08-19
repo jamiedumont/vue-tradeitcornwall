@@ -156,13 +156,15 @@
 .result__meta {
   background-color: $primary-colour;
   color: white;
-  position: relative;
-  top: -20px;
   display: inline;
   text-align: center;
   padding: 8px 10px 8px 0px;
   margin: 0 auto;
   letter-spacing: 0.4px;
+}
+.result__meta--overlap {
+  position: relative;
+  top: -20px;
 }
 // .meta__price, .meta__distance {
 //   display: inline-block;
@@ -170,7 +172,7 @@
 .meta__price {
   background-color: $black;
   color: $primary-colour;
-  min-height: 100%;
+  // min-height: 100%;
   display: inline-block;
   padding: 10px;
   margin-right: 10px;

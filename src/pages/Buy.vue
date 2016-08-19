@@ -147,7 +147,7 @@ export default {
               <img src="{{images.0}}" alt="{{title}}">
             </div>
             <div class="o-card__body">
-              <div class="result__meta">
+              <div class="result__meta result__meta--overlap">
                 <div class="meta__price">
                   <span>£{{price}}</span>
                 </div>
