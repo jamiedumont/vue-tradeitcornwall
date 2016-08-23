@@ -2,8 +2,10 @@
   <header-bar></header-bar>
   <div id="uploading">
     <div class="header-unit">
+      <div class="header-main">
       <h1 class="hu__header">Uploading</h1>
       <span class="hu__info">{{ totalUploads }} images</span>
+      </div>
     </div>
     <div class="upload-bar">
       <mdl-progress indeterminate></mdl-progress>
@@ -60,11 +62,14 @@ export default {
   .hu__header {
     padding-right: 20px;
     border-right: 1px solid $light-grey;
+    display: inline-block;
   }
   .hu__info {
-    padding-left: 20px;
+    padding-left: 12px;
     color: $light-grey;
     font-size: 10px;
+    position: relative;
+    bottom: 3px;
   }
   .upload-bar {
     max-width: 80%;

@@ -2,8 +2,10 @@
   <header-bar></header-bar>
   <div id="checkout">
     <div class="header-unit">
-      <h1 class="hu__header">Checkout</h1>
-      <span class="hu__info">{{numberItems}} {{numberItems | pluralize 'item'}}</span>
+      <div class="header-main">
+        <h1 class="hu__header">Checkout</h1>
+        <span class="hu__info">{{numberItems}} {{numberItems | pluralize 'item'}}</span>
+      </div>
       <button class="o-btn o-btn--ghost" v-link="'sell'">Add another</button>
     </div>
     <div class="container">
@@ -21,6 +23,12 @@
             </div>
 
         </div>
+      </div>
+
+      <h4 class="checkout__footer">Listings are valid for 30 days after payment</h4>
+
+      <div v-on:click="open" class="enquire">
+        <span>Pay {{ total | divide100 | currency '£'}}</span>
       </div>
     </div>
   </div>
@@ -56,7 +64,7 @@ export default {
 
         zipCode: true,
         currency: 'gbp',
-        amount: this.amount
+        amount: this.total
       })
     }
   },
@@ -93,10 +101,17 @@ export default {
 
 <style lang="scss">
   @import "../scss/1_settings/settings.colours.scss";
+  @import "../scss/1_settings/settings.globals.scss";
+  @import "../scss/1_settings/settings.breakpoints.scss";
+  @import "../scss/2_tools/tools.media-queries.scss";
   #checkout {
     text-align: left;
     background-color: white;
     height: 100vh;
+    @include media-query(med) {
+      max-width: 600px;
+      margin: 0 auto;
+    }
   }
   .container {
     padding: 0 20px;
@@ -117,11 +132,8 @@ export default {
     padding: 6px;
     text-align: left;
   }
-  .checkout-item {
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
-    align-content: flex-start;
+  .checkout__item {
+    margin-bottom: 6  px;
   }
   .co-item__header {
     text-align: left;
@@ -149,5 +161,32 @@ export default {
     font-weight: 300;
     margin: 0;
     padding-top: 2px;
+  }
+  .checkout__footer {
+    border-top: 1px solid $light-grey;
+    padding-top: 6px;
+    margin-top: 24px;
+    font-size: 10px;
+    color: $light-grey;
+    font-weight: 300;
+  }
+  .enquire {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: $base-spacing-unit;
+    background-color: $black;
+    text-align: center;
+    @include media-query(med) {
+      position: static;
+      padding: 9px;
+      width: 100px;
+      margin: 0 30px 0 auto;
+    }
+    span {
+      font-weight: $weight-bold;
+      color: white;
+    }
   }
 </style>
