@@ -11,6 +11,13 @@ export const setCurrentDate = function (store, itemUID) {
   })
 }
 
+function type (store) {
+  if (store.state.newListing.categories.lvl0 === 'Vehicles') {
+    return 'vehicle'
+  }
+  return 'item'
+}
+
 export const addListing = function (store) {
   // 0. Go to /sell/uploading view
   // TODO: This is a mutation to state, and should be handled in a dispatch
@@ -30,7 +37,7 @@ export const addListing = function (store) {
     description: item.description,
     location: item.location,
     _geoloc: item._geoloc,
-    type: item.type,
+    type: type(store),
     status: 'pending-payment',
     viewed: 0,
     favourited: 0,
@@ -48,7 +55,7 @@ export const addListing = function (store) {
   firebase.database().ref(`users/${userUID}/items/${itemUID}`).set(true)
 
   // 6. Add item ID to checkout, along with cost
-  addToCheckout(store, userUID, itemUID, item)
+  addToCheckout(store, userUID, itemUID, newItem)
   // 6. router.go('/checkout')
 }
 

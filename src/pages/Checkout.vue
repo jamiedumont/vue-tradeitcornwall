@@ -3,8 +3,11 @@
   <div id="checkout">
     <div class="header-unit">
       <h1 class="hu__header">Checkout</h1>
-      <span class="hu__info">{{ }} items</span>
-      <button class="o-btn o-btn--ghost">Add another</button>
+      <span class="hu__info">{{ numberItems }} items</span>
+      <button class="o-btn o-btn--ghost" v-link="'sell'">Add another</button>
+    </div>
+    <div class="checkout__items">
+      
     </div>
   </div>
 </template>
@@ -13,6 +16,7 @@
 import HeaderBar from 'src/components/HeaderBar'
 import Vue from 'vue'
 import VueResource from 'vue-resource'
+import { _ } from 'underscore'
 
 Vue.use(VueResource)
 
@@ -61,6 +65,9 @@ export default {
             })
         }
       })
+    },
+    numberItems () {
+      return _.size(this.items)
     }
   }
 }

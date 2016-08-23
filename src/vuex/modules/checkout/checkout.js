@@ -5,7 +5,7 @@ import {
 } from '../../mutation-types'
 
 const state = {
-  items: [],
+  items: {},
   total: 0
 }
 
