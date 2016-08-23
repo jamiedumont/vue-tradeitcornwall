@@ -38,6 +38,12 @@ export default {
       })
     }
   },
+  vuex: {
+    getters: {
+      total: state => state.checkout.total,
+      items: state => state.checkout.items
+    }
+  },
   computed: {
     handler () {
       const self = this

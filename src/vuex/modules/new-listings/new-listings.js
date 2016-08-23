@@ -48,6 +48,11 @@ const mutations = {
   },
   [UPDATE_CATEGORY] (state, level, value) {
     state.categories[level] = value
+    if (level === 'lvl0' && value === 'Vehicles') {
+      state.type = 'vehicle'
+    } else {
+      state.type = 'item'
+    }
   },
   [UPDATE_GEO] (state, pos) {
     state._geoloc = pos
