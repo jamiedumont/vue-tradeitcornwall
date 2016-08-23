@@ -1,12 +1,10 @@
 import Vue from 'vue'
-import VueFire from 'vuefire'
 import VueMdl from 'vue-mdl'
 
 import App from './App'
 import router from './router'
 
 Vue.use(VueMdl)
-Vue.use(VueFire)
 
 // Now we can start the app!
 // The router will create an instance of App and mount to
