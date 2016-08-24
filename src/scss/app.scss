@@ -212,6 +212,12 @@
   color: white;
 }
 
+#uploading, #checkout {
+  @include media-query(med) {
+    max-width: 600px;
+    margin: 0 auto;
+  }
+}
 
 
 

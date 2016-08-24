@@ -42,7 +42,7 @@ import Vue from 'vue'
 import VueResource from 'vue-resource'
 import { _ } from 'underscore'
 import { handlePaymentSuccess } from 'src/vuex/modules/checkout/actions'
-import charge from 'src/charge'
+// import charge from 'src/charge'
 
 Vue.use(VueResource)
 
@@ -123,10 +123,6 @@ export default {
     text-align: left;
     background-color: white;
     height: 100vh;
-    @include media-query(med) {
-      max-width: 600px;
-      margin: 0 auto;
-    }
   }
   .container {
     padding: 0 20px;

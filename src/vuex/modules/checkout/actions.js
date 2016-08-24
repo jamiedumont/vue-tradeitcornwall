@@ -1,6 +1,7 @@
 import firebase from 'src/data/Firebase'
 import { _ } from 'underscore'
 import moment from 'moment'
+import router from 'src/router'
 
 export const addToCheckout = function (store, userUID, itemUID, item) {
   const cost = item.type === 'vehicle' ? 500 : 200
@@ -27,8 +28,10 @@ export const updateCheckout = function (store, data) {
 }
 
 export const handlePaymentSuccess = function (store, res) {
-  // Assemble data needed for functions
+  // Change route
+  router.go({ path: 'checkout/thanks' })
 
+  // Assemble data needed for functions
   // Pluck only the relevant fields from response object
   const chargeData = _.pick(res,
     'id',

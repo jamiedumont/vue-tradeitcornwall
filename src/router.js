@@ -7,6 +7,7 @@ import Sell from './pages/Sell'
 import Uploading from './pages/Uploading'
 import About from './pages/About'
 import Checkout from './pages/Checkout'
+import Thanks from './pages/Thanks'
 import Inbox from './pages/Inbox'
 import Item from './pages/Item'
 import Login from './pages/Login'
@@ -47,6 +48,10 @@ router.map({
   '/checkout': {
     name: 'checkout',
     component: Checkout
+  },
+  '/checkout/thanks': {
+    name: 'checkout-thanks',
+    component: Thanks
   },
   '/about': {
     name: 'about',
