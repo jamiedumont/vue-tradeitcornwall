@@ -1,6 +1,6 @@
 import {
   ADD_TO_CHECKOUT,
-  READ_CHECKOUT_DATA,
+  UPDATE_CHECKOUT_DATA,
   ERROR_READ_CHECKOUT_DATA
 } from '../../mutation-types'
 
@@ -13,7 +13,7 @@ const mutations = {
   [ADD_TO_CHECKOUT] (state, listingUID) {
     console.log(listingUID)
   },
-  [READ_CHECKOUT_DATA] (state, data) {
+  [UPDATE_CHECKOUT_DATA] (state, data) {
     state.items = data.items
     state.total = data.total
   },

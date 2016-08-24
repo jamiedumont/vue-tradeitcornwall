@@ -18,7 +18,7 @@ const checkoutWatcher = (userUID) => {
     const data = snapshot.val()
 
     if (data !== null) {
-      store.dispatch('READ_CHECKOUT_DATA', data)
+      store.dispatch('UPDATE_CHECKOUT_DATA', data)
     }
   })
 }

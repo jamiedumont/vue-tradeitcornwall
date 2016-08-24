@@ -30,6 +30,8 @@
       <div v-on:click="open" class="enquire">
         <span>Pay {{ total | divide100 | currency '£'}}</span>
       </div>
+
+      <!-- <button v-on:click="dirtyCharge">Dirty Charge</button> -->
     </div>
   </div>
 </template>
@@ -39,6 +41,8 @@ import HeaderBar from 'src/components/HeaderBar'
 import Vue from 'vue'
 import VueResource from 'vue-resource'
 import { _ } from 'underscore'
+import { handlePaymentSuccess } from 'src/vuex/modules/checkout/actions'
+import charge from 'src/charge'
 
 Vue.use(VueResource)
 
@@ -67,11 +71,18 @@ export default {
         amount: this.total
       })
     }
+    // dirtyCharge () {
+    //   console.log('dirty charge')
+    //   this.handlePaymentSuccess(charge)
+    // }
   },
   vuex: {
     getters: {
       total: state => state.checkout.total,
       items: state => state.checkout.items
+    },
+    actions: {
+      handlePaymentSuccess
     }
   },
   computed: {
@@ -83,11 +94,15 @@ export default {
         locale: 'auto',
         token: function (token) {
           Vue.http
-            .post('https://webtask.it.auth0.com/api/run/wt-jamiedumont-icloud_com-0/stripe-test', {stripeToken: token.id, amount: self.total}).then(function (stripeCustomer) {
-              console.log(stripeCustomer)
+            .post('https://webtask.it.auth0.com/api/run/wt-jamiedumont-icloud_com-0/stripe-test', {stripeToken: token.id, amount: self.total}).then(function (res) {
+              if (res.ok === true) {
+                const response = JSON.parse(res.body)
+                self.handlePaymentSuccess(response)
+              }
             }, function (e) {
               console.log('Problem')
               console.log(e)
+              // TODO: Handle error with dispatch
             })
         }
       })
