@@ -83,7 +83,7 @@ export default {
         locale: 'auto',
         token: function (token) {
           Vue.http
-            .post('https://webtask.it.auth0.com/api/run/wt-jamiedumont-icloud_com-0/stripe-test', {stripeToken: token.id, amount: self.amount}).then(function (stripeCustomer) {
+            .post('https://webtask.it.auth0.com/api/run/wt-jamiedumont-icloud_com-0/stripe-test', {stripeToken: token.id, amount: self.total}).then(function (stripeCustomer) {
               console.log(stripeCustomer)
             }, function (e) {
               console.log('Problem')

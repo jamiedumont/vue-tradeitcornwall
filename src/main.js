@@ -3,6 +3,7 @@ import VueMdl from 'vue-mdl'
 
 import App from './App'
 import router from './router'
+import 'src/startup'
 
 Vue.use(VueMdl)
 

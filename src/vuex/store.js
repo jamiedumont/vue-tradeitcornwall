@@ -4,7 +4,6 @@ import accounts from 'src/vuex/modules/accounts/accounts'
 import newListing from 'src/vuex/modules/new-listings/new-listings'
 import checkout from 'src/vuex/modules/checkout/checkout'
 import uploads from 'src/vuex/modules/uploads/uploads'
-import { checkoutWatcher } from 'src/data/Firebase'
 
 // Make Vue aware of Vuex
 Vue.use(Vuex)
@@ -19,6 +18,5 @@ export default new Vuex.Store({
     checkout,
     uploads
   },
-  plugins: [checkoutWatcher],
   strict: debug
 })
