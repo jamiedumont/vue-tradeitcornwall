@@ -1,12 +1,12 @@
 <template>
   <header-bar></header-bar>
-  <div id="item">
+  <div class="bg-white tc">
   <div class="loading-spacer" v-if="loading">
     <mdl-spinner single-color></mdl-spinner>
   </div>
 
   <div class="full-height" v-else>
-    <div class="item__images layout">
+    <div class="mb3 layout">
       <div class="layout__item">
         <div v-for="image in item.images">
           <img :src="image" alt="" />
@@ -16,15 +16,13 @@
     </div>
     <div class="layout">
       <div class="layout__item">
-        <h1 class="gamma item__header">{{item.title}}</h1>
-        <p class="item__category">{{item.categories.lvl0}} - {{item.categories.lvl1}}</p>
-        <div class="item__meta result__meta">
-          <div class="meta__price">
-            <span class="item__price">£{{item.price}}</span>
-          </div>
-          <span class="item__location">{{item.location}}</span>
+        <h1 class="ma1">{{item.title}}</h1>
+        <p class="f6 i silver ma1 mb3">{{item.categories.lvl0}} - {{item.categories.lvl1}}</p>
+        <div class="flex w-75 mw5 center">
+          <div class="f6 gold pa2 ph3 bg-black">£{{item.price}}</div>
+          <div class="f6 black-80 tc pa2 bg-gold w-100">{{item.location}}</div>
         </div>
-        <div class="item__description">{{item.description}}</div>
+        <div class="f6 dark-gray mw6 center ma3">{{item.description}}</div>
       </div>
     </div>
 
@@ -87,47 +85,9 @@ export default {
     min-height: 100vh;
     padding-top: 30vh;
   }
-  #item {
-    background-color: white;
-    text-align: center;
-  }
 
   .full-height {
     min-height: 90vh;
-  }
-
-  .item__images {
-    margin-bottom: $base-spacing-unit*2.5;
-  }
-
-  .item__header {
-    /* 2009 BMW 330ci Touri: */
-    font-family: OpenSans-Bold;
-    font-size: 16px;
-    color: $black;
-    letter-spacing: 0.62px;
-    margin-bottom: $base-spacing-unit/4;
-    text-transform: none;
-  }
-
-  .item__category {
-    /* Vehicles - Cars: */
-    font-family: OpenSans;
-    font-size: 10px;
-    color: $light-grey;
-    letter-spacing: 0.38px;
-    margin-bottom: $base-spacing-unit/2;
-  }
-
-  .item__description {
-    margin: $base-spacing-unit auto 80px;
-    /* For sale is my 2009: */
-    font-family: OpenSans;
-    font-size: 10px;
-    color: $black;
-    letter-spacing: 0.6px;
-    line-height: 1.5em;
-    max-width: 90%;
   }
 
   .enquire {

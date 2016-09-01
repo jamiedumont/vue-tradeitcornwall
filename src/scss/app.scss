@@ -139,61 +139,6 @@
 
 */
 
-.result {
-  background-color: white;
-  width: 90vw;
-  margin: 1em auto;
-  text-align: center;
-}
-.result__header {
-    a {
-    font-size: 16px;
-    color: $black;
-    font-weight: 700;
-    display: block;
-    margin: 0px auto;
-    width: 80%;
-  }
-}
-.result__meta {
-  background-color: $primary-colour;
-  color: white;
-  display: inline;
-  text-align: center;
-  padding: 8px 10px 8px 0px;
-  margin: 0 auto;
-  letter-spacing: 0.4px;
-}
-.result__meta--overlap {
-  position: relative;
-  top: -20px;
-}
-.result__description {
-  padding: $base-spacing-unit 0 0;
-  /* For sale is my 2009: */
-  font-family: OpenSans;
-  font-size: 10px;
-  color: $black;
-  letter-spacing: 0.6px;
-  line-height: 1.5em;
-  max-width: 90%;
-  margin: 0 auto;
-}
-// .meta__price, .meta__distance {
-//   display: inline-block;
-// }
-.meta__price {
-  background-color: $black;
-  color: $primary-colour;
-  // min-height: 100%;
-  display: inline-block;
-  padding: 10px;
-  margin-right: 10px;
-  span {
-    font-weight: 700;
-  }
-}
-
 .is-pagination__root {
   margin: 0;
   text-align: center;
@@ -226,6 +171,10 @@
   Helpers and overrides.
 
 */
+
+.top--3 {
+  top: -3rem;
+}
 
 // Secondary naming convention to resize headers.
 @import "7_trumps/trumps.header-trumps";

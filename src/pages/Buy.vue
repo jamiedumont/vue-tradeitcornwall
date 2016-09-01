@@ -141,25 +141,26 @@ export default {
     search.addWidget(
       instantsearch.widgets.hits({
         container: '#hits-container',
+        cssClasses: {
+          root: 'layout layout--100 @med-layout--50 @lrg-layout--33',
+          item: 'layout__item pa3'
+        },
         templates: {
-          item: `<div class="result o-card">
-            <div class="o-card__img">
-              <img src="{{images.0}}" alt="{{title}}">
-            </div>
-            <div class="o-card__body">
-              <div class="result__meta result__meta--overlap">
-                <div class="meta__price">
-                  <span>£{{price}}</span>
+          item:
+            `<article class="br2 dark-gray bg-white w-100 center">
+              <img src="{{images.0}}" class="db w-100 br2 br--top" alt="{{title}}">
+              <div class="tc pa3 pt0">
+                <div class="flex relative top--1">
+                  <div class="f6 gold pa2 ph3 bg-black">£{{price}}</div>
+                  <div class="f6 black-80 tc pa2 bg-gold w-100">{{location}}</div>
                 </div>
-                <span>{{location}}</span>
+                <h2><a class="black-80" href="/buy/{{objectID}}">{{title}}</a></h2>
+                <div class="f6 dark-gray">{{description}}</div>
+                <a class="ma2 dib" href="/buy/{{objectID}}">
+                  <button class="center o-btn o-btn--ghost">More details</button>
+                </a>
               </div>
-              <span class="result__header"><a href="/buy/{{objectID}}">{{title}}</a></span>
-              <div class="result__description">{{description}}</div>
-              <a href="/buy/{{objectID}}">
-                <button class="o-btn o-btn--ghost">More details</button>
-              </a>
-            </div>
-          </div>`
+            </article>`
         }
       })
     )
