@@ -1,19 +1,20 @@
 <template>
-  <div id="header">
+  <div class="pa1" id="header">
+    <div class="center flex items-center w-100 mw8 justify-between pa2 h3">
+      <img v-link="{ path: '/' }" class="header__logo" src="../assets/tic-logo.svg" alt="Trade It Cornwall">
 
-    <img v-link="{ path: '/' }" class="header__logo" src="../assets/tic-logo.svg" alt="Trade It Cornwall">
-
-    <div @click="showMenu = true" class="o-media o-media--reverse o-media--centre header-avatar" v-if="loggedIn">
-      <div class="o-avatar o-avatar--small o-media__img">
-          <img :src="avatar" :alt="displayName" />
+      <div @click="showMenu = true" class="o-media o-media--reverse o-media--centre header-avatar" v-if="loggedIn">
+        <div class="o-avatar o-avatar--small o-media__img">
+            <img :src="avatar" :alt="displayName" />
+        </div>
+        <div class="o-media__body">
+          <h5 class="f6">Menu</h5>
+        </div>
       </div>
-      <div class="o-media__body">
-        <h5>MENU</h5>
-      </div>
-    </div>
 
-    <div v-else class="login-modal-trigger" v-link="{ name: 'login'}">
-      <h5 class="lmt__header">Login</h5>
+      <div v-else class="login-modal-trigger" v-link="{ name: 'login'}">
+        <h5 class="lmt__header">Login</h5>
+      </div>
     </div>
   </div>
 
@@ -87,11 +88,6 @@
     cursor: pointer;
   }
   #header {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    height: 80px;
-    padding: 15px;
     background-color: $primary-colour;
   }
   .header__logo {

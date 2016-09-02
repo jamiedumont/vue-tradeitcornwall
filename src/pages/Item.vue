@@ -16,13 +16,13 @@
     </div>
     <div class="layout">
       <div class="layout__item">
-        <h1 class="ma1">{{item.title}}</h1>
+        <h1 class="f4 ma1">{{item.title}}</h1>
         <p class="f6 i silver ma1 mb3">{{item.categories.lvl0}} - {{item.categories.lvl1}}</p>
         <div class="flex w-75 mw5 center">
           <div class="f6 gold pa2 ph3 bg-black">£{{item.price}}</div>
           <div class="f6 black-80 tc pa2 bg-gold w-100">{{item.location}}</div>
         </div>
-        <div class="f6 dark-gray mw6 center ma3">{{item.description}}</div>
+        <div class="w-80 f6 dark-gray mw6 center ma3">{{item.description}}</div>
       </div>
     </div>
 

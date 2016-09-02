@@ -3,8 +3,8 @@
   <div id="uploading">
     <div class="header-unit">
       <div class="header-main">
-      <h1 class="hu__header">Uploading</h1>
-      <span class="hu__info">{{ totalUploads }} images</span>
+      <h1 class="b dib f4 pr3 br b--light-gray">Uploading</h1>
+      <span class="pl2 relative gray hu__info">{{ totalUploads }} images</span>
       </div>
     </div>
     <div class="upload-bar">
@@ -59,16 +59,8 @@ export default {
       margin: 0;
     }
   }
-  .hu__header {
-    padding-right: 20px;
-    border-right: 1px solid $light-grey;
-    display: inline-block;
-  }
   .hu__info {
-    padding-left: 12px;
-    color: $light-grey;
     font-size: 10px;
-    position: relative;
     bottom: 3px;
   }
   .upload-bar {

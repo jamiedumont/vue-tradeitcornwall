@@ -19,8 +19,8 @@ table,
 fieldset, figure,
 pre,
 %margin-bottom {
-    margin-bottom: $base-line-height;
-    margin-bottom: ($base-line-height / $base-font-size) * 1rem;
+    margin-bottom: $base-leading;
+    margin-bottom: ($base-leading / $base-font-size) * 1rem;
 }
 
 ul, ol, dd,

@@ -1,34 +1,14 @@
 <template>
   <header-bar></header-bar>
-  <div id="buy">
+  <div class="mw8 center" id="buy">
 
-    <!-- <div class="algolia-filters">
-      <div class="content">
-        <h2>Query: {{query here}}</h2>
-      </div>
-
-
-
-    </div> -->
-
-    <div class="algolia-container">
+    <div class="mw-100 algolia-container">
       <div id="search-input"></div>
 
       <div id="hits-container"></div>
 
       <div id="pagination-container"></div>
     </div>
-
-
-
-    <!-- <div class="search-box">
-      <input placeholder="Search Cornwall...">
-      <span class="input-icon">
-        <img class="input-icon-actual" src="../assets/search.svg" alt="Search">
-      </span>
-    </div>
-    <p class="search-box__meta"><strong>280</strong> results found within <strong> 8km</strong></p> -->
-
 
     <div class="filter-btn">
       <span>Filters</span>
@@ -142,8 +122,8 @@ export default {
       instantsearch.widgets.hits({
         container: '#hits-container',
         cssClasses: {
-          root: 'layout layout--100 @med-layout--50 @lrg-layout--33',
-          item: 'layout__item pa3'
+          root: 'layout layout--100 @med-layout--50 @lrg-layout--25',
+          item: 'layout__item pa2'
         },
         templates: {
           item:
@@ -154,7 +134,7 @@ export default {
                   <div class="f6 gold pa2 ph3 bg-black">£{{price}}</div>
                   <div class="f6 black-80 tc pa2 bg-gold w-100">{{location}}</div>
                 </div>
-                <h2><a class="black-80" href="/buy/{{objectID}}">{{title}}</a></h2>
+                <h2 class="f4 ma2"><a class="black-80" href="/buy/{{objectID}}">{{title}}</a></h2>
                 <div class="f6 dark-gray">{{description}}</div>
                 <a class="ma2 dib" href="/buy/{{objectID}}">
                   <button class="center o-btn o-btn--ghost">More details</button>

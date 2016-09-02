@@ -1,10 +1,10 @@
 <template>
   <header-bar></header-bar>
-  <div id="checkout">
+  <div class="mw8 ph4-m ph6-l center" id="checkout">
     <div class="header-unit">
       <div class="header-main">
-        <h1 class="hu__header">Checkout</h1>
-        <span class="hu__info">{{numberItems}} {{numberItems | pluralize 'item'}}</span>
+        <h1 class="b dib f4 pr3 br b--light-gray">Checkout</h1>
+        <span class="pl2 relative gray hu__info">{{numberItems}} {{numberItems | pluralize 'item'}}</span>
       </div>
       <button class="o-btn o-btn--ghost" v-link="'sell'">Add another</button>
     </div>

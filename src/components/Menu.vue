@@ -14,12 +14,12 @@
           <img v-if="photoURL" v-bind:src="photoURL" alt="{{ displayName }}">
           <img v-else src="../assets/avatar.png">
         </div>
-        <h4 v-if="displayName">{{ displayName }}</h4>
+        <span class="ma2 f6 db light-gray tc" v-if="displayName">{{ displayName }}</span>
         <span v-else>Please head to your profile and add your name</span>
       </div>
 
       <div class="search-box">
-        <input v-model="searchValue" @keyup.enter="search" placeholder="Search Cornwall...">
+        <input class="i" v-model="searchValue" @keyup.enter="search" placeholder="Search Cornwall...">
         <span class="input-icon">
           <img class="input-icon-actual" src="../assets/search.svg" alt="Search">
         </span>
@@ -32,7 +32,7 @@
             <img class="menu__icon" src="../assets/sell-icon.svg" alt="Sell">
           </div>
           <div class="o-media__body">
-            <span class="menu__text">Sell</span>
+            <span class="menu__text tracked">Sell</span>
           </div>
         </div>
 
@@ -41,7 +41,7 @@
             <img class="menu__icon" src="../assets/message-icon.svg" alt="Messages">
           </div>
           <div class="o-media__body">
-            <span class="menu__text">Messages</span>
+            <span class="menu__text tracked">Messages</span>
           </div>
         </div>
 
@@ -50,7 +50,7 @@
             <img class="menu__icon" src="../assets/account-icon.svg" alt="Account">
           </div>
           <div class="o-media__body">
-            <span class="menu__text">Account</span>
+            <span class="menu__text tracked">Account</span>
           </div>
         </div>
 
