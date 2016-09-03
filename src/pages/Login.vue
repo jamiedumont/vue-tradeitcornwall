@@ -1,21 +1,42 @@
 <template>
-  <div class="login-screen">
-    <div v-link="{ name: 'home'}" class="cross">
-      <img src="../assets/cross.svg" alt="Close">
-    </div>
-    <div class="logo">
-      <img src="../assets/tic-logo--white.svg" alt="Trade It Cornwall">
+  <div class="login-screen flex justify-center items-center">
+
+    <!-- Change this to a "back" or "cancel" dialog -->
+    <div v-link="{ name: 'home'}" class="w1 absolute top-1 right-1">
+      <img class="w-100" src="../assets/cross.svg" alt="Close">
     </div>
 
-    <div class="buttons">
-      <div v-link="{ name: 'login-email'}"class="button login">
-        <h1>Login</h1>
+
+    <div class="w-100 pa3 mw5-ns pa3-ns bg-black-70 center">
+
+      <div class="ma4 mw5 center">
+        <img class="db center w-60" src="../assets/tic-logo--white.svg" alt="Trade It Cornwall">
       </div>
-      <div v-link="{ name: 'home'}" @click="oAuthLogin('facebook')" class="button facebook">
-        <h1>Login with Facebook</h1>
-      </div>
-      <div v-link="{ name: 'signup'}" class="button signup">
-        <h1>Create an account</h1>
+
+      <div class="mt5">
+
+        <button
+          v-link="{ name: 'login-email'}"
+          class="pointer f4 pa2 b w-100 mw5 bg-transparent ba ma2 bw1 b--gold center white tc center db hover-bg-gold hover-dark-gray"
+        >
+          Login
+        </button>
+
+        <button
+          v-link="{ name: 'home'}"
+          @click="oAuthLogin('facebook')"
+          class="pointer f6 pa2 w-100 mw5 bg-transparent ba ma2 bw1 b--facebook center white tc center db hover-bg-facebook"
+        >
+          Login with Facebook
+        </button>
+
+        <button
+          v-link="{ name: 'signup'}"
+          class="pointer f6 pa2 db w-100 mw5 bg-transparent ba mt2 mb3 mb0-ns bw1 b--silver center white tc hover-bg-silver"
+        >
+          Create an account
+        </button>
+
       </div>
     </div>
   </div>
@@ -34,62 +55,11 @@ export default {
 </script>
 
 <style lang='scss' scoped>
-@import "../scss/1_settings/settings.colours.scss";
-  .login {
-    background-color: $primary-colour;
-  }
-  .facebook {
-    background-color: $facebook-blue;
-    color: $off-white;
-    h1 {
-      font-weight: 400;
-      font-size: 16px;
-    }
-  }
-  .signup {
-    background-color: $black;
-    color: $off-white;
-    h1 {
-      font-weight: 400;
-      font-size: 16px;
-    }
-  }
-  .buttons {
-    position: absolute;
-    bottom: 0;
-    width: 100vw;
-  }
-  .button {
-    cursor: pointer;
-    h1 {
-      padding: 20px;
-      text-align: center;
-      margin: 0;
-      letter-spacing: 0.7px;
-    }
-  }
   .login-screen {
     background: url(../assets/cornwall.jpg);
     background-position: center;
     height: 100vh;
     background-repeat: none;
     background-size: cover;
-  }
-  .cross {
-    width: 18px;
-    position: absolute;
-    top: 12px;
-    right: 12px;
-    img {
-      width: 100%;
-    }
-  }
-  .logo {
-    max-width: 60vw;
-    margin: 0 auto;
-    padding-top: 10vh;
-    img {
-      width: 100%;
-    }
   }
 </style>

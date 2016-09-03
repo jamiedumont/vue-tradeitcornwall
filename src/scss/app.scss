@@ -176,6 +176,26 @@
   top: -3rem;
 }
 
+.bg-gold {
+  background-color: $primary-colour;
+}
+
+.b--gold {
+  border-color: $primary-colour;
+}
+
+.hover-bg-gold:hover { background-color: $primary-colour; }
+
+.bg-facebook {
+  background-color: $facebook-blue;
+}
+
+.b--facebook {
+  border-color: $facebook-blue;
+}
+
+.hover-bg-facebook:hover { background-color: $facebook-blue; }
+
 // Secondary naming convention to resize headers.
 @import "7_trumps/trumps.header-trumps";
 

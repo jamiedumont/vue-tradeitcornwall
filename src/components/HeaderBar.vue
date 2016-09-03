@@ -1,5 +1,5 @@
 <template>
-  <div class="pa1" id="header">
+  <div class="bg-gold pa1" id="header">
     <div class="center flex items-center w-100 mw8 justify-between pa2 h3">
       <img v-link="{ path: '/' }" class="header__logo" src="../assets/tic-logo.svg" alt="Trade It Cornwall">
 
@@ -86,9 +86,6 @@
   .login-icon {
     width: 50px;
     cursor: pointer;
-  }
-  #header {
-    background-color: $primary-colour;
   }
   .header__logo {
     height: 100%;

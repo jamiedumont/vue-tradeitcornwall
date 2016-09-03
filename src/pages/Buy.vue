@@ -10,8 +10,8 @@
       <div id="pagination-container"></div>
     </div>
 
-    <div class="filter-btn">
-      <span>Filters</span>
+    <div class="dn tc pa3 fixed bg-dark-gray bottom-0 left-0 right-0">
+      <span class="white b">Filters</span>
     </div>
 
   </div>
@@ -71,19 +71,6 @@
     }
   }
 
-  .filter-btn {
-    position: fixed;
-    bottom: 0;
-    width: 100%;
-    background-color: $black;
-    text-align: center;
-    cursor: pointer;
-    padding: 16px;
-    span {
-      font-size: 16px;
-      color: white;
-    }
-  }
 
   .algolia-container {
     width: 90vw;

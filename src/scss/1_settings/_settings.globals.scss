@@ -9,8 +9,29 @@
 /////////////
 
 
-$base-font: 'Helvetica Neue', Helvetica, Arial, sans-serif;
-$header-font: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+$base-font: -apple-system, BlinkMacSystemFont, /* MacOS and iOS */
+             'avenir next', avenir, /* MacOS and iOS */
+             'Segoe UI' /* Windows */
+             'lucida grande', /* Older MacOS */
+             'helvetica neue', helvetica, /* Older MacOS */
+             'Fira Sans', /* Firefox OS */
+             roboto, noto, /* Google stuff */
+             'Droid Sans', /* Old Google stuff */
+             cantarell, oxygen, ubuntu, /* Linux stuff */
+             'franklin gothic medium', 'century gothic', /* Windows stuff */
+             sans-serif; /* Everything else */
+
+$header-font: -apple-system, BlinkMacSystemFont, /* MacOS and iOS */
+               'avenir next', avenir, /* MacOS and iOS */
+               'Segoe UI' /* Windows */
+               'lucida grande', /* Older MacOS */
+               'helvetica neue', helvetica, /* Older MacOS */
+               'Fira Sans', /* Firefox OS */
+               roboto, noto, /* Google stuff */
+               'Droid Sans', /* Old Google stuff */
+               cantarell, oxygen, ubuntu, /* Linux stuff */
+               'franklin gothic medium', 'century gothic', /* Windows stuff */
+               sans-serif; /* Everything else */
 
 $base-font-size: 1rem;
 $base-leading: 1.5;

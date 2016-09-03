@@ -186,7 +186,6 @@ export default {
     bottom: 0;
     left: 0;
     right: 0;
-    padding: $base-spacing-unit;
     background-color: $black;
     text-align: center;
     @include media-query(med) {

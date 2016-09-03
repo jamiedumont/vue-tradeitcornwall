@@ -1,13 +1,13 @@
 <template>
   <header-bar></header-bar>
-  <div class="bg-white tc">
+  <div class="mw8 center bg-white tc">
   <div class="loading-spacer" v-if="loading">
     <mdl-spinner single-color></mdl-spinner>
   </div>
 
   <div class="full-height" v-else>
     <div class="mb3 layout">
-      <div class="layout__item">
+      <div class="mw7 center layout__item">
         <div v-for="image in item.images">
           <img :src="image" alt="" />
         </div>
@@ -26,8 +26,8 @@
       </div>
     </div>
 
-    <div class="enquire">
-      <span>ENQUIRE</span>
+    <div class="pa3 fixed bg-dark-gray bottom-0 left-0 right-0 center static-ns w4-ns">
+      <span class="white b">ENQUIRE</span>
     </div>
 
   </div>
@@ -88,19 +88,6 @@ export default {
 
   .full-height {
     min-height: 90vh;
-  }
-
-  .enquire {
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    padding: $base-spacing-unit;
-    background-color: $black;
-    span {
-      font-weight: $weight-bold;
-      color: white;
-    }
   }
 
 </style>
