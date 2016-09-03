@@ -7,17 +7,17 @@
     </div>
 
 
-    <div class="w-100 pa3 mw5-ns pa3-ns bg-black-70 center">
+    <div class="flex flex-column justify-between vh-100 w-100 bg-black-70 center pa3 mw5-ns pa3-ns h-auto-ns">
 
       <div class="ma4 mw5 center">
         <img class="db center w-60" src="../assets/tic-logo--white.svg" alt="Trade It Cornwall">
       </div>
 
-      <div class="mt5">
+      <div>
 
         <button
           v-link="{ name: 'login-email'}"
-          class="pointer f4 pa2 b w-100 mw5 bg-transparent ba ma2 bw1 b--gold center white tc center db hover-bg-gold hover-dark-gray"
+          class="pointer f4 pa2 b mw5 w-100 bg-gold ba ma2 bw1 b--gold center dark-gray tc center db hover-bg-transparent hover-white"
         >
           Login
         </button>
@@ -25,14 +25,14 @@
         <button
           v-link="{ name: 'home'}"
           @click="oAuthLogin('facebook')"
-          class="pointer f6 pa2 w-100 mw5 bg-transparent ba ma2 bw1 b--facebook center white tc center db hover-bg-facebook"
+          class="pointer f6 pa2 w-100 mw5 bg-facebook ba ma2 bw1 b--facebook center white tc center db hover-bg-transparent"
         >
           Login with Facebook
         </button>
 
         <button
           v-link="{ name: 'signup'}"
-          class="pointer f6 pa2 db w-100 mw5 bg-transparent ba mt2 mb3 mb0-ns bw1 b--silver center white tc hover-bg-silver"
+          class="pointer f6 pa2 db w-100 mw5 bg-silver ba mt2 mb3 mb0-ns bw1 b--silver center dark-gray tc hover-bg-transparent hover-white"
         >
           Create an account
         </button>
@@ -56,9 +56,10 @@ export default {
 
 <style lang='scss' scoped>
   .login-screen {
-    background: url(../assets/cornwall.jpg);
+    background: url(http://www.purecornwall.co.uk/wp-content/uploads/2014/06/st-agnes.jpg);
     background-position: center;
-    height: 100vh;
+    min-height: 100vh;
+    height: 100%;
     background-repeat: none;
     background-size: cover;
   }

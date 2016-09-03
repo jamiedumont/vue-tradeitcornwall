@@ -30,12 +30,12 @@ input, textarea {
   border: none;
   border-bottom: 1px solid $light-grey;
   padding: 1em 1.6em;
-  margin-bottom: 10px;
+  margin-bottom: 8px;
   width: 100%;
 
   &:focus {
     border-bottom: 3px solid $primary-colour;
-    margin-bottom: 8px; // To allow for the inputs to not move up and down
+    margin-bottom: 6px; // To allow for the inputs to not move up and down
   }
 }
 

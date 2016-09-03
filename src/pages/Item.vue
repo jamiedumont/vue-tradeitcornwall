@@ -57,11 +57,12 @@ export default {
   components: {
     HeaderBar
   },
-  ready () {
+  created () {
     // Pass the UID from route params to Vuex action which adds it to store
     const self = this
     firebase.database().ref(`/items/${this.id}`).once('value')
     .then(function (snapshot) {
+      console.log('data loaded')
       const d = snapshot.val()
       self.item = {
         title: d.title,
