@@ -38,28 +38,6 @@
       </div>
     </div>
   </div>
-  <!-- <div class="login-screen">
-    <div v-link="{ name: 'home'}" class="cross">
-      <img src="../assets/cross.svg" alt="Close">
-    </div>
-    <div class="logo">
-      <img src="../assets/tic-logo--white.svg" alt="Trade It Cornwall">
-    </div>
-
-    <div class="form">
-      <input placeholder="Email..." v-model="email">
-      <input @keyup.enter="login(email,password)" type="password" placeholder="Password..." v-model="password">
-    </div>
-
-    <div class="buttons">
-      <div @click="login(email,password)" class="button login">
-        <h1>Login</h1>
-      </div>
-      <div v-link="{ name: 'login'}" class="button back">
-        <h1>Back</h1>
-      </div>
-    </div>
-  </div> -->
 </template>
 
 <script>
@@ -82,7 +60,7 @@ export default {
 
 <style lang='scss' scoped>
   .login-screen {
-    background: url(http://www.whitsandbayselfcatering.co.uk/wp-content/uploads/2014/06/South-east-cornwall-Beach-Sunset.jpg);
+    background: url(http://www.purecornwall.co.uk/wp-content/uploads/2014/06/st-agnes.jpg);
     background-position: center;
     height: 100vh;
     background-repeat: none;

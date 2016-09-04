@@ -1,6 +1,6 @@
 <template>
   <header-bar></header-bar>
-  <div class="mw8 ph4-m ph6-l center" id="checkout">
+  <div class="mw8 ph4-ns center" id="checkout">
     <div class="header-unit">
       <div class="header-main">
         <h1 class="b dib f4 pr3 br b--light-gray">Checkout</h1>
@@ -25,9 +25,9 @@
         </div>
       </div>
 
-      <h4 class="checkout__footer">Listings are valid for 30 days after payment</h4>
+      <h4 class="mt2 checkout__footer">Listings are valid for 30 days after payment</h4>
 
-      <div v-on:click="open" class="enquire">
+      <div v-on:click="open" class="mw4-ns pa3 enquire">
         <span>Pay {{ total | divide100 | currency '£'}}</span>
       </div>
 
@@ -176,7 +176,6 @@ export default {
   .checkout__footer {
     border-top: 1px solid $light-grey;
     padding-top: 6px;
-    margin-top: 24px;
     font-size: 10px;
     color: $light-grey;
     font-weight: 300;
@@ -190,8 +189,6 @@ export default {
     text-align: center;
     @include media-query(med) {
       position: static;
-      padding: 9px;
-      width: 100px;
       margin: 0 30px 0 auto;
     }
     span {

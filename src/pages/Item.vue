@@ -1,15 +1,15 @@
 <template>
   <header-bar></header-bar>
   <div class="mw8 center bg-white tc">
-  <div class="loading-spacer" v-if="loading">
+  <div class="pt6 vh-100" v-if="loading">
     <mdl-spinner single-color></mdl-spinner>
   </div>
 
-  <div class="full-height" v-else>
-    <div class="mb3 layout">
-      <div class="mw7 center layout__item">
+  <div class="pb5" v-else>
+    <div class="mb3">
+      <div class="mw7 center">
         <div v-for="image in item.images">
-          <img :src="image" alt="" />
+          <img :src="image" alt="" style="max-height: 32rem"/>
         </div>
 
       </div>
@@ -78,17 +78,3 @@ export default {
   }
 }
 </script>
-
-<style lang="scss" scoped>
-  @import "../scss/1_settings/settings.colours.scss";
-  @import "../scss/1_settings/settings.globals.scss";
-  .loading-spacer {
-    min-height: 100vh;
-    padding-top: 30vh;
-  }
-
-  .full-height {
-    min-height: 90vh;
-  }
-
-</style>

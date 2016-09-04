@@ -278,7 +278,7 @@ $gritcode-file-upload-label-color: #333;
     padding: 20px;
     &.advanced-upload {
         outline: 2px dashed #92b0b3;
-        outline-offset: -10px;
+        outline-offset: -2px;
         transition: outline-offset .15s ease-in-out, background-color .15s linear;
     }
 
