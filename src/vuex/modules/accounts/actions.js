@@ -2,6 +2,19 @@ import firebase from 'src/data/Firebase'
 import router from 'src/router'
 // import { _ } from 'underscore'
 
+// export const getBillingHistory = ({dispatch, state}) => {
+//   console.log('In accounts actions', state.accounts.user.uid)
+//   const userUID = new Promise(function (resolve, reject) {
+//     resolve(state.accounts.user.uid)
+//   })
+//   const transRef = firebase.database().ref(`/users/${userUID}/transactions`)
+//   transRef.on('value', function (snapshot) {
+//     console.log(snapshot.val())
+//   }, function (errObj) {
+//     console.log('Error:', errObj)
+//   })
+// }
+
 export const newUser = function ({dispatch, state}, email, password) {
   firebase.auth().createUserWithEmailAndPassword(email, password)
     .then(function (result) {

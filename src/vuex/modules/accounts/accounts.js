@@ -4,7 +4,9 @@ import {
   USER_LOGGED_OUT,
   USER_LOGIN,
   USER_LOGIN_ERROR,
-  ALERT
+  ALERT,
+  GET_BILLING_HISTORY,
+  GET_USER_ITEMS
 } from '../../mutation-types'
 
 import { userCreationError, emailLoginError } from 'src/data/FirebaseErrors'
@@ -55,6 +57,12 @@ const mutations = {
     state.alert.type = 'danger'
     state.alert.msg = msg
     state.alert.present = true
+  },
+  [GET_BILLING_HISTORY] (state, data) {
+    state.user.billingHistory = data
+  },
+  [GET_USER_ITEMS] (state, items) {
+    state.user.items = items
   }
 }
 

@@ -22,6 +22,7 @@
     "vue-mdl": "https://registry.npmjs.org/vue-mdl/-/vue-mdl-0.9.4.tgz",
     "vue-resource": "^0.9.3",
     "vue-router": "^0.7.13",
+    "vuefire": "^1.2.0",
     "vuex": "^1.0.0-rc.2"
   },
   "devDependencies": {

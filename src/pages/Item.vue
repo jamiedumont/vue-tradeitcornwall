@@ -27,7 +27,7 @@
     </div>
 
     <div class="pa3 fixed bg-dark-gray bottom-0 left-0 right-0 center static-ns w4-ns">
-      <span class="white b">ENQUIRE</span>
+      <span @click="fireEnquiry" class="white b">ENQUIRE</span>
     </div>
 
   </div>
@@ -37,6 +37,8 @@
 <script>
 import HeaderBar from 'src/components/HeaderBar'
 import firebase from 'src/data/Firebase'
+import { newConversation } from 'src/vuex/modules/conversations/actions'
+
 export default {
   name: 'Item',
   data: function () {
@@ -52,6 +54,18 @@ export default {
         price: '',
         dateListed: ''
       }
+    }
+  },
+  vuex: {
+    actions: {
+      newConversation
+    }
+  },
+  methods: {
+    fireEnquiry () {
+      const itemUID = this.id
+      const userOther = this.item.sellerUID
+      this.newConversation(itemUID, userOther)
     }
   },
   components: {
@@ -71,7 +85,8 @@ export default {
         categories: d.categories,
         location: d.location,
         price: d.price,
-        dateListed: d.dateListed
+        dateListed: d.dateListed,
+        sellerUID: d.sellerUID
       }
       self.loading = false
     })

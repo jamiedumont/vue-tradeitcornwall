@@ -10,6 +10,7 @@ import Checkout from './pages/Checkout'
 import Thanks from './pages/Thanks'
 import Inbox from './pages/Inbox'
 import Item from './pages/Item'
+import Conversation from './pages/Conversation'
 import Login from './pages/Login'
 import SignUp from './pages/SignUp'
 import LoginEmail from './pages/LoginEmail'
@@ -36,6 +37,10 @@ router.map({
   '/buy/:itemUID': {
     name: 'item',
     component: Item
+  },
+  '/messages/:convUID': {
+    name: 'message',
+    component: Conversation
   },
   '/sell': {
     name: 'sell',
