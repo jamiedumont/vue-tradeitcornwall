@@ -3,6 +3,18 @@ import { _ } from 'underscore'
 // import moment from 'moment'
 import router from 'src/router'
 
+export const getUsersConversations = ({dispatch, state}, userUID) => {
+  console.log('conversation action', userUID)
+  return new Promise(function (resolve, reject) {
+    const convsRef = firebase.database().ref(`/users/${userUID}/convs`)
+    convsRef.on('value', (snapshot) => {
+      const convs = snapshot.val()
+      dispatch('GET_USER_CONVS', convs)
+      resolve()
+    })
+  })
+}
+
 const checkForExistingConversation = (userSelf, itemUID) => {
   return new Promise(function (resolve, reject) {
     const ref = firebase.database().ref(`/users/${userSelf}/convs`)
@@ -43,4 +55,10 @@ export const newConversation = function (store, itemUID, userOther) {
       })
     }
   })
+}
+
+export const retrieveConversation = ({dispatch, state}) => {
+  console.log(state.conversations.all)
+  const convUID = state.route.params.convUID
+  console.log(state.conversations.all[convUID].lastMsg.msg)
 }

@@ -17,7 +17,7 @@ export default {
   },
   vuex: {
     getters: {
-      convs: state => state.conversations.convs
+      convs: state => state.conversations.all
     }
   }
 }

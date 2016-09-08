@@ -2,6 +2,17 @@ import firebase from 'src/data/Firebase'
 import router from 'src/router'
 // import { _ } from 'underscore'
 
+export const getAuth = ({dispatch, state}) => {
+  return new Promise(function (resolve, reject) {
+    firebase.auth().onAuthStateChanged(function (user) {
+      if (user) {
+        dispatch('USER_LOGIN', user)
+        resolve(user.uid)
+      }
+    })
+  })
+}
+
 // export const getBillingHistory = ({dispatch, state}) => {
 //   console.log('In accounts actions', state.accounts.user.uid)
 //   const userUID = new Promise(function (resolve, reject) {

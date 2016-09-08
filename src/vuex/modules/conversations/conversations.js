@@ -3,12 +3,12 @@ import {
 } from '../../mutation-types'
 
 const state = {
-  convs: []
+  all: []
 }
 
 const mutations = {
   [GET_USER_CONVS] (state, convs) {
-    state.convs = convs
+    state.all = convs
   }
 }
 

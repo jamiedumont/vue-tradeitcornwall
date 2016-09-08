@@ -2,18 +2,18 @@ import firebase from 'src/data/Firebase'
 import store from 'src/vuex/store'
 import { _ } from 'underscore'
 
-firebase.auth().onAuthStateChanged(function (user) {
-  if (user) {
-    store.dispatch('USER_LOGIN', user)
-    checkoutWatcher(user.uid)
-    getBillingHistory(user.uid)
-    getUsersItems(user.uid)
-    getUsersConversations(user.uid)
-  } else {
-    // No user is signed in
-    // Do nothing
-  }
-})
+// firebase.auth().onAuthStateChanged(function (user) {
+//   if (user) {
+//     store.dispatch('USER_LOGIN', user)
+//     checkoutWatcher(user.uid)
+//     getBillingHistory(user.uid)
+//     getUsersItems(user.uid)
+//     getUsersConversations(user.uid)
+//   } else {
+//     // No user is signed in
+//     // Do nothing
+//   }
+// })
 
 const checkoutWatcher = (userUID) => {
   console.log(userUID)

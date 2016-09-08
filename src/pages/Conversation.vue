@@ -20,6 +20,7 @@ import HeaderBar from 'src/components/HeaderBar'
 import firebase from 'src/data/Firebase'
 import moment from 'moment'
 import { _ } from 'underscore'
+import { retrieveConversation } from 'src/vuex/modules/conversations/actions'
 
 const db = firebase.database()
 
@@ -149,12 +150,17 @@ export default {
       console.log(errObject)
     })
   },
-  beforeDestroy () {
-    db.ref(`/convMessages/${this.id}`).off()
+  route: {
+    data () {
+      this.retrieveConversation()
+    }
   },
   vuex: {
     getters: {
       userUID: state => state.accounts.user.uid
+    },
+    actions: {
+      retrieveConversation
     }
   }
 }

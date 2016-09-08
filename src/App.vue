@@ -6,9 +6,18 @@
 
 <script>
   import store from 'src/vuex/store'
+  // import firebase from 'src/data/Firebase'
 
   export default {
-    store
+    store,
+    route: {
+      waitForData: true, // wait until data is loaded
+      data (transition) {
+        // authService.getUser((response) => {
+        //   transition.next({ authData: response }) // set data
+        // })
+      }
+    }
   }
 </script>
 
