@@ -65,23 +65,9 @@ const getUsersItems = (userUID) => {
 const getUsersConversations = (userUID) => {
   const convsRef = firebase.database().ref(`/users/${userUID}/convs`)
   convsRef.on('value', (snapshot) => {
-    const convUIDs = _.keys(snapshot.val())
-    console.log(convUIDs)
-    const convs = []
+    const convs = snapshot.val()
+    store.dispatch('GET_USER_CONVS', convs)
 
-    _.each(convUIDs, (conv) => {
-      firebase.database()
-        .ref(`/convs/${conv}`)
-        .once('value')
-        .then(function (snapshot) {
-          const convObject = snapshot.val()
-          if (convObject !== null) {
-            convs.push(convObject)
-            if (convs.length === convUIDs.length) {
-              store.dispatch('GET_USER_CONVS', convs)
-            }
-          }
-        })
-    })
+    // for each conv.id, go get the last 10 messages and store them under convMessages
   })
 }

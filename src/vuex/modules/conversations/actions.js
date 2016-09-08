@@ -13,11 +13,11 @@ export const newConversation = function (store, itemUID, userOther) {
     seller: userOther,
     buyer: userSelf,
     item: itemUID,
-    lastMsg: {},
-    buyerRead: false,
-    sellerRead: false
+    lastMsg: {}
   }
   firebase.database().ref('convs/' + convUID).set(newConv)
+  firebase.database().ref(`/users/${userSelf}/convs/${convUID}`).set(newConv)
+  firebase.database().ref(`/users/${userOther}/convs/${convUID}`).set(newConv)
   router.go({
     name: 'message',
     params: { convUID }

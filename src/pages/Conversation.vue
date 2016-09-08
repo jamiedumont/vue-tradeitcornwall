@@ -2,11 +2,12 @@
   <header-bar></header-bar>
   <div class="mw8 ph4-ns center bg-white vh-100">
     <h1 class="ma4 b dib f4">Conversation: {{id}}</h1>
-    <ul id="example-1">
-      <li v-for="message in messages">
-        {{ message.msg }} Sent <span v-formatdate="message.dateSent"></span>
-      </li>
-    </ul>
+    <div>
+      <div class="cf" v-for="message in messages">
+        <p class="bg-gold white tr fr mw6 br2 ph2 pv1 mb2">{{ message.msg }}</p>
+      </div>
+    </div>
+
     <textarea class="bg-dark-gray white" v-model="tempMessage" rows="8" cols="40" @keyup.enter="sendMessage"></textarea>
     <div class="pa3 fixed bg-dark-gray bottom-0 left-0 right-0 center static-ns w4-ns">
       <span @click="sendMessage" class="white b">SEND</span>
@@ -34,6 +35,7 @@ export default {
       messages: {},
       item: {},
       otherUser: {},
+      otherUserUID: '',
       tempMessage: ''
     }
   },
@@ -46,18 +48,36 @@ export default {
   methods: {
     sendMessage () {
       // const self = this
+      const messageUID = db.ref('/convMessages').child(this.id).push().key
+      console.log(messageUID)
+
       const message = {
         dateSent: Date.now(),
         isRead: false,
+        id: messageUID,
         msg: this.tempMessage,
         readAt: '',
         sender: this.userUID
       }
-      db.ref('/convMessages').child(this.id).push(message)
+
+      console.log(message)
+
+      console.log(this.otherUserUID)
+
+      const updates = {}
+      updates[`/convs/${this.id}/lastMsg`] = message
+      updates[`/users/${this.userUID}/convs/${this.id}/lastMsg`] = message
+      updates[`/users/${this.otherUserUID}/convs/${this.id}/lastMsg`] = message
+      updates[`/convMessages/${this.id}/${messageUID}`] = message
+
+      console.log(updates)
+
+      firebase.database().ref().update(updates)
       this.tempMessage = ''
     },
     getOtherUsersData (userUID) {
       const self = this
+      self.otherUserUID = userUID
       db.ref(`/users/${userUID}`).on('value', function (snapshot) {
         const user = snapshot.val()
         self.otherUser = user

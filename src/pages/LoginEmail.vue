@@ -30,7 +30,7 @@
 
         <button
           v-link="{ name: 'login'}"
-          class="pointer f6 pa2 db w-100 mw5 bg-silver ba mt2 mb3 mb0-ns bw1 b--silver center dark-gray tc hover-bg-transparent hover-white"
+          class="pointer f6 pa2 db w-100 mw5 bg-silver ba mt2 mb3 mb0-ns bw1 b--silver center white tc hover-bg-transparent hover-white"
         >
           Back
         </button>
