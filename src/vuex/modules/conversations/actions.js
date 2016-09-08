@@ -5,13 +5,6 @@ import router from 'src/router'
 
 const checkForExistingConversation = (userSelf, itemUID) => {
   return new Promise(function (resolve, reject) {
-    // firebase.database().ref(`/users/${userSelf}/convs`).once('value').then(function (snapshot) {
-    //   const allUserConvs = snapshot.val()
-    //   console.log(allUserConvs)
-    // }, function (errObj) {
-    //   console.err(errObj)
-    // })
-    console.log(itemUID)
     const ref = firebase.database().ref(`/users/${userSelf}/convs`)
     ref.orderByChild('item').equalTo(itemUID).once('value').then(function (snapshot) {
       const result = snapshot.val()
@@ -25,21 +18,16 @@ const checkForExistingConversation = (userSelf, itemUID) => {
   })
 }
 
-// const createNewConversation = () {
-//
-// }
-
 export const newConversation = function (store, itemUID, userOther) {
   const userSelf = store.state.accounts.user.uid
-
+  if (userSelf === userOther) {
+    return window.alert('Did you know that trying to talk to yourself is a sign of madness?')
+  }
   checkForExistingConversation(userSelf, itemUID).then((res) => {
     if (res) {
       router.go({ name: 'message', params: { convUID: res } })
     } else {
       const convUID = firebase.database().ref().child('convs').push().key
-      if (userSelf === userOther) {
-        console.error('Throw a wobbly with store, alert, whatever!')
-      }
       const newConv = {
         seller: userOther,
         buyer: userSelf,

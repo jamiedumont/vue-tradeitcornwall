@@ -23,7 +23,8 @@
     "vue-resource": "^0.9.3",
     "vue-router": "^0.7.13",
     "vuefire": "^1.2.0",
-    "vuex": "^1.0.0-rc.2"
+    "vuex": "https://registry.npmjs.org/vuex/-/vuex-1.0.0-rc.2.tgz",
+    "vuex-router-sync": "^2.1.0"
   },
   "devDependencies": {
     "babel-core": "^6.0.0",

@@ -19,6 +19,7 @@
 import HeaderBar from 'src/components/HeaderBar'
 import firebase from 'src/data/Firebase'
 import moment from 'moment'
+import { _ } from 'underscore'
 
 const db = firebase.database()
 
@@ -32,7 +33,7 @@ export default {
       id: this.$route.params.convUID,
       loading: true,
       conv: {},
-      messages: {},
+      messages: [],
       item: {},
       otherUser: {},
       otherUserUID: '',
@@ -96,15 +97,37 @@ export default {
     },
     getMessages (convUID) {
       const self = this
-      db.ref(`/convMessages/${convUID}`).on('value', function (snapshot) {
+      return db.ref(`/convMessages/${convUID}`).once('value').then(function (snapshot) {
         const messages = snapshot.val()
+        console.log('Running get messges')
         self.messages = messages
+        // self.findForeignMessages(messages)
       }, function (errObject) {
         console.log(errObject)
       })
+    },
+    findForeignMessages (messages) {
+      const self = this
+      _.each(messages, function (message) {
+        if (self.userUID !== message.sender && message.isRead === false) {
+          message.isRead = true
+          message.readAt = Date.now()
+          self.updateMessageStatus(message)
+        }
+      })
+    },
+    updateMessageStatus (message) {
+      console.log('updating message: ', message.id)
+      const updates = {}
+      updates[`/convs/${this.id}/lastMsg`] = message
+      updates[`/users/${this.userUID}/convs/${this.id}/lastMsg`] = message
+      updates[`/users/${this.otherUserUID}/convs/${this.id}/lastMsg`] = message
+      updates[`/convMessages/${this.id}/${message.id}`] = message
+
+      firebase.database().ref().update(updates)
     }
   },
-  created () {
+  ready () {
     // Pass the UID from route params to Vuex action which adds it to store
     const self = this
     db.ref(`/convs/${this.id}`).on('value', function (snapshot) {
@@ -125,6 +148,9 @@ export default {
     }, function (errObject) {
       console.log(errObject)
     })
+  },
+  beforeDestroy () {
+    db.ref(`/convMessages/${this.id}`).off()
   },
   vuex: {
     getters: {

@@ -67,7 +67,5 @@ const getUsersConversations = (userUID) => {
   convsRef.on('value', (snapshot) => {
     const convs = snapshot.val()
     store.dispatch('GET_USER_CONVS', convs)
-
-    // for each conv.id, go get the last 10 messages and store them under convMessages
   })
 }
