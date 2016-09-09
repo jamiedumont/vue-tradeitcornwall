@@ -1,26 +1,33 @@
+// Import NPM dependancies
 import Vue from 'vue'
 import VueFire from 'vuefire'
 import { sync } from 'vuex-router-sync'
 import VueMdl from 'vue-mdl'
 
+// Import App dependancies
 import App from './App'
 import store from 'src/vuex/store'
 import router from './router'
-// import 'src/startup'
+
+// Import Vuex actions to perform on startup
 import { getAuth } from 'src/vuex/modules/accounts/actions'
 import { getUsersConversations } from 'src/vuex/modules/conversations/actions'
 
+// Bind Vue to various addons
 Vue.use(VueMdl)
 Vue.use(VueFire)
 
+// Bind Vuex and VueRouter
 sync(store, router)
-getAuth(store).then((userUID) => {
-  console.log(userUID)
-  getUsersConversations(store, userUID).then(function () {
-    router.start(App, '#app')
+
+// Initialise startup.
+// Checkout for user auth and login... [1]
+// Then get relevant data needed (conversations)... [2]
+// And start the app [3]
+getAuth(store).then((userUID) => { // [1]
+  const conversationState = getUsersConversations(store, userUID)
+
+  Promise.all([conversationState]).then((values) => { // [2]
+    router.start(App, '#app') // [3]
   })
 })
-
-// Now we can start the app!
-// The router will create an instance of App and mount to
-// the element matching the selector #app.

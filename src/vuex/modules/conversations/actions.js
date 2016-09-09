@@ -58,7 +58,102 @@ export const newConversation = function (store, itemUID, userOther) {
 }
 
 export const retrieveConversation = ({dispatch, state}) => {
-  console.log(state.conversations.all)
+  /*
+
+  I need to retrieve the following:
+  > base conv data (from Vuex)
+  > my profile details (from Vuex)
+    > name
+    > avatar
+  > other user's details (from Firebase)
+    > name
+    > avatar
+  > the item's details (from Firebase)
+    > Title
+    > Image
+    > Asking Price
+  > The conversation messages (from Firbase)
+
+  */
+
+  // Get the current conversationUID from route params
   const convUID = state.route.params.convUID
-  console.log(state.conversations.all[convUID].lastMsg.msg)
+
+  // Retrieve the base data for the conversation from the Vuex store
+  const conv = state.conversations.all[convUID]
+
+  const myself = {
+    uid: state.accounts.user.uid,
+    name: state.accounts.user.displayName,
+    avatar: state.accounts.user.photoURL,
+    role: _determineUserRole(state.accounts.user.uid, conv)
+  }
+
+  const otherUsersUID = _otherUsersUID(myself, conv)
+
+  // Include in Promise.all
+  const otherUser = _retrievePublicUserData(otherUsersUID)
+
+  console.log(otherUser)
+
+  // Include in Promise.all
+  const item = _retrievePublicItemData(conv.item)
+
+  console.log(item)
+}
+
+// PRIVATE FUNCTIONS
+
+const _retrievePublicItemData = (itemUID) => {
+  return new Promise(function (resolve, reject) {
+    firebase.database().ref(`/items/${itemUID}`).once('value').then((snapshot) => {
+      const data = snapshot.val()
+      const item = {
+        title: data.title,
+        price: data.price,
+        image: data.images[0],
+        location: data.location
+      }
+      resolve(item)
+    }, function (errObject) {
+      reject(errObject)
+    })
+  })
+}
+
+const _retrievePublicUserData = (userUID) => {
+  return new Promise(function (resolve, reject) {
+    firebase.database().ref(`/users/${userUID}`).once('value').then((snapshot) => {
+      const data = snapshot.val()
+      const user = {
+        uid: userUID,
+        name: data.displayName,
+        avatar: data.photoURL
+      }
+      resolve(user)
+    }, function (errObject) {
+      reject(errObject)
+    })
+  })
+}
+
+const _determineUserRole = (userUID, conv) => {
+  // Function takes in a UID and a conversation. It then returns the role of the
+  // user in that conversation
+  if (userUID === conv.buyer) {
+    return 'buyer'
+  }
+  if (userUID === conv.seller) {
+    return 'seller'
+  }
+}
+
+const _otherUsersUID = (myself, conv) => {
+  // function returns the userUID of the other party
+  if (myself.role === 'buyer') {
+    return conv.seller
+  }
+  if (myself.role === 'seller') {
+    return conv.buyer
+  }
 }

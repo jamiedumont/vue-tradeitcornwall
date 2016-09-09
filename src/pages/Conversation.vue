@@ -49,6 +49,7 @@ export default {
   },
   methods: {
     sendMessage () {
+      // sendMessageAction(this.tempMessage).then((res) => { do something with res })
       // const self = this
       const messageUID = db.ref('/convMessages').child(this.id).push().key
       console.log(messageUID)
@@ -130,25 +131,25 @@ export default {
   },
   ready () {
     // Pass the UID from route params to Vuex action which adds it to store
-    const self = this
-    db.ref(`/convs/${this.id}`).on('value', function (snapshot) {
-      console.log('inside firebase')
-      const d = snapshot.val()
-
-      if (d.buyer === self.userUID) {
-        self.getOtherUsersData(d.seller)
-      } else {
-        self.getOtherUsersData(d.buyer)
-      }
-
-      self.getItemData(d.item)
-      self.getMessages(self.id)
-
-      self.conv = d
-      self.loading = false
-    }, function (errObject) {
-      console.log(errObject)
-    })
+    // const self = this
+    // db.ref(`/convs/${this.id}`).on('value', function (snapshot) {
+    //   console.log('inside firebase')
+    //   const d = snapshot.val()
+    //
+    //   if (d.buyer === self.userUID) {
+    //     self.getOtherUsersData(d.seller)
+    //   } else {
+    //     self.getOtherUsersData(d.buyer)
+    //   }
+    //
+    //   self.getItemData(d.item)
+    //   self.getMessages(self.id)
+    //
+    //   self.conv = d
+    //   self.loading = false
+    // }, function (errObject) {
+    //   console.log(errObject)
+    // })
   },
   route: {
     data () {
