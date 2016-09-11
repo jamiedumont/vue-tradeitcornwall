@@ -4,12 +4,12 @@ import { _ } from 'underscore'
 import router from 'src/router'
 
 export const getUsersConversations = ({dispatch, state}, userUID) => {
-  console.log('conversation action', userUID)
   return new Promise(function (resolve, reject) {
     const convsRef = firebase.database().ref(`/users/${userUID}/convs`)
     convsRef.on('value', (snapshot) => {
       const convs = snapshot.val()
       dispatch('GET_USER_CONVS', convs)
+      calcUnread({dispatch, state}, convs)
       resolve(convs)
     })
   })
@@ -79,12 +79,9 @@ export const retrieveConversation = ({dispatch, state}) => {
   // Include in Promise.all
   const otherUser = _retrievePublicUserData(otherUsersUID)
 
-  console.log(otherUser)
-
   // Include in Promise.all
   const item = _retrievePublicItemData(conv.item)
 
-  console.log(item)
   Promise.all([otherUser, item]).then((values) => {
     const currentConv = {
       otherUser: values[0], // otherUser
@@ -143,6 +140,16 @@ export const updateMessageStatus = (message) => {
   updates[`/convMessages/${this.id}/${message.id}`] = message
 
   firebase.database().ref().update(updates)
+}
+
+export const calcUnread = ({dispatch, state}, convs) => {
+  const unreadConvs = _.filter(convs, function (conv) {
+    return conv.lastMsg.isRead === false
+  })
+
+  console.log('unread convs', unreadConvs.length)
+
+  dispatch('UPDATE_UNREAD_COUNT', unreadConvs.length)
 }
 
 // PRIVATE FUNCTIONS

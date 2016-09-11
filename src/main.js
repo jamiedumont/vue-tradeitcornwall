@@ -31,7 +31,6 @@ getAuth(store).then((userUID) => { // [1]
     const conversationState = getUsersConversations(store, userUID)
 
     Promise.all([conversationState]).then((values) => { // [2]
-      // workoutUnreadMessages(values[0])
       router.start(App, '#app') // [3]
     })
   }

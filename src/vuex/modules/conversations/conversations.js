@@ -1,11 +1,13 @@
 import {
   GET_USER_CONVS,
   STREAM_MESSAGES,
-  SET_CURRENT_CONV
+  SET_CURRENT_CONV,
+  UPDATE_UNREAD_COUNT
 } from '../../mutation-types'
 
 const state = {
   all: {},
+  unreadCount: 0,
   messages: {},
   otherUser: {},
   item: {}
@@ -21,6 +23,9 @@ const mutations = {
   [SET_CURRENT_CONV] (state, currentConv) {
     state.otherUser = currentConv.otherUser
     state.item = currentConv.item
+  },
+  [UPDATE_UNREAD_COUNT] (state, count) {
+    state.unreadCount = count
   }
 }
 
