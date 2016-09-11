@@ -9,6 +9,7 @@
         </div>
         <div class="o-media__body">
           <h5 class="f6">Menu</h5>
+          <span>Messages: {{messages}}</span>
         </div>
       </div>
 
@@ -41,7 +42,8 @@
         loggedIn: state => state.accounts.user.loggedIn,
         displayName: state => state.accounts.user.displayName,
         email: state => state.accounts.user.email,
-        photoURL: state => state.accounts.user.photoURL
+        photoURL: state => state.accounts.user.photoURL,
+        messages: state => state.conversations.unreadCount
       }
     },
     computed: {

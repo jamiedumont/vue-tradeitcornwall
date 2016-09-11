@@ -17,9 +17,7 @@
 
 <script>
 import HeaderBar from 'src/components/HeaderBar'
-import firebase from 'src/data/Firebase'
 import moment from 'moment'
-import { _ } from 'underscore'
 import { retrieveConversation, streamMessages, sendMessageAction } from 'src/vuex/modules/conversations/actions'
 
 export default {
@@ -49,29 +47,7 @@ export default {
       console.log('params', params)
       this.sendMessageAction(params)
       this.tempMessage = ''
-    },
-    findForeignMessages (messages) {
-      const self = this
-      _.each(messages, function (message) {
-        if (self.userUID !== message.sender && message.isRead === false) {
-          message.isRead = true
-          message.readAt = Date.now()
-          self.updateMessageStatus(message)
-        }
-      })
-    },
-    updateMessageStatus (message) {
-      console.log('updating message: ', message.id)
-      const updates = {}
-      updates[`/convs/${this.id}/lastMsg`] = message
-      updates[`/users/${this.userUID}/convs/${this.id}/lastMsg`] = message
-      updates[`/users/${this.otherUserUID}/convs/${this.id}/lastMsg`] = message
-      updates[`/convMessages/${this.id}/${message.id}`] = message
-
-      firebase.database().ref().update(updates)
     }
-  },
-  ready () {
   },
   route: {
     data () {

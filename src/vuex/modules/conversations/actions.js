@@ -29,7 +29,14 @@ export const newConversation = function (store, itemUID, userOther) {
         seller: userOther,
         buyer: userSelf,
         item: itemUID,
-        lastMsg: {}
+        lastMsg: {
+          dateSent: null,
+          isRead: false,
+          id: null,
+          msg: null,
+          readAt: null,
+          sender: userSelf
+        }
       }
       firebase.database().ref('convs/' + convUID).set(newConv)
       firebase.database().ref(`/users/${userSelf}/convs/${convUID}`).set(newConv)
@@ -84,6 +91,7 @@ export const retrieveConversation = ({dispatch, state}) => {
 
   Promise.all([otherUser, item]).then((values) => {
     const currentConv = {
+      conv,
       otherUser: values[0], // otherUser
       item: values[1] // item
     }
@@ -126,25 +134,26 @@ export const streamMessages = ({dispatch, state}) => {
   const convUID = state.route.params.convUID
   firebase.database().ref(`/convMessages/${convUID}`).on('value', function (snapshot) {
     const messages = snapshot.val()
+    _findForeignMessages({dispatch, state}, messages)
     dispatch('STREAM_MESSAGES', messages)
   }, function (errObject) {
   })
 }
 
-export const updateMessageStatus = (message) => {
+export const updateMessageStatus = ({dispatch, state}, message) => {
   console.log('updating message: ', message.id)
   const updates = {}
-  updates[`/convs/${this.id}/lastMsg`] = message
-  updates[`/users/${this.userUID}/convs/${this.id}/lastMsg`] = message
-  updates[`/users/${this.otherUserUID}/convs/${this.id}/lastMsg`] = message
-  updates[`/convMessages/${this.id}/${message.id}`] = message
+  updates[`/convs/${state.route.params.convUID}/lastMsg`] = message
+  updates[`/users/${state.accounts.user.uid}/convs/${state.route.params.convUID}/lastMsg`] = message
+  updates[`/users/${state.conversations.otherUser.uid}/convs/${state.route.params.convUID}/lastMsg`] = message
+  updates[`/convMessages/${state.route.params.convUID}/${message.id}`] = message
 
   firebase.database().ref().update(updates)
 }
 
 export const calcUnread = ({dispatch, state}, convs) => {
   const unreadConvs = _.filter(convs, function (conv) {
-    return conv.lastMsg.isRead === false
+    return conv.lastMsg.isRead === false && conv.lastMsg.sender !== state.accounts.user.uid
   })
 
   console.log('unread convs', unreadConvs.length)
@@ -153,6 +162,17 @@ export const calcUnread = ({dispatch, state}, convs) => {
 }
 
 // PRIVATE FUNCTIONS
+
+const _findForeignMessages = ({dispatch, state}, messages) => {
+  const userUID = state.accounts.user.uid
+  _.each(messages, function (message) {
+    if (userUID !== message.sender && message.isRead === false) {
+      message.isRead = true
+      message.readAt = Date.now()
+      updateMessageStatus({dispatch, state}, message)
+    }
+  })
+}
 
 const _checkForExistingConversation = (userSelf, itemUID) => {
   return new Promise(function (resolve, reject) {

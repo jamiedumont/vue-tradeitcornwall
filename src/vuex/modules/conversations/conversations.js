@@ -7,6 +7,7 @@ import {
 
 const state = {
   all: {},
+  currentConv: {},
   unreadCount: 0,
   messages: {},
   otherUser: {},
@@ -21,6 +22,7 @@ const mutations = {
     state.messages = messages
   },
   [SET_CURRENT_CONV] (state, currentConv) {
+    state.currentConv = currentConv.conv
     state.otherUser = currentConv.otherUser
     state.item = currentConv.item
   },
