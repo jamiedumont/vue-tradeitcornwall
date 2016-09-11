@@ -41,8 +41,7 @@ import HeaderBar from 'src/components/HeaderBar'
 import Vue from 'vue'
 import VueResource from 'vue-resource'
 import { _ } from 'underscore'
-import { handlePaymentSuccess } from 'src/vuex/modules/checkout/actions'
-// import charge from 'src/charge'
+import { handlePaymentSuccess, retrieveCheckoutItems } from 'src/vuex/modules/checkout/actions'
 
 Vue.use(VueResource)
 
@@ -82,7 +81,13 @@ export default {
       items: state => state.checkout.items
     },
     actions: {
-      handlePaymentSuccess
+      handlePaymentSuccess,
+      retrieveCheckoutItems
+    }
+  },
+  route: {
+    data () {
+      this.retrieveCheckoutItems()
     }
   },
   computed: {

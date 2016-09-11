@@ -27,6 +27,19 @@ export const updateCheckout = function (store, data) {
   store.dispatch('READ_CHECKOUT_DATA', data)
 }
 
+export const retrieveCheckoutItems = ({dispatch, state}) => {
+  return new Promise(function (resolve, reject) {
+    const userUID = state.accounts.user.uid
+    firebase.database()
+      .ref(`/users/${userUID}/checkout`)
+      .once('value')
+      .then((snapshot) => {
+        const data = snapshot.val()
+        resolve(dispatch('UPDATE_CHECKOUT_DATA', data))
+      })
+  })
+}
+
 export const handlePaymentSuccess = function (store, res) {
   // Change route
   router.go({ path: 'checkout/thanks' })
