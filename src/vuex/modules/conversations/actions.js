@@ -102,7 +102,73 @@ export const retrieveConversation = ({dispatch, state}) => {
   console.log(item)
 }
 
+export const sendMessageAction = ({dispatch, state}, params) => {
+  /*
+    Params object = {
+        convUID: The UID of the conversation
+        senderUID: The UID of the sender
+        recipientUID: The UID of the recipient
+        message: The message content (as String)
+      }
+  */
+
+  const messageUID = firebase.database().ref('/convMessages').child(params.convUID).push().key
+
+  const message = {
+    dateSent: Date.now(),
+    isRead: false,
+    id: messageUID,
+    msg: params.message,
+    readAt: '',
+    sender: params.senderUID
+  }
+
+  const updates = {}
+  updates[`/convs/${params.convUID}/lastMsg`] = message
+  updates[`/users/${params.senderUID}/convs/${params.convUID}/lastMsg`] = message
+  updates[`/users/${params.recipientUID}/convs/${params.convUID}/lastMsg`] = message
+  updates[`/convMessages/${params.convUID}/${messageUID}`] = message
+
+  return firebase.database().ref().update(updates)
+}
+
+export const streamMessages = ({dispatch, state}) => {
+  // Get the current conversationUID from route params
+  const convUID = state.route.params.convUID
+  firebase.database().ref(`/convMessages/${convUID}`).on('value', function (snapshot) {
+    const messages = snapshot.val()
+    console.log(messages)
+  }, function (errObject) {
+  })
+  // _getConversationMessages(convUID).then(function (messages) {
+  //   console.log(messages)
+  // })
+}
+
+export const updateMessageStatus = (message) => {
+  console.log('updating message: ', message.id)
+  const updates = {}
+  updates[`/convs/${this.id}/lastMsg`] = message
+  updates[`/users/${this.userUID}/convs/${this.id}/lastMsg`] = message
+  updates[`/users/${this.otherUserUID}/convs/${this.id}/lastMsg`] = message
+  updates[`/convMessages/${this.id}/${message.id}`] = message
+
+  firebase.database().ref().update(updates)
+}
+
 // PRIVATE FUNCTIONS
+
+// const _getConversationMessages = (convUID) => {
+//   return new Promise(function (resolve, reject) {
+//     firebase.database().ref(`/convMessages/${convUID}`).on('value', function (snapshot) {
+//       const messages = snapshot.val()
+//       console.log();
+//       resolve(messages)
+//     }, function (errObject) {
+//       reject(errObject)
+//     })
+//   })
+// }
 
 const _retrievePublicItemData = (itemUID) => {
   return new Promise(function (resolve, reject) {

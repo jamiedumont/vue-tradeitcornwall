@@ -20,9 +20,7 @@ import HeaderBar from 'src/components/HeaderBar'
 import firebase from 'src/data/Firebase'
 import moment from 'moment'
 import { _ } from 'underscore'
-import { retrieveConversation } from 'src/vuex/modules/conversations/actions'
-
-const db = firebase.database()
+import { retrieveConversation, streamMessages, sendMessageAction } from 'src/vuex/modules/conversations/actions'
 
 export default {
   name: 'Conversation',
@@ -49,64 +47,15 @@ export default {
   },
   methods: {
     sendMessage () {
-      // sendMessageAction(this.tempMessage).then((res) => { do something with res })
-      // const self = this
-      const messageUID = db.ref('/convMessages').child(this.id).push().key
-      console.log(messageUID)
-
-      const message = {
-        dateSent: Date.now(),
-        isRead: false,
-        id: messageUID,
-        msg: this.tempMessage,
-        readAt: '',
-        sender: this.userUID
+      const params = {
+        convUID: this.id,
+        senderUID: this.userUID,
+        recipientUID: this.otherUserUID,
+        message: this.tempMessage
       }
 
-      console.log(message)
-
-      console.log(this.otherUserUID)
-
-      const updates = {}
-      updates[`/convs/${this.id}/lastMsg`] = message
-      updates[`/users/${this.userUID}/convs/${this.id}/lastMsg`] = message
-      updates[`/users/${this.otherUserUID}/convs/${this.id}/lastMsg`] = message
-      updates[`/convMessages/${this.id}/${messageUID}`] = message
-
-      console.log(updates)
-
-      firebase.database().ref().update(updates)
+      this.sendMessageAction(params)
       this.tempMessage = ''
-    },
-    getOtherUsersData (userUID) {
-      const self = this
-      self.otherUserUID = userUID
-      db.ref(`/users/${userUID}`).on('value', function (snapshot) {
-        const user = snapshot.val()
-        self.otherUser = user
-      }, function (errObject) {
-        console.log(errObject)
-      })
-    },
-    getItemData (itemUID) {
-      const self = this
-      db.ref(`/items/${itemUID}`).on('value', function (snapshot) {
-        const item = snapshot.val()
-        self.item = item
-      }, function (errObject) {
-        console.log(errObject)
-      })
-    },
-    getMessages (convUID) {
-      const self = this
-      return db.ref(`/convMessages/${convUID}`).once('value').then(function (snapshot) {
-        const messages = snapshot.val()
-        console.log('Running get messges')
-        self.messages = messages
-        // self.findForeignMessages(messages)
-      }, function (errObject) {
-        console.log(errObject)
-      })
     },
     findForeignMessages (messages) {
       const self = this
@@ -130,30 +79,11 @@ export default {
     }
   },
   ready () {
-    // Pass the UID from route params to Vuex action which adds it to store
-    // const self = this
-    // db.ref(`/convs/${this.id}`).on('value', function (snapshot) {
-    //   console.log('inside firebase')
-    //   const d = snapshot.val()
-    //
-    //   if (d.buyer === self.userUID) {
-    //     self.getOtherUsersData(d.seller)
-    //   } else {
-    //     self.getOtherUsersData(d.buyer)
-    //   }
-    //
-    //   self.getItemData(d.item)
-    //   self.getMessages(self.id)
-    //
-    //   self.conv = d
-    //   self.loading = false
-    // }, function (errObject) {
-    //   console.log(errObject)
-    // })
   },
   route: {
     data () {
       this.retrieveConversation()
+      this.streamMessages()
     }
   },
   vuex: {
@@ -161,7 +91,9 @@ export default {
       userUID: state => state.accounts.user.uid
     },
     actions: {
-      retrieveConversation
+      retrieveConversation,
+      streamMessages,
+      sendMessageAction
     }
   }
 }
