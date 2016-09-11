@@ -29,13 +29,6 @@ export default {
   },
   data: function () {
     return {
-      id: this.$route.params.convUID,
-      loading: true,
-      conv: {},
-      messages: [],
-      item: {},
-      otherUser: {},
-      otherUserUID: '',
       tempMessage: ''
     }
   },
@@ -48,12 +41,12 @@ export default {
   methods: {
     sendMessage () {
       const params = {
-        convUID: this.id,
+        convUID: this.convUID,
         senderUID: this.userUID,
-        recipientUID: this.otherUserUID,
+        recipientUID: this.otherUser.uid,
         message: this.tempMessage
       }
-
+      console.log('params', params)
       this.sendMessageAction(params)
       this.tempMessage = ''
     },
@@ -88,7 +81,11 @@ export default {
   },
   vuex: {
     getters: {
-      userUID: state => state.accounts.user.uid
+      convUID: state => state.route.params.convUID,
+      userUID: state => state.accounts.user.uid,
+      otherUser: state => state.conversations.otherUser,
+      item: state => state.conversations.item,
+      messages: state => state.conversations.messages
     },
     actions: {
       retrieveConversation,

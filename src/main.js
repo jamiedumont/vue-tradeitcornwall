@@ -25,9 +25,14 @@ sync(store, router)
 // Then get relevant data needed (conversations)... [2]
 // And start the app [3]
 getAuth(store).then((userUID) => { // [1]
-  const conversationState = getUsersConversations(store, userUID)
+  if (userUID === 'no-user') {
+    router.start(App, '#app')
+  } else {
+    const conversationState = getUsersConversations(store, userUID)
 
-  Promise.all([conversationState]).then((values) => { // [2]
-    router.start(App, '#app') // [3]
-  })
+    Promise.all([conversationState]).then((values) => { // [2]
+      // workoutUnreadMessages(values[0])
+      router.start(App, '#app') // [3]
+    })
+  }
 })

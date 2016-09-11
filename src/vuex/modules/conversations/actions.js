@@ -10,22 +10,7 @@ export const getUsersConversations = ({dispatch, state}, userUID) => {
     convsRef.on('value', (snapshot) => {
       const convs = snapshot.val()
       dispatch('GET_USER_CONVS', convs)
-      resolve()
-    })
-  })
-}
-
-const checkForExistingConversation = (userSelf, itemUID) => {
-  return new Promise(function (resolve, reject) {
-    const ref = firebase.database().ref(`/users/${userSelf}/convs`)
-    ref.orderByChild('item').equalTo(itemUID).once('value').then(function (snapshot) {
-      const result = snapshot.val()
-      if (_.isObject(result)) {
-        const asArray = _.keys(result)
-        resolve(asArray[0])
-      } else {
-        resolve(null)
-      }
+      resolve(convs)
     })
   })
 }
@@ -35,7 +20,7 @@ export const newConversation = function (store, itemUID, userOther) {
   if (userSelf === userOther) {
     return window.alert('Did you know that trying to talk to yourself is a sign of madness?')
   }
-  checkForExistingConversation(userSelf, itemUID).then((res) => {
+  _checkForExistingConversation(userSelf, itemUID).then((res) => {
     if (res) {
       router.go({ name: 'message', params: { convUID: res } })
     } else {
@@ -100,6 +85,13 @@ export const retrieveConversation = ({dispatch, state}) => {
   const item = _retrievePublicItemData(conv.item)
 
   console.log(item)
+  Promise.all([otherUser, item]).then((values) => {
+    const currentConv = {
+      otherUser: values[0], // otherUser
+      item: values[1] // item
+    }
+    dispatch('SET_CURRENT_CONV', currentConv)
+  })
 }
 
 export const sendMessageAction = ({dispatch, state}, params) => {
@@ -137,12 +129,9 @@ export const streamMessages = ({dispatch, state}) => {
   const convUID = state.route.params.convUID
   firebase.database().ref(`/convMessages/${convUID}`).on('value', function (snapshot) {
     const messages = snapshot.val()
-    console.log(messages)
+    dispatch('STREAM_MESSAGES', messages)
   }, function (errObject) {
   })
-  // _getConversationMessages(convUID).then(function (messages) {
-  //   console.log(messages)
-  // })
 }
 
 export const updateMessageStatus = (message) => {
@@ -158,17 +147,20 @@ export const updateMessageStatus = (message) => {
 
 // PRIVATE FUNCTIONS
 
-// const _getConversationMessages = (convUID) => {
-//   return new Promise(function (resolve, reject) {
-//     firebase.database().ref(`/convMessages/${convUID}`).on('value', function (snapshot) {
-//       const messages = snapshot.val()
-//       console.log();
-//       resolve(messages)
-//     }, function (errObject) {
-//       reject(errObject)
-//     })
-//   })
-// }
+const _checkForExistingConversation = (userSelf, itemUID) => {
+  return new Promise(function (resolve, reject) {
+    const ref = firebase.database().ref(`/users/${userSelf}/convs`)
+    ref.orderByChild('item').equalTo(itemUID).once('value').then(function (snapshot) {
+      const result = snapshot.val()
+      if (_.isObject(result)) {
+        const asArray = _.keys(result)
+        resolve(asArray[0])
+      } else {
+        resolve(null)
+      }
+    })
+  })
+}
 
 const _retrievePublicItemData = (itemUID) => {
   return new Promise(function (resolve, reject) {

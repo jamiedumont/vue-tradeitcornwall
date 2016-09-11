@@ -9,6 +9,7 @@ export const getAuth = ({dispatch, state}) => {
         dispatch('USER_LOGIN', user)
         resolve(user.uid)
       }
+      resolve('no-user')
     })
   })
 }
