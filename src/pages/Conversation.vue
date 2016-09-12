@@ -1,33 +1,44 @@
 <template>
   <header-bar></header-bar>
-  <div class="mw8 ph4-ns center bg-white vh-100">
-    <h1 class="ma4 b dib f4">Conversation: {{id}}</h1>
-    <div>
-      <div class="cf" v-for="message in messages">
-        <p class="bg-gold white tr fr mw6 br2 ph2 pv1 mb2">{{ message.msg }}</p>
+  <div class="mw8 ph4-ns center bg-white minus-header">
+
+
+    <div class="ph2 ph4-ns">
+      <div class="ph2 minus-both overflow-scroll">
+        <span @click="getMoreMessages">More messages</span>
+        <div class="" v-for="message in messages">
+          <message :message="message"></message>
+        </div>
+      </div>
+
+      <div class="fixed bottom-0 right-0 left-0 flex">
+        <input class="ma0 h3 bg-light-gray" v-model="tempMessage" @keyup.enter="sendMessage"></input>
+        <div class="dt pa3 bg-dark-gray h3 w4-ns tc">
+          <span @click="sendMessage" class="dtc v-mid white b">SEND</span>
+        </div>
       </div>
     </div>
 
-    <textarea class="bg-dark-gray white" v-model="tempMessage" rows="8" cols="40" @keyup.enter="sendMessage"></textarea>
-    <div class="pa3 fixed bg-dark-gray bottom-0 left-0 right-0 center static-ns w4-ns">
-      <span @click="sendMessage" class="white b">SEND</span>
-    </div>
+
   </div>
 </template>
 
 <script>
 import HeaderBar from 'src/components/HeaderBar'
+import Message from 'src/components/Message'
 import moment from 'moment'
 import { retrieveConversation, streamMessages, sendMessageAction } from 'src/vuex/modules/conversations/actions'
 
 export default {
   name: 'Conversation',
   components: {
-    HeaderBar
+    HeaderBar,
+    Message
   },
   data: function () {
     return {
-      tempMessage: ''
+      tempMessage: '',
+      limit: 5
     }
   },
   directives: {
@@ -47,6 +58,10 @@ export default {
       console.log('params', params)
       this.sendMessageAction(params)
       this.tempMessage = ''
+    },
+    getMoreMessages () {
+      this.limit = this.limit + 10
+      this.streamMessages(this.limit)
     }
   },
   route: {
@@ -72,6 +87,11 @@ export default {
 }
 </script>
 
-<style>
-
+<style lang="scss">
+  .minus-header {
+    height: calc(100vh - 64px);
+  }
+  .minus-both {
+    height: calc(100vh - 128px);
+  }
 </style>

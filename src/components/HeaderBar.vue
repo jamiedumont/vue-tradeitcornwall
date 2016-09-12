@@ -1,7 +1,7 @@
 <template>
   <div class="bg-gold">
     <div class="center flex items-center w-100 mw8 justify-between h3">
-      <div class="h-100 pv2 ph3">
+      <div class="h-75 pa1 pl3">
         <img v-link="{ path: '/' }" class="h-100 pointer" src="../assets/tic-logo.svg" alt="Trade It Cornwall">
       </div>
 
@@ -19,19 +19,26 @@
           <div v-link="{ name: 'inbox'}" class="pointer hover-bg-lighten dib h3 w3 flex items-center justify-center">
             <span>Messages</span>
           </div>
-          <div class="pointer hover-bg-lighten dib h3 w3 flex items-center justify-center">
-            <span>Account</span>
+          <div class="pointer hover-bg-lighten dib h3 dt pr2">
+            <h5 class="dtc v-mid f6 fw5 ph1">{{firstName}}</h5>
+            <div class="dtc v-mid h3">
+              <img
+                class="br-100 ba b--white-80 fr ma1 h-50"
+                :src="avatar"
+                :alt="displayName"
+              />
+            </div>
           </div>
         </div>
 
         <!-- MOBILE MENU -->
 
         <div class="dn-ns">
-          <div @click="showMenu = true" class="dt" v-if="loggedIn">
-            <h5 class="dtc v-mid f6">Menu</h5>
-            <div class="dtc v-mid w3 h3 pa2">
+          <div @click="showMenu = true" class="dt pr2" v-if="loggedIn">
+            <h5 class="dtc v-mid f6 fw5 pr1">Menu</h5>
+            <div class="dtc v-mid h3">
               <img
-                class="br-100 ba b--black h-100"
+                class="br-100 ba b--white-80 fr ma1 h-50"
                 :src="avatar"
                 :alt="displayName"
               />
@@ -81,6 +88,9 @@
       avatar () {
         // TODO: Replace this avatar with a locally served one.
         return this.photoURL ? this.photoURL : 'http://s3.amazonaws.com/37assets/svn/765-default-avatar.png'
+      },
+      firstName () {
+        return this.displayName.split(' ')[0]
       }
     }
   }

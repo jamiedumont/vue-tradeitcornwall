@@ -129,13 +129,13 @@ export const sendMessageAction = ({dispatch, state}, params) => {
   return firebase.database().ref().update(updates)
 }
 
-export const streamMessages = ({dispatch, state}) => {
+export const streamMessages = ({dispatch, state}, limit) => {
   // Get the current conversationUID from route params
   const convUID = state.route.params.convUID
-  firebase.database().ref(`/convMessages/${convUID}`).on('value', function (snapshot) {
+  firebase.database().ref(`/convMessages/${convUID}`).limitToLast(limit | 5).on('value', function (snapshot) {
     const messages = snapshot.val()
     _findForeignMessages({dispatch, state}, messages)
-    dispatch('STREAM_MESSAGES', messages)
+    dispatch('STREAM_MESSAGES', _.toArray(messages))
   }, function (errObject) {
   })
 }
