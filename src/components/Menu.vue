@@ -36,7 +36,7 @@
           </div>
         </div>
 
-        <div class="o-media o-media--centre menu__item">
+        <div v-link="{ name: 'inbox'}" class="o-media o-media--centre menu__item">
           <div class="menu__icon-container o-media__img">
             <img class="menu__icon" src="../assets/message-icon.svg" alt="Messages">
           </div>
@@ -45,7 +45,7 @@
           </div>
         </div>
 
-        <div class="o-media o-media--centre menu__item menu__item--last">
+        <div v-link="{ name: 'user-dashboard'}" class="o-media o-media--centre menu__item menu__item--last">
           <div class="menu__icon-container o-media__img">
             <img class="menu__icon" src="../assets/account-icon.svg" alt="Account">
           </div>
@@ -111,6 +111,7 @@
       }
     },
     ready: function () {
+      // Listener to close the menu when 'Esc' is pressed
       document.addEventListener('keydown', (e) => {
         if (this.show && e.keyCode === 27) {
           this.close()

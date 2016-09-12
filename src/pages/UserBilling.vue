@@ -8,7 +8,7 @@
 
 <script>
 import HeaderBar from 'src/components/HeaderBar'
-// import { getBillingHistory } from 'src/vuex/modules/accounts/actions'
+import { getBillingHistory } from 'src/vuex/modules/accounts/actions'
 
 export default {
   name: 'UserBilling',
@@ -18,14 +18,16 @@ export default {
   vuex: {
     getters: {
       billingHistory: state => state.accounts.user.billingHistory
+    },
+    actions: {
+      getBillingHistory
+    }
+  },
+  route: {
+    data () {
+      this.getBillingHistory()
     }
   }
-  // route: {
-  //   data () {
-  //     console.log('In component "route => data" function')
-  //     this.getBillingHistory()
-  //   }
-  // }
 }
 </script>
 

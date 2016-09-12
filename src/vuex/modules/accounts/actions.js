@@ -1,6 +1,7 @@
 import firebase from 'src/data/Firebase'
 import router from 'src/router'
-// import { _ } from 'underscore'
+import { each } from 'async'
+import { _ } from 'underscore'
 
 export const getAuth = ({dispatch, state}) => {
   return new Promise(function (resolve, reject) {
@@ -14,18 +15,52 @@ export const getAuth = ({dispatch, state}) => {
   })
 }
 
-// export const getBillingHistory = ({dispatch, state}) => {
-//   console.log('In accounts actions', state.accounts.user.uid)
-//   const userUID = new Promise(function (resolve, reject) {
-//     resolve(state.accounts.user.uid)
-//   })
-//   const transRef = firebase.database().ref(`/users/${userUID}/transactions`)
-//   transRef.on('value', function (snapshot) {
-//     console.log(snapshot.val())
-//   }, function (errObj) {
-//     console.log('Error:', errObj)
-//   })
-// }
+export const getUsersItems = ({dispatch, state}) => {
+  const userUID = state.accounts.user.uid
+  const usersItemUIDs = new Promise(function (resolve, reject) {
+    firebase.database()
+      .ref(`/users/${userUID}/items`)
+      .once('value')
+      .then((snapshot) => {
+        const data = snapshot.val()
+        resolve(_.keys(data))
+      })
+  })
+
+  usersItemUIDs.then((items) => {
+    const allItems = []
+    each(items, function (item, callback) {
+      firebase.database()
+        .ref(`/items/${item}`)
+        .once('value')
+        .then(function (snapshot) {
+          const newItem = snapshot.val()
+          newItem.uid = item
+          allItems.push(newItem)
+          callback()
+        })
+    }, function (err) {
+      if (err) {
+        console.log('err', err)
+      } else {
+        dispatch('GET_USER_ITEMS', allItems)
+      }
+    })
+  })
+}
+
+export const getBillingHistory = ({dispatch, state}) => {
+  const userUID = state.accounts.user.uid
+  return new Promise(function (resolve, reject) {
+    firebase.database()
+      .ref(`/users/${userUID}/transactions`)
+      .once('value')
+      .then((snapshot) => {
+        const data = snapshot.val()
+        resolve(dispatch('GET_BILLING_HISTORY', data))
+      })
+  })
+}
 
 export const newUser = function ({dispatch, state}, email, password) {
   firebase.auth().createUserWithEmailAndPassword(email, password)
