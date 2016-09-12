@@ -186,6 +186,10 @@
 
 .hover-bg-gold:hover { background-color: $primary-colour; }
 
+.hover-bg-darken:hover { background-color: rgba(0,0,0,0.1) }
+
+.hover-bg-lighten:hover { background-color: rgba(255,255,255,0.2) }
+
 .bg-facebook {
   background-color: $facebook-blue;
 }

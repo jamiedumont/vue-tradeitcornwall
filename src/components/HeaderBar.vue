@@ -1,21 +1,52 @@
 <template>
-  <div class="bg-gold pa1" id="header">
-    <div class="center flex items-center w-100 mw8 justify-between pa2 h3">
-      <img v-link="{ path: '/' }" class="header__logo" src="../assets/tic-logo.svg" alt="Trade It Cornwall">
-
-      <div @click="showMenu = true" class="o-media o-media--reverse o-media--centre header-avatar" v-if="loggedIn">
-        <div class="o-avatar o-avatar--small o-media__img">
-            <img :src="avatar" :alt="displayName" />
-        </div>
-        <div class="o-media__body">
-          <h5 class="f6">Menu</h5>
-          <span>Messages: {{messages}}</span>
-        </div>
+  <div class="bg-gold">
+    <div class="center flex items-center w-100 mw8 justify-between h3">
+      <div class="h-100 pv2 ph3">
+        <img v-link="{ path: '/' }" class="h-100 pointer" src="../assets/tic-logo.svg" alt="Trade It Cornwall">
       </div>
 
-      <div v-else class="login-modal-trigger" v-link="{ name: 'login'}">
-        <h5 class="lmt__header">Login</h5>
+
+      <div class="h3">
+
+        <!-- DESKTOP MENU -->
+        <div class="dn flex-ns">
+          <div v-link="{ name: 'buy'}" class="pointer hover-bg-lighten dib h3 w3 flex items-center justify-center">
+            <span>Buy</span>
+          </div>
+          <div v-link="{ name: 'sell'}" class="pointer hover-bg-lighten dib h3 w3 flex items-center justify-center">
+            <span>Sell</span>
+          </div>
+          <div v-link="{ name: 'inbox'}" class="pointer hover-bg-lighten dib h3 w3 flex items-center justify-center">
+            <span>Messages</span>
+          </div>
+          <div class="pointer hover-bg-lighten dib h3 w3 flex items-center justify-center">
+            <span>Account</span>
+          </div>
+        </div>
+
+        <!-- MOBILE MENU -->
+
+        <div class="dn-ns">
+          <div @click="showMenu = true" class="dt" v-if="loggedIn">
+            <h5 class="dtc v-mid f6">Menu</h5>
+            <div class="dtc v-mid w3 h3 pa2">
+              <img
+                class="br-100 ba b--black h-100"
+                :src="avatar"
+                :alt="displayName"
+              />
+            </div>
+          </div>
+
+          <div v-else class="dt w3 h3 tc" v-link="{ name: 'login'}">
+            <h5 class="dtc v-mid f6">Login</h5>
+          </div>
+        </div>
+
+
       </div>
+
+
     </div>
   </div>
 
@@ -55,71 +86,6 @@
   }
 </script>
 
-<style lang="scss" scoped>
-@import "../scss/1_settings/settings.colours.scss";
+<style>
 
-  .header-avatar {
-    margin-bottom: 0;
-    cursor: pointer;
-    img {
-      border: 1px solid $black;
-    }
-  }
-  .header-avatar > .o-media__img {
-    margin: 0 0 0 0.5em;
-  }
-  .login-buttons {
-    text-align: center;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    h3 {
-      margin: 0 30px;
-    }
-  }
-  .modal-task {
-    margin: 0 auto 20px;
-    display: block;
-    text-align: center;
-    font-size: 0.8em;
-    flex-basis: 100%;
-    color: #333;
-  }
-  .login-icon {
-    width: 50px;
-    cursor: pointer;
-  }
-  .header__logo {
-    height: 100%;
-    cursor: pointer;
-  }
-  .header__nav {
-    h4 {
-      margin-right: 10px;
-      display: inline-block;
-      cursor: pointer;
-    }
-    h4:hover {
-      color: white;
-    }
-    h4:last-of-type {
-      margin: 0;
-    }
-  }
-  .login-modal-trigger {
-    text-align: center;
-    cursor: pointer;
-  }
-  .login-modal-trigger:hover {
-    color: white;
-  }
-  .lmt__header {
-    margin: 0;
-    text-transform: uppercase;
-  }
-  .lmt__tip {
-    margin: 5px 0;
-    font-size: 0.6em;
-    font-style: italic;
-  }
 </style>
