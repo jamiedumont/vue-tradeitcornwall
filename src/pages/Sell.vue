@@ -56,9 +56,20 @@
 
         <div class="mb3">
           <div class="mw7 center">
-            <div v-for="image in previewImages">
-              <img :src="image" alt="" style="max-height: 32rem"/>
-            </div>
+            <swiper
+              direction="horizontal"
+              :pagination-visible="true"
+              :pagination-clickable="true"
+              :performance-mode="true"
+            >
+              <div v-for="image in previewImages">
+                <img :src="image" alt="" style="max-height: 32rem"/>
+              </div>
+            </swiper>
+            <!-- v-for="image in previewImages" -->
+                <!-- <img :src="image" alt="" style="max-height: 32rem"/> -->
+
+
 
           </div>
         </div>
@@ -100,6 +111,7 @@
   import Button from 'src/components/Button'
   import { _ } from 'underscore'
   import { addListing } from 'src/vuex/modules/new-listings/actions'
+  import Swiper from 'vue-swiper'
 
   export default {
     name: 'Sell',
@@ -229,7 +241,8 @@
       HeaderBar,
       CategorySelect,
       FileUpload,
-      Button
+      Button,
+      Swiper
     }
   }
 </script>

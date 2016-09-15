@@ -8,9 +8,18 @@
   <div class="pb5" v-else>
     <div class="mb3">
       <div class="mw7 center">
-        <div v-for="image in item.images">
-          <img :src="image" alt="" style="max-height: 32rem"/>
-        </div>
+        <!-- v-for="image in item.images"
+        <img :src="image" alt="" style="max-height: 32rem"/> -->
+        <swiper
+          direction="horizontal"
+          :pagination-visible="true"
+          :pagination-clickable="true"
+          :performance-mode="true"
+        >
+          <div v-for="image in item.images">
+            <img :src="image" alt="" style="max-height: 32rem"/>
+          </div>
+        </swiper>
 
       </div>
     </div>
@@ -36,6 +45,7 @@
 
 <script>
 import HeaderBar from 'src/components/HeaderBar'
+import Swiper from 'vue-swiper'
 import firebase from 'src/data/Firebase'
 import { newConversation } from 'src/vuex/modules/conversations/actions'
 
@@ -69,7 +79,8 @@ export default {
     }
   },
   components: {
-    HeaderBar
+    HeaderBar,
+    Swiper
   },
   created () {
     // Pass the UID from route params to Vuex action which adds it to store
