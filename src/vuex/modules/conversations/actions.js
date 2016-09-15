@@ -141,7 +141,6 @@ export const streamMessages = ({dispatch, state}, limit) => {
 }
 
 export const updateMessageStatus = ({dispatch, state}, message) => {
-  console.log('updating message: ', message.id)
   const updates = {}
   updates[`/convs/${state.route.params.convUID}/lastMsg`] = message
   updates[`/users/${state.accounts.user.uid}/convs/${state.route.params.convUID}/lastMsg`] = message
@@ -155,8 +154,6 @@ export const calcUnread = ({dispatch, state}, convs) => {
   const unreadConvs = _.filter(convs, function (conv) {
     return conv.lastMsg.isRead === false && conv.lastMsg.sender !== state.accounts.user.uid
   })
-
-  console.log('unread convs', unreadConvs.length)
 
   dispatch('UPDATE_UNREAD_COUNT', unreadConvs.length)
 }
