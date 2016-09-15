@@ -11,20 +11,13 @@ export const addToCheckout = function (store, userUID, itemUID, item) {
   itemCheckoutRef.update({
     cost: cost
   })
-  updateTotal(store, userUID, cost)
-  store.dispatch('ADD_TO_CHECKOUT', itemUID)
 }
 
-export const updateTotal = function (store, userUID, price) {
-  const totalRef = firebase.database().ref(`users/${userUID}/checkout/total`)
-  totalRef.once('value')
-    .then(function (snapshot) {
-      totalRef.set(snapshot.val() + price)
-    })
-}
-
-export const updateCheckout = function (store, data) {
-  store.dispatch('READ_CHECKOUT_DATA', data)
+export const removeFromCheckout = function ({dispatch, state}, itemUID) {
+  const userUID = state.accounts.user.uid
+  const itemRef = firebase.database().ref(`/users/${userUID}/checkout/items/${itemUID}`)
+  itemRef.remove()
+  retrieveCheckoutItems({dispatch, state})
 }
 
 export const retrieveCheckoutItems = ({dispatch, state}) => {
@@ -35,6 +28,7 @@ export const retrieveCheckoutItems = ({dispatch, state}) => {
       .once('value')
       .then((snapshot) => {
         const data = snapshot.val()
+        console.log(data)
         resolve(dispatch('UPDATE_CHECKOUT_DATA', data))
       })
   })

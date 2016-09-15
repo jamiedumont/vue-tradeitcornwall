@@ -13,13 +13,13 @@
         <h2 class="checkout__header">Listings</h2>
         <div class="checkout__items">
 
-            <div v-for="item in items" class="checkout__item layout">
+            <div v-for="item in items" class="checkout__item layout items-baseline">
               <div class="layout__item force--70 med-force--80">
                 <h3 class="co-item__header">{{ item.title }}</h3><br/>
                 <span class="co-item__category">{{ item.categories.lvl0 }}: {{ item.categories.lvl1 }}</span>
               </div>
               <div class="layout__item co-item__cost">{{ item.cost | divide100 | currency '£'}}</div>
-              <div class="layout__item co-item__icon"><img src="../assets/account-icon.svg" alt=""></div>
+              <div @click="remove($key)" class="layout__item"><img src="../assets/red-cross.svg" alt="" class="w1 h1"></div>
             </div>
 
         </div>
@@ -31,7 +31,6 @@
         <span>Pay {{ total | divide100 | currency '£'}}</span>
       </div>
 
-      <!-- <button v-on:click="dirtyCharge">Dirty Charge</button> -->
     </div>
   </div>
 </template>
@@ -41,7 +40,7 @@ import HeaderBar from 'src/components/HeaderBar'
 import Vue from 'vue'
 import VueResource from 'vue-resource'
 import { _ } from 'underscore'
-import { handlePaymentSuccess, retrieveCheckoutItems } from 'src/vuex/modules/checkout/actions'
+import { handlePaymentSuccess, retrieveCheckoutItems, removeFromCheckout } from 'src/vuex/modules/checkout/actions'
 
 Vue.use(VueResource)
 
@@ -51,11 +50,6 @@ Vue.filter('divide100', function (value) {
 
 export default {
   name: 'Checkout',
-  data () {
-    return {
-      amount: 400
-    }
-  },
   components: {
     HeaderBar
   },
@@ -69,20 +63,19 @@ export default {
         currency: 'gbp',
         amount: this.total
       })
+    },
+    remove (itemUID) {
+      this.removeFromCheckout(itemUID)
     }
-    // dirtyCharge () {
-    //   console.log('dirty charge')
-    //   this.handlePaymentSuccess(charge)
-    // }
   },
   vuex: {
     getters: {
-      total: state => state.checkout.total,
       items: state => state.checkout.items
     },
     actions: {
       handlePaymentSuccess,
-      retrieveCheckoutItems
+      retrieveCheckoutItems,
+      removeFromCheckout
     }
   },
   route: {
@@ -114,6 +107,11 @@ export default {
     },
     numberItems () {
       return _.size(this.items)
+    },
+    total () {
+      return _.reduce(this.items, (sum, item) => {
+        return sum + item.cost
+      }, 0)
     }
   }
 }
@@ -163,13 +161,6 @@ export default {
     font-size: 9px;
     color: $light-grey;
     padding-left: 3px;
-  }
-  .co-item__icon {
-    img {
-      display: block;
-      margin: 0 auto;
-      width: 20px;
-    }
   }
   .co-item__cost {
     text-align: left;

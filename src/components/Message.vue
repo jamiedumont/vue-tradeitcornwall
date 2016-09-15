@@ -28,7 +28,7 @@
   }
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 
 $gold: #E2B644;
 $grey: #949494;
