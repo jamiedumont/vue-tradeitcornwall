@@ -5,6 +5,10 @@ Vue.js &amp; Firebase app for Trade It Cornwall
 
 ---
 
+**Note:** This project is no longer maintained or actively developed. I decided that a single page app wasn't an appropriate choice for this site. I've instead built another version of it using [Elixir and Phoenix](https://github.com/jamiedumont/tradeitcornwall.co.uk)
+
+---
+
 An online, local marketplace for second-hand goods
 
 ## Build Setup
